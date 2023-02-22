@@ -1,0 +1,1460 @@
+[
+    {
+        "id": "8c45f8d06741be73",
+        "type": "tab",
+        "label": "Config Update",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "83d656b646c5388f",
+        "type": "tab",
+        "label": "Test",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "dfa0812f08c5edb4",
+        "type": "subflow",
+        "name": "Sensor",
+        "info": "",
+        "category": "MUV Cloud",
+        "in": [
+            {
+                "x": 50,
+                "y": 30,
+                "wires": [
+                    {
+                        "id": "22b9adcd085a1830"
+                    },
+                    {
+                        "id": "08cb4a562125a06d"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1580,
+                "y": 60,
+                "wires": [
+                    {
+                        "id": "39d91273e2942415",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "sensorId",
+                "type": "str",
+                "value": "",
+                "ui": {
+                    "icon": "font-awesome/fa-hashtag",
+                    "label": {
+                        "en-US": "Sensor ID"
+                    },
+                    "type": "input",
+                    "opts": {
+                        "types": [
+                            "str"
+                        ]
+                    }
+                }
+            }
+        ],
+        "meta": {},
+        "color": "#C0DEED",
+        "icon": "node-red/bridge-dash.svg",
+        "status": {
+            "x": 1580,
+            "y": 620,
+            "wires": [
+                {
+                    "id": "87cd2074bfaa5787",
+                    "port": 0
+                },
+                {
+                    "id": "ecde6a868e3e32a7",
+                    "port": 0
+                },
+                {
+                    "id": "6e1d9bf0f47a7b70",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "1223839bdffe9d0d",
+        "type": "subflow",
+        "name": "Sensor message",
+        "info": "",
+        "category": "MUV Cloud",
+        "in": [
+            {
+                "x": 50,
+                "y": 30,
+                "wires": [
+                    {
+                        "id": "28f7706d41b93a85"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 460,
+                "y": 40,
+                "wires": [
+                    {
+                        "id": "77cf05fb88eb127b",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#C0DEED",
+        "icon": "font-awesome/fa-cloud-upload"
+    },
+    {
+        "id": "70d1fdda41d144b4",
+        "type": "subflow",
+        "name": "State",
+        "info": "",
+        "category": "MUV Cloud",
+        "in": [
+            {
+                "x": 50,
+                "y": 30,
+                "wires": [
+                    {
+                        "id": "cbc778167979e20f"
+                    },
+                    {
+                        "id": "c145167cf85330b1"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1620,
+                "y": 40,
+                "wires": [
+                    {
+                        "id": "78ecb151acb97104",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "stateId",
+                "type": "str",
+                "value": "",
+                "ui": {
+                    "label": {
+                        "en-US": "State ID"
+                    },
+                    "type": "input",
+                    "opts": {
+                        "types": [
+                            "str"
+                        ]
+                    }
+                }
+            },
+            {
+                "name": "stateMessage",
+                "type": "str",
+                "value": "",
+                "ui": {
+                    "icon": "font-awesome/fa-bullhorn",
+                    "label": {
+                        "en-US": "State Message"
+                    }
+                }
+            }
+        ],
+        "meta": {},
+        "color": "#FFAAAA",
+        "icon": "node-red/status.svg",
+        "status": {
+            "x": 1600,
+            "y": 700,
+            "wires": [
+                {
+                    "id": "34e7821b1dd7e43b",
+                    "port": 0
+                },
+                {
+                    "id": "d2017caac973a445",
+                    "port": 0
+                },
+                {
+                    "id": "b0be4f169bfcd0bd",
+                    "port": 0
+                }
+            ]
+        }
+    },
+    {
+        "id": "5d435a6998c40b9b",
+        "type": "subflow",
+        "name": "State message",
+        "info": "",
+        "category": "MUV Cloud",
+        "in": [
+            {
+                "x": 50,
+                "y": 30,
+                "wires": [
+                    {
+                        "id": "59204faee23b9837"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 380,
+                "y": 40,
+                "wires": [
+                    {
+                        "id": "59204faee23b9837",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#FFAAAA",
+        "icon": "font-awesome/fa-cloud-upload"
+    },
+    {
+        "id": "9ae1708756df0d8c",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "1f7f9690401b3e4d",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "192.168.0.123",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "b2134ec83ee6a4aa",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-custom",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "MUV",
+                "default": "#4B7930",
+                "baseColor": "#474747",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "reset": false
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#474747",
+                    "value": "#474747",
+                    "edited": true
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#474747",
+                    "edited": true
+                },
+                "page-backgroundColor": {
+                    "value": "#a491ff",
+                    "edited": true
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#474747",
+                    "edited": true
+                },
+                "group-textColor": {
+                    "value": "#f0f0f0",
+                    "edited": true
+                },
+                "group-borderColor": {
+                    "value": "#555555",
+                    "edited": true
+                },
+                "group-backgroundColor": {
+                    "value": "#474747",
+                    "edited": true
+                },
+                "widget-textColor": {
+                    "value": "#eeeeee",
+                    "edited": true
+                },
+                "widget-backgroundColor": {
+                    "value": "#474747",
+                    "edited": true
+                },
+                "widget-borderColor": {
+                    "value": "#474747",
+                    "edited": true
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "purple",
+                "accents": "indigo",
+                "warn": "red",
+                "background": "grey",
+                "palette": "dark"
+            }
+        },
+        "site": {
+            "name": "MUV Digital Connect",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 16,
+                "gy": 16,
+                "cx": 8,
+                "cy": 8,
+                "px": 8,
+                "py": 8
+            }
+        }
+    },
+    {
+        "id": "bbf304e04a18642e",
+        "type": "ui_group",
+        "name": "Status",
+        "tab": "fe62d49438427213",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "fe62d49438427213",
+        "type": "ui_tab",
+        "name": "Data",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "1942aa948e12150b",
+        "type": "ui_group",
+        "name": "PLC Data Selection",
+        "tab": "fe62d49438427213",
+        "order": 3,
+        "disp": true,
+        "width": "10",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "6cf1cef97e8f72d7",
+        "type": "ui_group",
+        "name": "Data Visualization",
+        "tab": "956d2ac79850b5ee",
+        "order": 4,
+        "disp": true,
+        "width": "24",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "956d2ac79850b5ee",
+        "type": "ui_tab",
+        "name": "Monitoring",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "f7cc1d2637fe3f03",
+        "type": "ui_group",
+        "name": "Commands",
+        "tab": "956d2ac79850b5ee",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "0d64d5f3bbe857a5",
+        "type": "function",
+        "z": "dfa0812f08c5edb4",
+        "name": "Available Sensor IDs",
+        "func": "const ids = global.get(\"sensorsIds\");\nmsg.payload = ids;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2bc1e08f5b7995e2",
+        "type": "inject",
+        "z": "dfa0812f08c5edb4",
+        "name": "Startup flow",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "3600",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 660,
+        "wires": [
+            [
+                "0d64d5f3bbe857a5",
+                "6cabe16f224ebdb2"
+            ]
+        ]
+    },
+    {
+        "id": "39d91273e2942415",
+        "type": "function",
+        "z": "dfa0812f08c5edb4",
+        "name": "Create sensor data",
+        "func": "if (msg.id === \"AXIS_X_POS\"){\n    msg.type = \"Position Portal X-Axis\";\n} else if (msg.id === \"AXIS_X_PUSHING_FORCE\") {\n    msg.type = \"Pushing Force Portal X-Axis\";\n} else if (msg.id === \"AXIS_X_SPEED\") {\n    msg.type = \"Speed Portal X-Axis\";\n} else if (msg.id === \"AXIS_Y_POS\") {\n    msg.type = \"Position Portal Y-Axis\";\n} else if (msg.id === \"AXIS_Y_PUSHING_FORCE\") {\n    msg.type = \"Pushing Force Portal Y-Axis\";\n} else if (msg.id === \"AXIS_Y_SPEED\") {\n    msg.type = \"Speed Portal Y-Axis\";\n} else if (msg.id === \"AXIS_Z_POS\") {\n    msg.type = \"Position Portal Z-Axis\";\n} else if (msg.id === \"AXIS_Z_PUSHING_FORCE\") {\n    msg.type = \"Pushing Force Portal Z-Axis\";\n} else if (msg.id === \"AXIS_Z_SPEED\") {\n    msg.type = \"Speed Portal Z-Axis\";\n} else if (msg.id === \"NOZZLE_LEFT_1_POS\") {\n    msg.type = \"Position Nozzle Left 1\";\n} else if (msg.id === \"NOZZLE_RIGHT_1_POS\") {\n    msg.type = \"Position Nozzle Right 1\";\n}\n\nmsg.payload =\n{\n    \"id\": msg.id ? msg.id : env.get(\"sensorId\"),\n    \"properties\": {\n        \"type\": msg.type ? msg.type : msg.id,\n        \"data\": [{\n            \"timezone\": \"UTC\",\n            \"timestamp\": new Date(),\n            \"value\": msg.payload\n        }]\n    }\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 40,
+        "wires": [
+            [
+                "2240d6432d7230f0"
+            ]
+        ]
+    },
+    {
+        "id": "87cd2074bfaa5787",
+        "type": "change",
+        "z": "dfa0812f08c5edb4",
+        "name": "Waiting",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"fill\":\"yellow\",\"shape\":\"ring\",\"text\":\"waiting for input..\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1420,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e058f022dbfc989e",
+        "type": "catch",
+        "z": "dfa0812f08c5edb4",
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 100,
+        "y": 800,
+        "wires": [
+            [
+                "5c56c4412e1ba881"
+            ]
+        ]
+    },
+    {
+        "id": "2240d6432d7230f0",
+        "type": "change",
+        "z": "dfa0812f08c5edb4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "sensor value sent",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 700,
+        "y": 100,
+        "wires": [
+            [
+                "328a8d57fc326a85",
+                "7d060a297615cadc"
+            ]
+        ]
+    },
+    {
+        "id": "328a8d57fc326a85",
+        "type": "delay",
+        "z": "dfa0812f08c5edb4",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 840,
+        "y": 160,
+        "wires": [
+            [
+                "a0fd2ed94bb93669"
+            ]
+        ]
+    },
+    {
+        "id": "22b9adcd085a1830",
+        "type": "change",
+        "z": "dfa0812f08c5edb4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "reset",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 200,
+        "y": 140,
+        "wires": [
+            [
+                "328a8d57fc326a85"
+            ]
+        ]
+    },
+    {
+        "id": "08cb4a562125a06d",
+        "type": "switch",
+        "z": "dfa0812f08c5edb4",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "string",
+                "vt": "string"
+            },
+            {
+                "t": "istype",
+                "v": "number",
+                "vt": "number"
+            },
+            {
+                "t": "istype",
+                "v": "boolean",
+                "vt": "boolean"
+            },
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "empty"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 5,
+        "x": 230,
+        "y": 60,
+        "wires": [
+            [
+                "39d91273e2942415"
+            ],
+            [
+                "39d91273e2942415"
+            ],
+            [
+                "39d91273e2942415"
+            ],
+            [
+                "dc4b098f979c94e1"
+            ],
+            [
+                "dc4b098f979c94e1"
+            ]
+        ]
+    },
+    {
+        "id": "15a6e22afa836360",
+        "type": "link in",
+        "z": "dfa0812f08c5edb4",
+        "name": "Waiting",
+        "links": [
+            "6cabe16f224ebdb2",
+            "a0fd2ed94bb93669"
+        ],
+        "x": 1295,
+        "y": 660,
+        "wires": [
+            [
+                "87cd2074bfaa5787"
+            ]
+        ]
+    },
+    {
+        "id": "f3fb132352d2445f",
+        "type": "link in",
+        "z": "dfa0812f08c5edb4",
+        "name": "Error",
+        "links": [
+            "5c56c4412e1ba881",
+            "5ee321d72acc041a"
+        ],
+        "x": 1295,
+        "y": 700,
+        "wires": [
+            [
+                "ecde6a868e3e32a7"
+            ]
+        ]
+    },
+    {
+        "id": "ecde6a868e3e32a7",
+        "type": "change",
+        "z": "dfa0812f08c5edb4",
+        "name": "Error",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   fill: \"red\",\t   shape: \"ring\",\t   text: msg.payload\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1430,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5c56c4412e1ba881",
+        "type": "link out",
+        "z": "dfa0812f08c5edb4",
+        "name": "link out 1",
+        "mode": "link",
+        "links": [
+            "f3fb132352d2445f"
+        ],
+        "x": 255,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "6cabe16f224ebdb2",
+        "type": "link out",
+        "z": "dfa0812f08c5edb4",
+        "name": "link out 2",
+        "mode": "link",
+        "links": [
+            "15a6e22afa836360"
+        ],
+        "x": 255,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "6e1d9bf0f47a7b70",
+        "type": "change",
+        "z": "dfa0812f08c5edb4",
+        "name": "Info",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"fill\": \"green\",\t   \"shape\": \"ring\",\t   \"text\": msg.payload\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1430,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d204b902b17be991",
+        "type": "link in",
+        "z": "dfa0812f08c5edb4",
+        "name": "Info",
+        "links": [
+            "7d060a297615cadc"
+        ],
+        "x": 1295,
+        "y": 620,
+        "wires": [
+            [
+                "6e1d9bf0f47a7b70"
+            ]
+        ]
+    },
+    {
+        "id": "7d060a297615cadc",
+        "type": "link out",
+        "z": "dfa0812f08c5edb4",
+        "name": "link out 3",
+        "mode": "link",
+        "links": [
+            "d204b902b17be991"
+        ],
+        "x": 945,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "a0fd2ed94bb93669",
+        "type": "link out",
+        "z": "dfa0812f08c5edb4",
+        "name": "link out 4",
+        "mode": "link",
+        "links": [
+            "15a6e22afa836360"
+        ],
+        "x": 945,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "5ee321d72acc041a",
+        "type": "link out",
+        "z": "dfa0812f08c5edb4",
+        "name": "link out 5",
+        "mode": "link",
+        "links": [
+            "f3fb132352d2445f"
+        ],
+        "x": 945,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "dc4b098f979c94e1",
+        "type": "change",
+        "z": "dfa0812f08c5edb4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Invalid data input",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 700,
+        "y": 240,
+        "wires": [
+            [
+                "5ee321d72acc041a"
+            ]
+        ]
+    },
+    {
+        "id": "28f7706d41b93a85",
+        "type": "join",
+        "z": "1223839bdffe9d0d",
+        "name": "",
+        "mode": "custom",
+        "build": "array",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "5",
+        "count": "",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 150,
+        "y": 40,
+        "wires": [
+            [
+                "77cf05fb88eb127b"
+            ]
+        ]
+    },
+    {
+        "id": "77cf05fb88eb127b",
+        "type": "function",
+        "z": "1223839bdffe9d0d",
+        "name": "create cloud message",
+        "func": "var seen = new Map();\nvar mergedInputData = msg.payload.filter(function (entry) {\n    var previous;\n\n    if (seen.has(entry.id)) {\n        previous = seen.get(entry.id);\n        entry.properties.data.forEach(function(element) {\n            previous.properties.data.push(element);\n        });\n\n        return false;\n    }\n    seen.set(entry.id, entry);\n\n    return true;\n});\n\nmsg.payload =\n{\n    \"sensors\": mergedInputData\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "048e50cc50754b19",
+        "type": "function",
+        "z": "70d1fdda41d144b4",
+        "name": "Available Sensor IDs",
+        "func": "const ids = global.get(\"stateIds\");\nmsg.payload = ids;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 780,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e4bfb7a3286c7511",
+        "type": "inject",
+        "z": "70d1fdda41d144b4",
+        "name": "Startup flow",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "3600",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 720,
+        "wires": [
+            [
+                "048e50cc50754b19",
+                "517e5c8611b27022"
+            ]
+        ]
+    },
+    {
+        "id": "78ecb151acb97104",
+        "type": "function",
+        "z": "70d1fdda41d144b4",
+        "name": "Create state data",
+        "func": "if (msg.id === \"SPS_EMERGENCY_STOP\") {\n    msg.type = \"Emergency Button\";\n    msg.payload = true;\n}\n\nmsg.payload = {\n    \"id\": msg.id ? msg.id : env.get(\"stateId\"),\n    \"properties\": {\n        \"type\": msg.type ? msg.type : msg.id,\n        \"message\": env.get(\"stateMessage\"),\n        \"data\": {\n            \"timezone\": \"UTC\",\n            \"timestamp\": new Date(),\n            \"value\": msg.payload\n        }\n    }\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 40,
+        "wires": [
+            [
+                "82d9c90e6a9bc3a3"
+            ]
+        ]
+    },
+    {
+        "id": "d2017caac973a445",
+        "type": "change",
+        "z": "70d1fdda41d144b4",
+        "name": "Waiting",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"fill\":\"yellow\",\"shape\":\"ring\",\"text\":\"waiting for input..\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1460,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2e6c6086f635a00f",
+        "type": "catch",
+        "z": "70d1fdda41d144b4",
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 140,
+        "y": 860,
+        "wires": [
+            [
+                "fb69b0ce53a62bf6"
+            ]
+        ]
+    },
+    {
+        "id": "82d9c90e6a9bc3a3",
+        "type": "change",
+        "z": "70d1fdda41d144b4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "state value sent",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 700,
+        "y": 100,
+        "wires": [
+            [
+                "3ebc9e7e4f6b035c",
+                "5b8966ed00df8180"
+            ]
+        ]
+    },
+    {
+        "id": "3ebc9e7e4f6b035c",
+        "type": "delay",
+        "z": "70d1fdda41d144b4",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 840,
+        "y": 160,
+        "wires": [
+            [
+                "06d083a67d1343b3"
+            ]
+        ]
+    },
+    {
+        "id": "c145167cf85330b1",
+        "type": "change",
+        "z": "70d1fdda41d144b4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "reset",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 200,
+        "y": 140,
+        "wires": [
+            [
+                "3ebc9e7e4f6b035c"
+            ]
+        ]
+    },
+    {
+        "id": "cbc778167979e20f",
+        "type": "switch",
+        "z": "70d1fdda41d144b4",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "string",
+                "vt": "string"
+            },
+            {
+                "t": "istype",
+                "v": "number",
+                "vt": "number"
+            },
+            {
+                "t": "istype",
+                "v": "boolean",
+                "vt": "boolean"
+            },
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "empty"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 5,
+        "x": 230,
+        "y": 60,
+        "wires": [
+            [
+                "78ecb151acb97104"
+            ],
+            [
+                "78ecb151acb97104"
+            ],
+            [
+                "78ecb151acb97104"
+            ],
+            [
+                "72c1424fcea79353"
+            ],
+            [
+                "72c1424fcea79353"
+            ]
+        ]
+    },
+    {
+        "id": "5e12dff3084c7213",
+        "type": "link in",
+        "z": "70d1fdda41d144b4",
+        "name": "Waiting",
+        "links": [
+            "06d083a67d1343b3",
+            "517e5c8611b27022"
+        ],
+        "x": 1335,
+        "y": 720,
+        "wires": [
+            [
+                "d2017caac973a445"
+            ]
+        ]
+    },
+    {
+        "id": "bf7ee29ff17d8ed4",
+        "type": "link in",
+        "z": "70d1fdda41d144b4",
+        "name": "Error",
+        "links": [
+            "48935720d4feb714",
+            "fb69b0ce53a62bf6"
+        ],
+        "x": 1335,
+        "y": 760,
+        "wires": [
+            [
+                "b0be4f169bfcd0bd"
+            ]
+        ]
+    },
+    {
+        "id": "b0be4f169bfcd0bd",
+        "type": "change",
+        "z": "70d1fdda41d144b4",
+        "name": "Error",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   fill: \"red\",\t   shape: \"ring\",\t   text: msg.payload\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1470,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fb69b0ce53a62bf6",
+        "type": "link out",
+        "z": "70d1fdda41d144b4",
+        "name": "link out 6",
+        "mode": "link",
+        "links": [
+            "bf7ee29ff17d8ed4"
+        ],
+        "x": 295,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "517e5c8611b27022",
+        "type": "link out",
+        "z": "70d1fdda41d144b4",
+        "name": "link out 7",
+        "mode": "link",
+        "links": [
+            "5e12dff3084c7213"
+        ],
+        "x": 295,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "34e7821b1dd7e43b",
+        "type": "change",
+        "z": "70d1fdda41d144b4",
+        "name": "Info",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"fill\": \"green\",\t   \"shape\": \"ring\",\t   \"text\": msg.payload\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1470,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "06a036e1ef0d5cf3",
+        "type": "link in",
+        "z": "70d1fdda41d144b4",
+        "name": "Info",
+        "links": [
+            "5b8966ed00df8180"
+        ],
+        "x": 1335,
+        "y": 680,
+        "wires": [
+            [
+                "34e7821b1dd7e43b"
+            ]
+        ]
+    },
+    {
+        "id": "5b8966ed00df8180",
+        "type": "link out",
+        "z": "70d1fdda41d144b4",
+        "name": "link out 8",
+        "mode": "link",
+        "links": [
+            "06a036e1ef0d5cf3"
+        ],
+        "x": 945,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "06d083a67d1343b3",
+        "type": "link out",
+        "z": "70d1fdda41d144b4",
+        "name": "link out 9",
+        "mode": "link",
+        "links": [
+            "5e12dff3084c7213"
+        ],
+        "x": 945,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "48935720d4feb714",
+        "type": "link out",
+        "z": "70d1fdda41d144b4",
+        "name": "link out 10",
+        "mode": "link",
+        "links": [
+            "bf7ee29ff17d8ed4"
+        ],
+        "x": 945,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "72c1424fcea79353",
+        "type": "change",
+        "z": "70d1fdda41d144b4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Invalid data input",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 700,
+        "y": 240,
+        "wires": [
+            [
+                "48935720d4feb714"
+            ]
+        ]
+    },
+    {
+        "id": "59204faee23b9837",
+        "type": "function",
+        "z": "5d435a6998c40b9b",
+        "name": "create cloud message",
+        "func": "msg.payload =\n{\n    \"states\": msg.payload\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 220,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9cb41c778a242c32",
+        "type": "http request",
+        "z": "8c45f8d06741be73",
+        "name": "Update Configuration",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "127.0.0.1/flows",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1240,
+        "y": 40,
+        "wires": [
+            [
+                "09c004e5e748d2f1"
+            ]
+        ]
+    },
+    {
+        "id": "09c004e5e748d2f1",
+        "type": "debug",
+        "z": "8c45f8d06741be73",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1420,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "4a3f544eb892783e",
+        "type": "inject",
+        "z": "8c45f8d06741be73",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "10",
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 110,
+        "y": 40,
+        "wires": [
+            [
+                "8805e992f7f00598"
+            ]
+        ]
+    },
+    {
+        "id": "8805e992f7f00598",
+        "type": "switch",
+        "z": "8c45f8d06741be73",
+        "name": "Env Variable Exists",
+        "property": "DEVICE_CONFIGURATION",
+        "propertyType": "env",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 270,
+        "y": 40,
+        "wires": [
+            [
+                "9cb41c778a242c32"
+            ]
+        ]
+    }
+]
