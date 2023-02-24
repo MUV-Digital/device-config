@@ -109,7 +109,7 @@
         "z": "8c45f8d06741be73",
         "name": "Read Remote Configuration",
         "method": "GET",
-        "ret": "obj",
+        "ret": "txt",
         "paytoqs": "ignore",
         "url": "${DEVICE_CONFIGURATION}",
         "tls": "",
@@ -123,7 +123,7 @@
         "y": 80,
         "wires": [
             [
-                "377977105c56c06a"
+                "f167fd46d0e6685e"
             ]
         ]
     },
@@ -186,7 +186,7 @@
         "to": "",
         "reg": false,
         "x": 800,
-        "y": 120,
+        "y": 160,
         "wires": [
             [
                 "fca1e38b2bfe1d61"
@@ -208,22 +208,6 @@
             [
                 "8805e992f7f00598",
                 "4f3b9deb99ebe9f4"
-            ]
-        ]
-    },
-    {
-        "id": "89e01d33fee4fecc",
-        "type": "json",
-        "z": "8c45f8d06741be73",
-        "name": "",
-        "property": "payload",
-        "action": "",
-        "pretty": false,
-        "x": 450,
-        "y": 120,
-        "wires": [
-            [
-                "c60ac3fc83d15a30"
             ]
         ]
     },
@@ -367,7 +351,9 @@
             [
                 "430ca381530b90ca"
             ],
-            []
+            [
+                "7b7ac37718865a31"
+            ]
         ]
     },
     {
@@ -413,5 +399,37 @@
         "x": 1460,
         "y": 20,
         "wires": []
+    },
+    {
+        "id": "89e01d33fee4fecc",
+        "type": "json",
+        "z": "8c45f8d06741be73",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 450,
+        "y": 120,
+        "wires": [
+            [
+                "c60ac3fc83d15a30"
+            ]
+        ]
+    },
+    {
+        "id": "f167fd46d0e6685e",
+        "type": "json",
+        "z": "8c45f8d06741be73",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 750,
+        "y": 120,
+        "wires": [
+            [
+                "377977105c56c06a"
+            ]
+        ]
     }
 ]
