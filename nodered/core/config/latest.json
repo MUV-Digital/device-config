@@ -1001,7 +1001,7 @@
         "type": "function",
         "z": "36d23b104ae95f19",
         "name": "Send Sensors to Cloud",
-        "func": "global.get(\"cloud.sensors\").forEach(sensor => {\n    msg.payload = {\n        \"value\" : sensor.value\n    }\n    msg.topic = sensor.topic\n    node.send(msg);\n});\n\nnode.done();",
+        "func": "global.get(\"cloud.sensors\").forEach(sensor => {\n    if (sensor.value !== undefined && sensor.value !== null){\n        msg.payload = {\n            \"value\": sensor.value\n        }\n        msg.topic = sensor.topic\n        node.send(msg);\n    } else {\n        node.warn(\"Missing value for sensor topic: \" + sensor.topic);\n    }\n});\n\nnode.done();",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
