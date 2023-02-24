@@ -189,7 +189,7 @@
         "y": 160,
         "wires": [
             [
-                "fca1e38b2bfe1d61"
+                "3199b7b26537303c"
             ]
         ]
     },
@@ -327,25 +327,21 @@
         "id": "fca1e38b2bfe1d61",
         "type": "switch",
         "z": "8c45f8d06741be73",
-        "name": "Compare Remote/Local Config",
-        "property": "config.local",
-        "propertyType": "global",
+        "name": "True/False",
+        "property": "payload",
+        "propertyType": "msg",
         "rules": [
             {
-                "t": "eq",
-                "v": "config.remote",
-                "vt": "global"
+                "t": "true"
             },
             {
-                "t": "neq",
-                "v": "config.remote",
-                "vt": "global"
+                "t": "false"
             }
         ],
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1170,
+        "x": 1110,
         "y": 40,
         "wires": [
             [
@@ -429,6 +425,25 @@
         "wires": [
             [
                 "377977105c56c06a"
+            ]
+        ]
+    },
+    {
+        "id": "3199b7b26537303c",
+        "type": "function",
+        "z": "8c45f8d06741be73",
+        "name": "Compare Remote/Local Config",
+        "func": "const deepCompare = (arg1, arg2) => {\n    if (Object.prototype.toString.call(arg1) === Object.prototype.toString.call(arg2)) {\n        if (Object.prototype.toString.call(arg1) === '[object Object]' || Object.prototype.toString.call(arg1) === '[object Array]') {\n            if (Object.keys(arg1).length !== Object.keys(arg2).length) {\n                return false;\n            }\n            return (Object.keys(arg1).every(function (key) {\n                return deepCompare(arg1[key], arg2[key]);\n            }));\n        }\n        return (arg1 === arg2);\n    }\n    return false;\n}\n\nif (deepCompare(global.get(\"config.remote\"), global.get(\"config.local\"))) {\n    msg.payload = true;\n} else {\n    msg.payload = false;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 200,
+        "wires": [
+            [
+                "fca1e38b2bfe1d61"
             ]
         ]
     }
