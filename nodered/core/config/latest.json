@@ -806,7 +806,8 @@
         "y": 500,
         "wires": [
             [
-                "8570e4975b604533"
+                "8570e4975b604533",
+                "d8f9f7a996818d8d"
             ],
             [
                 "01aa9dc7544f2b55"
@@ -837,7 +838,7 @@
         "wires": [
             [
                 "c93deaf7f1d5dec2",
-                "fc62ae18882a7832"
+                "a34f12b31113e0bf"
             ]
         ]
     },
@@ -910,31 +911,6 @@
         ]
     },
     {
-        "id": "fc62ae18882a7832",
-        "type": "delay",
-        "z": "8c45f8d06741be73",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "2",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 1040,
-        "y": 660,
-        "wires": [
-            [
-                "a34f12b31113e0bf"
-            ]
-        ]
-    },
-    {
         "id": "a34f12b31113e0bf",
         "type": "change",
         "z": "8c45f8d06741be73",
@@ -954,7 +930,7 @@
         "to": "",
         "reg": false,
         "x": 1070,
-        "y": 700,
+        "y": 660,
         "wires": [
             [
                 "470ee3b3dd48d7e9"
@@ -975,7 +951,51 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 1330,
-        "y": 700,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "d8f9f7a996818d8d",
+        "type": "change",
+        "z": "8c45f8d06741be73",
+        "name": "Apply Local Config",
+        "rules": [
+            {
+                "t": "set",
+                "p": "cloud.sensors",
+                "pt": "global",
+                "to": "cloud.config.local.sensors",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1290,
+        "y": 500,
+        "wires": [
+            [
+                "161ad2f836a9b6a3"
+            ]
+        ]
+    },
+    {
+        "id": "161ad2f836a9b6a3",
+        "type": "debug",
+        "z": "8c45f8d06741be73",
+        "name": "Sensor Config Applied",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1510,
+        "y": 500,
         "wires": []
     },
     {
