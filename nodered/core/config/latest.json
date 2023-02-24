@@ -67,12 +67,12 @@
         ],
         "repeat": "",
         "crontab": "",
-        "once": false,
+        "once": true,
         "onceDelay": "10",
         "topic": "",
         "payload": "{}",
         "payloadType": "json",
-        "x": 110,
+        "x": 120,
         "y": 40,
         "wires": [
             [
