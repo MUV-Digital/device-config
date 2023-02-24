@@ -108,7 +108,7 @@
         "type": "http request",
         "z": "8c45f8d06741be73",
         "name": "Read Remote Configuration",
-        "method": "POST",
+        "method": "GET",
         "ret": "obj",
         "paytoqs": "ignore",
         "url": "${DEVICE_CONFIGURATION}",
