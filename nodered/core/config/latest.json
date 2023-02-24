@@ -1,0 +1,419 @@
+[
+    {
+        "id": "8c45f8d06741be73",
+        "type": "tab",
+        "label": "Config Update",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9cb41c778a242c32",
+        "type": "http request",
+        "z": "8c45f8d06741be73",
+        "name": "Deploy Configuration",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "127.0.0.1/flows",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "other",
+                "keyValue": "Node-RED-Deployment-Type",
+                "valueType": "other",
+                "valueValue": "full"
+            }
+        ],
+        "x": 1140,
+        "y": 200,
+        "wires": [
+            [
+                "09c004e5e748d2f1"
+            ]
+        ]
+    },
+    {
+        "id": "09c004e5e748d2f1",
+        "type": "debug",
+        "z": "8c45f8d06741be73",
+        "name": "New Config Deployed",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1380,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "4a3f544eb892783e",
+        "type": "inject",
+        "z": "8c45f8d06741be73",
+        "name": "Startup",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "10",
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 110,
+        "y": 40,
+        "wires": [
+            [
+                "5212e7eb218d9561"
+            ]
+        ]
+    },
+    {
+        "id": "8805e992f7f00598",
+        "type": "switch",
+        "z": "8c45f8d06741be73",
+        "name": "Env Variable Exists",
+        "property": "DEVICE_CONFIGURATION",
+        "propertyType": "env",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 790,
+        "y": 40,
+        "wires": [
+            [
+                "38a38d75d43f92ec"
+            ]
+        ]
+    },
+    {
+        "id": "38a38d75d43f92ec",
+        "type": "http request",
+        "z": "8c45f8d06741be73",
+        "name": "Read Remote Configuration",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "${DEVICE_CONFIGURATION}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 820,
+        "y": 80,
+        "wires": [
+            [
+                "377977105c56c06a"
+            ]
+        ]
+    },
+    {
+        "id": "8362a82ef067f837",
+        "type": "file",
+        "z": "8c45f8d06741be73",
+        "name": "Write Config",
+        "filename": "/data/config/latest.json",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "utf8",
+        "x": 1110,
+        "y": 120,
+        "wires": [
+            [
+                "bcc7acb5c7e32a74"
+            ]
+        ]
+    },
+    {
+        "id": "eecab5644c409048",
+        "type": "file in",
+        "z": "8c45f8d06741be73",
+        "name": "Read Config",
+        "filename": "/data/config/latest.json",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "utf8",
+        "allProps": false,
+        "x": 470,
+        "y": 80,
+        "wires": [
+            [
+                "89e01d33fee4fecc"
+            ]
+        ]
+    },
+    {
+        "id": "377977105c56c06a",
+        "type": "change",
+        "z": "8c45f8d06741be73",
+        "name": "Store Remote Config",
+        "rules": [
+            {
+                "t": "set",
+                "p": "config.remote",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 120,
+        "wires": [
+            [
+                "fca1e38b2bfe1d61"
+            ]
+        ]
+    },
+    {
+        "id": "670b3f735eeae284",
+        "type": "catch",
+        "z": "8c45f8d06741be73",
+        "name": "",
+        "scope": [
+            "eecab5644c409048"
+        ],
+        "uncaught": false,
+        "x": 450,
+        "y": 40,
+        "wires": [
+            [
+                "8805e992f7f00598",
+                "4f3b9deb99ebe9f4"
+            ]
+        ]
+    },
+    {
+        "id": "89e01d33fee4fecc",
+        "type": "json",
+        "z": "8c45f8d06741be73",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 450,
+        "y": 120,
+        "wires": [
+            [
+                "c60ac3fc83d15a30"
+            ]
+        ]
+    },
+    {
+        "id": "c60ac3fc83d15a30",
+        "type": "change",
+        "z": "8c45f8d06741be73",
+        "name": "Store Local Config",
+        "rules": [
+            {
+                "t": "set",
+                "p": "config.local",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 490,
+        "y": 160,
+        "wires": [
+            [
+                "8805e992f7f00598"
+            ]
+        ]
+    },
+    {
+        "id": "5212e7eb218d9561",
+        "type": "change",
+        "z": "8c45f8d06741be73",
+        "name": "Init Variables",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "config.local",
+                "pt": "global",
+                "to": "{}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "config.remote",
+                "pt": "global",
+                "to": " {}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 270,
+        "y": 40,
+        "wires": [
+            [
+                "eecab5644c409048"
+            ]
+        ]
+    },
+    {
+        "id": "4f3b9deb99ebe9f4",
+        "type": "debug",
+        "z": "8c45f8d06741be73",
+        "name": "Config Error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "7b7ac37718865a31",
+        "type": "change",
+        "z": "8c45f8d06741be73",
+        "name": "Apply Remote Config",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "config.remote",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1140,
+        "y": 80,
+        "wires": [
+            [
+                "8362a82ef067f837"
+            ]
+        ]
+    },
+    {
+        "id": "fca1e38b2bfe1d61",
+        "type": "switch",
+        "z": "8c45f8d06741be73",
+        "name": "Compare Remote/Local Config",
+        "property": "config.local",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "config.remote",
+                "vt": "global"
+            },
+            {
+                "t": "neq",
+                "v": "config.remote",
+                "vt": "global"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1170,
+        "y": 40,
+        "wires": [
+            [
+                "430ca381530b90ca"
+            ],
+            [
+                "7b7ac37718865a31"
+            ]
+        ]
+    },
+    {
+        "id": "bcc7acb5c7e32a74",
+        "type": "change",
+        "z": "8c45f8d06741be73",
+        "name": "Apply Remote Config",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "config.remote",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1140,
+        "y": 160,
+        "wires": [
+            [
+                "9cb41c778a242c32"
+            ]
+        ]
+    },
+    {
+        "id": "430ca381530b90ca",
+        "type": "debug",
+        "z": "8c45f8d06741be73",
+        "name": "Remote Config Already Deployed",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1460,
+        "y": 20,
+        "wires": []
+    }
+]
