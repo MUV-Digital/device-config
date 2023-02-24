@@ -30,19 +30,17 @@
                 "valueValue": "full"
             }
         ],
-        "x": 1140,
-        "y": 200,
+        "x": 1100,
+        "y": 340,
         "wires": [
-            [
-                "09c004e5e748d2f1"
-            ]
+            []
         ]
     },
     {
         "id": "09c004e5e748d2f1",
         "type": "debug",
         "z": "8c45f8d06741be73",
-        "name": "New Config Deployed",
+        "name": "Deploying new Config...",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -51,8 +49,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1380,
-        "y": 200,
+        "x": 1350,
+        "y": 260,
         "wires": []
     },
     {
@@ -72,8 +70,8 @@
         "topic": "",
         "payload": "{}",
         "payloadType": "json",
-        "x": 120,
-        "y": 40,
+        "x": 100,
+        "y": 140,
         "wires": [
             [
                 "5212e7eb218d9561"
@@ -95,8 +93,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 790,
-        "y": 40,
+        "x": 750,
+        "y": 140,
         "wires": [
             [
                 "38a38d75d43f92ec"
@@ -119,8 +117,8 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 820,
-        "y": 80,
+        "x": 780,
+        "y": 180,
         "wires": [
             [
                 "f167fd46d0e6685e"
@@ -138,8 +136,8 @@
         "createDir": true,
         "overwriteFile": "true",
         "encoding": "utf8",
-        "x": 1110,
-        "y": 120,
+        "x": 1070,
+        "y": 220,
         "wires": [
             [
                 "bcc7acb5c7e32a74"
@@ -158,8 +156,8 @@
         "sendError": false,
         "encoding": "utf8",
         "allProps": false,
-        "x": 470,
-        "y": 80,
+        "x": 430,
+        "y": 180,
         "wires": [
             [
                 "89e01d33fee4fecc"
@@ -185,8 +183,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 800,
-        "y": 160,
+        "x": 760,
+        "y": 260,
         "wires": [
             [
                 "3199b7b26537303c"
@@ -202,8 +200,8 @@
             "eecab5644c409048"
         ],
         "uncaught": false,
-        "x": 450,
-        "y": 40,
+        "x": 410,
+        "y": 140,
         "wires": [
             [
                 "8805e992f7f00598",
@@ -230,8 +228,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 490,
-        "y": 160,
+        "x": 450,
+        "y": 260,
         "wires": [
             [
                 "8805e992f7f00598"
@@ -271,8 +269,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 270,
-        "y": 40,
+        "x": 250,
+        "y": 140,
         "wires": [
             [
                 "eecab5644c409048"
@@ -283,7 +281,7 @@
         "id": "4f3b9deb99ebe9f4",
         "type": "debug",
         "z": "8c45f8d06741be73",
-        "name": "Config Error",
+        "name": "Config doesn't exist.",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -292,8 +290,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 590,
-        "y": 20,
+        "x": 580,
+        "y": 60,
         "wires": []
     },
     {
@@ -315,8 +313,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1140,
-        "y": 80,
+        "x": 1100,
+        "y": 180,
         "wires": [
             [
                 "8362a82ef067f837"
@@ -341,8 +339,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1110,
-        "y": 40,
+        "x": 1070,
+        "y": 140,
         "wires": [
             [
                 "430ca381530b90ca"
@@ -371,11 +369,12 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1140,
-        "y": 160,
+        "x": 1100,
+        "y": 260,
         "wires": [
             [
-                "9cb41c778a242c32"
+                "09c004e5e748d2f1",
+                "48a85503faf9fed7"
             ]
         ]
     },
@@ -383,7 +382,7 @@
         "id": "430ca381530b90ca",
         "type": "debug",
         "z": "8c45f8d06741be73",
-        "name": "Remote Config Already Deployed",
+        "name": "Remote Config already deployed.",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -392,8 +391,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1460,
-        "y": 20,
+        "x": 1340,
+        "y": 60,
         "wires": []
     },
     {
@@ -404,8 +403,8 @@
         "property": "payload",
         "action": "",
         "pretty": true,
-        "x": 450,
-        "y": 120,
+        "x": 410,
+        "y": 220,
         "wires": [
             [
                 "c60ac3fc83d15a30"
@@ -420,8 +419,8 @@
         "property": "payload",
         "action": "",
         "pretty": true,
-        "x": 750,
-        "y": 120,
+        "x": 710,
+        "y": 220,
         "wires": [
             [
                 "377977105c56c06a"
@@ -439,11 +438,46 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 830,
-        "y": 200,
+        "x": 790,
+        "y": 300,
         "wires": [
             [
                 "fca1e38b2bfe1d61"
+            ]
+        ]
+    },
+    {
+        "id": "8be58ed0f40fbde5",
+        "type": "comment",
+        "z": "8c45f8d06741be73",
+        "name": "Automatic Configuration Update",
+        "info": "",
+        "x": 150,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "48a85503faf9fed7",
+        "type": "delay",
+        "z": "8c45f8d06741be73",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1060,
+        "y": 300,
+        "wires": [
+            [
+                "9cb41c778a242c32"
             ]
         ]
     }
