@@ -8,6 +8,41 @@
         "env": []
     },
     {
+        "id": "36d23b104ae95f19",
+        "type": "tab",
+        "label": "MUV Cloud",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "be312c8b96f1dcb0",
+        "type": "mqtt-broker",
+        "name": "MUV Cloud MQTT Broker",
+        "broker": "mqtt.akenza.io",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
         "id": "9cb41c778a242c32",
         "type": "http request",
         "z": "8c45f8d06741be73",
@@ -480,5 +515,23 @@
                 "9cb41c778a242c32"
             ]
         ]
+    },
+    {
+        "id": "4880e07a7863e3c9",
+        "type": "mqtt out",
+        "z": "36d23b104ae95f19",
+        "name": "Heizung 5",
+        "topic": "/up/859gpbgfrv2bmm0pkbjpespljbs83dtf/id/0EEF512C0EEFDDF8",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "be312c8b96f1dcb0",
+        "x": 1200,
+        "y": 80,
+        "wires": []
     }
 ]
