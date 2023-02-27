@@ -721,7 +721,7 @@
             },
             {
                 "t": "set",
-                "p": "cloud.sensors",
+                "p": "cloud.devices",
                 "pt": "global",
                 "to": "[]",
                 "tot": "json"
@@ -914,13 +914,13 @@
         "id": "a34f12b31113e0bf",
         "type": "change",
         "z": "8c45f8d06741be73",
-        "name": "Set Cloud Sensors",
+        "name": "Set Cloud Devices",
         "rules": [
             {
                 "t": "set",
-                "p": "cloud.sensors",
+                "p": "cloud.devices",
                 "pt": "global",
-                "to": "cloud.config.remote.sensors",
+                "to": "cloud.config.remote.devices",
                 "tot": "global"
             }
         ],
@@ -941,7 +941,7 @@
         "id": "470ee3b3dd48d7e9",
         "type": "debug",
         "z": "8c45f8d06741be73",
-        "name": "Sensor Config Applied",
+        "name": "Customer Config Applied",
         "active": true,
         "tosidebar": true,
         "console": true,
@@ -950,7 +950,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1330,
+        "x": 1340,
         "y": 660,
         "wires": []
     },
@@ -962,9 +962,9 @@
         "rules": [
             {
                 "t": "set",
-                "p": "cloud.sensors",
+                "p": "cloud.devices",
                 "pt": "global",
-                "to": "cloud.config.local.sensors",
+                "to": "cloud.config.local.devices",
                 "tot": "global"
             }
         ],
@@ -977,7 +977,7 @@
         "y": 500,
         "wires": [
             [
-                "161ad2f836a9b6a3"
+                "e99891fadf209f72"
             ]
         ]
     },
@@ -985,7 +985,7 @@
         "id": "161ad2f836a9b6a3",
         "type": "debug",
         "z": "8c45f8d06741be73",
-        "name": "Sensor Config Applied",
+        "name": "Customer Config Applied",
         "active": true,
         "tosidebar": true,
         "console": true,
@@ -994,9 +994,28 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1510,
+        "x": 1660,
         "y": 500,
         "wires": []
+    },
+    {
+        "id": "e99891fadf209f72",
+        "type": "function",
+        "z": "8c45f8d06741be73",
+        "name": "function 1",
+        "func": "global.get(\"cloud.devices\").forEach(device => {\n    device.sensors = [];\n})\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1460,
+        "y": 500,
+        "wires": [
+            [
+                "161ad2f836a9b6a3"
+            ]
+        ]
     },
     {
         "id": "4880e07a7863e3c9",
@@ -1021,7 +1040,7 @@
         "type": "function",
         "z": "36d23b104ae95f19",
         "name": "Send Sensors to Cloud",
-        "func": "global.get(\"cloud.sensors\").forEach(sensor => {\n    if (sensor.value !== undefined && sensor.value !== null){\n        msg.payload = {\n            \"value\": sensor.value\n        }\n        msg.topic = sensor.topic\n        node.send(msg);\n    } else {\n        node.warn(\"Missing value for sensor topic: \" + sensor.topic);\n    }\n});\n\nnode.done();",
+        "func": "global.get(\"cloud.devices\").forEach(device => {\n    msg.topic = device.topic\n    msg.payload = {};\n    device.sensors.forEach(function (item, index) {\n        if (index % 2 === 0) {\n            msg.payload[item] = device.sensors[index + 1];\n        }\n    });\n    if (Object.keys(msg.payload).length > 0){\n        node.send(msg);\n    } else {\n        node.warn(\"Device: \" + device.id + \" has no sensor values.\");\n    }\n});\n\nnode.done();",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
