@@ -980,7 +980,7 @@
         "type": "function",
         "z": "8c45f8d06741be73",
         "name": "function 1",
-        "func": "global.get(\"cloud.devices\").forEach(device => {\n    device.sensors = {};\n})\nreturn msg;",
+        "func": "global.get(\"cloud.devices\").forEach(device => {\n    device.sensors = {};\n    device.errors = {};\n})\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1199,7 +1199,7 @@
         "id": "4880e07a7863e3c9",
         "type": "mqtt out",
         "z": "36d23b104ae95f19",
-        "name": "MUV Cloud",
+        "name": "MUV Cloud Telemtry",
         "topic": "",
         "qos": "0",
         "retain": "false",
@@ -1209,7 +1209,7 @@
         "correl": "",
         "expiry": "",
         "broker": "be312c8b96f1dcb0",
-        "x": 1210,
+        "x": 1240,
         "y": 80,
         "wires": []
     },
@@ -1218,13 +1218,13 @@
         "type": "function",
         "z": "36d23b104ae95f19",
         "name": "Send Sensors to Cloud",
-        "func": "global.get(\"cloud.devices\").forEach(device => {\n    msg.topic = device.topic\n    msg.payload = device.sensors;\n    \n    if (Object.keys(msg.payload).length > 0){\n        node.send(msg);\n    } else {\n        node.warn(\"Device: \" + device.id + \" has no sensor values.\");\n    }\n});\n\nnode.done();",
+        "func": "global.get(\"cloud.devices\").forEach(device => {\n    msg.topic = device.topic + \"/error\";\n    msg.payload = device.sensors;\n    \n    if (Object.keys(msg.payload).length > 0){\n        node.send(msg);\n    }\n});\n\nnode.done();",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1010,
+        "x": 930,
         "y": 80,
         "wires": [
             [
@@ -1254,7 +1254,8 @@
         "wires": [
             [
                 "54630f3e2ab7393b",
-                "de3e23cc3af03da9"
+                "de3e23cc3af03da9",
+                "ddb12aeb38995a4a"
             ]
         ]
     },
@@ -1271,5 +1272,102 @@
         "x": 265,
         "y": 40,
         "wires": []
+    },
+    {
+        "id": "238392b309c51de9",
+        "type": "mqtt out",
+        "z": "36d23b104ae95f19",
+        "name": "MUV Cloud Error",
+        "topic": "",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "be312c8b96f1dcb0",
+        "x": 1230,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "ddb12aeb38995a4a",
+        "type": "function",
+        "z": "36d23b104ae95f19",
+        "name": "Send errors to cloud",
+        "func": "global.get(\"cloud.devices\").forEach(device => {\n    msg.topic = device.topic + \"/error\";\n    msg.payload = device.errors;\n\n    if (Object.keys(msg.payload).length > 0) {\n        node.send(msg);\n    }\n});\n\nnode.done();",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 140,
+        "wires": [
+            [
+                "238392b309c51de9"
+            ]
+        ]
+    },
+    {
+        "id": "a195b8e2c4504d83",
+        "type": "inject",
+        "z": "36d23b104ae95f19",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1800",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 870,
+        "y": 20,
+        "wires": [
+            [
+                "371668732aec16e9"
+            ]
+        ]
+    },
+    {
+        "id": "371668732aec16e9",
+        "type": "change",
+        "z": "36d23b104ae95f19",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "action",
+                "pt": "msg",
+                "to": "connect",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "broker",
+                "pt": "msg",
+                "to": "{\t   \"broker\": \"mqtt.akenza.io\",\t   \"port\": 1883,\t   \"force\": true,\t   \"username\": $env(\"CLOUD_USERNAME\"),\t   \"password\": $env(\"CLOUD_PASSWORD\")\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1020,
+        "y": 20,
+        "wires": [
+            [
+                "4880e07a7863e3c9",
+                "238392b309c51de9"
+            ]
+        ]
     }
 ]
