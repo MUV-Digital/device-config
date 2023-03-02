@@ -554,31 +554,7 @@
         "y": 500,
         "wires": [
             [
-                "5f351ea623760afc"
-            ]
-        ]
-    },
-    {
-        "id": "5f351ea623760afc",
-        "type": "http request",
-        "z": "8c45f8d06741be73",
-        "name": "Read Remote Configuration",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "${DEVICE_CUSTOMER_CONFIGURATION}",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 760,
-        "y": 540,
-        "wires": [
-            [
-                "eb4728a6f0826f22"
+                "ef927bf343698888"
             ]
         ]
     },
@@ -1189,6 +1165,33 @@
         "wires": [
             [
                 "42e544d829e692a9"
+            ]
+        ]
+    },
+    {
+        "id": "ef927bf343698888",
+        "type": "change",
+        "z": "8c45f8d06741be73",
+        "name": "Set Config",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "DEVICE_CUSTOMER_CONFIGURATION",
+                "tot": "env"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 710,
+        "y": 540,
+        "wires": [
+            [
+                "eb4728a6f0826f22"
             ]
         ]
     },
