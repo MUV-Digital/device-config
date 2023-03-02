@@ -75,7 +75,7 @@
         "id": "09c004e5e748d2f1",
         "type": "debug",
         "z": "8c45f8d06741be73",
-        "name": "Deploying new Device Config...",
+        "name": "Deploying new System Config...",
         "active": true,
         "tosidebar": true,
         "console": true,
@@ -101,7 +101,7 @@
         "repeat": "",
         "crontab": "",
         "once": true,
-        "onceDelay": "5",
+        "onceDelay": "2",
         "topic": "",
         "payload": "{}",
         "payloadType": "json",
@@ -110,7 +110,8 @@
         "wires": [
             [
                 "5212e7eb218d9561",
-                "94e875b81ba27c7c"
+                "94e875b81ba27c7c",
+                "221faf33ddac3bab"
             ]
         ]
     },
@@ -317,7 +318,7 @@
         "id": "4f3b9deb99ebe9f4",
         "type": "debug",
         "z": "8c45f8d06741be73",
-        "name": "Device Config doesn't exist.",
+        "name": "System Config doesn't exist.",
         "active": true,
         "tosidebar": true,
         "console": true,
@@ -418,7 +419,7 @@
         "id": "430ca381530b90ca",
         "type": "debug",
         "z": "8c45f8d06741be73",
-        "name": "Remote Device Config already deployed.",
+        "name": "Remote System Config already deployed.",
         "active": true,
         "tosidebar": true,
         "console": true,
@@ -1018,6 +1019,180 @@
         ]
     },
     {
+        "id": "ce58468417dcb813",
+        "type": "function",
+        "z": "8c45f8d06741be73",
+        "name": "Read Config URLs",
+        "func": "global.get(\"cloud.devices\").forEach(device => {\n    if (device.configURL !== null && device.configURL !== undefined) {\n        msg.url = device.configURL;\n        node.send(msg);\n    }\n});\n\nnode.done();",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 820,
+        "wires": [
+            [
+                "c17d4993caeb087f"
+            ]
+        ]
+    },
+    {
+        "id": "c17d4993caeb087f",
+        "type": "http request",
+        "z": "8c45f8d06741be73",
+        "name": "Read Remote Configuration",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 660,
+        "y": 820,
+        "wires": [
+            [
+                "6cc338bb8f3e85b9"
+            ]
+        ]
+    },
+    {
+        "id": "221faf33ddac3bab",
+        "type": "delay",
+        "z": "8c45f8d06741be73",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 240,
+        "y": 820,
+        "wires": [
+            [
+                "ce58468417dcb813"
+            ]
+        ]
+    },
+    {
+        "id": "6cc338bb8f3e85b9",
+        "type": "json",
+        "z": "8c45f8d06741be73",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 590,
+        "y": 860,
+        "wires": [
+            [
+                "8beb1874c301552f",
+                "1a9f5fe822e2d685"
+            ]
+        ]
+    },
+    {
+        "id": "8beb1874c301552f",
+        "type": "debug",
+        "z": "8c45f8d06741be73",
+        "name": "Deploying new Device Config...",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "1a9f5fe822e2d685",
+        "type": "delay",
+        "z": "8c45f8d06741be73",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 600,
+        "y": 900,
+        "wires": [
+            [
+                "24fc4c4655c3184e"
+            ]
+        ]
+    },
+    {
+        "id": "42e544d829e692a9",
+        "type": "http request",
+        "z": "8c45f8d06741be73",
+        "name": "Deploy Configuration",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "127.0.0.1/flow",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 640,
+        "y": 980,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "24fc4c4655c3184e",
+        "type": "change",
+        "z": "8c45f8d06741be73",
+        "name": "",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "url",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 620,
+        "y": 940,
+        "wires": [
+            [
+                "42e544d829e692a9"
+            ]
+        ]
+    },
+    {
         "id": "4880e07a7863e3c9",
         "type": "mqtt out",
         "z": "36d23b104ae95f19",
@@ -1058,7 +1233,7 @@
         "id": "5399216ed31f9d82",
         "type": "inject",
         "z": "36d23b104ae95f19",
-        "name": "",
+        "name": "Cloud Cycle",
         "props": [
             {
                 "p": "payload"
@@ -1071,7 +1246,7 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 130,
+        "x": 140,
         "y": 80,
         "wires": [
             [
@@ -1087,7 +1262,8 @@
         "name": "Cloud uplink cycle",
         "mode": "link",
         "links": [
-            "acf296b73e514c81"
+            "acf296b73e514c81",
+            "5b23648546b1c667"
         ],
         "x": 265,
         "y": 40,
