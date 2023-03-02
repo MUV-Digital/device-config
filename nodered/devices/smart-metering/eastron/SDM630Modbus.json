@@ -4,6 +4,42 @@
     "disabled": false,
     "info": "",
     "env": [],
+    "configs": [
+        {
+            "id": "7547c27f49e25e9c",
+            "type": "modbus-client",
+            "name": "RS485",
+            "clienttype": "serial",
+            "bufferCommands": true,
+            "stateLogEnabled": true,
+            "queueLogEnabled": true,
+            "failureLogEnabled": true,
+            "tcpHost": "127.0.0.1",
+            "tcpPort": "502",
+            "tcpType": "DEFAULT",
+            "serialPort": "/dev/ttyUSB0",
+            "serialType": "RTU-BUFFERD",
+            "serialBaudrate": "9600",
+            "serialDatabits": "8",
+            "serialStopbits": "1",
+            "serialParity": "none",
+            "serialConnectionDelay": "100",
+            "serialAsciiResponseStartDelimiter": "0x3A",
+            "unit_id": "1",
+            "commandDelay": "1",
+            "clientTimeout": "1000",
+            "reconnectOnTimeout": true,
+            "reconnectTimeout": "5000",
+            "parallelUnitIdsAllowed": true,
+            "showWarnings": true,
+            "showLogs": true,
+            "_users": [
+                "69e4473cf5e5ec89",
+                "45e6ce74ebe4d289",
+                "e150fa15183f1adc"
+            ]
+        }
+    ],
     "nodes": [
         {
             "id": "69e4473cf5e5ec89",
