@@ -1,0 +1,93 @@
+[
+    {
+        "id": "d0fe0f728b647f80",
+        "type": "tab",
+        "label": "MUV Lab 1 Simulator",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "acf296b73e514c81",
+        "type": "link in",
+        "z": "d0fe0f728b647f80",
+        "name": "link in 1",
+        "links": [
+            "de3e23cc3af03da9"
+        ],
+        "x": 65,
+        "y": 60,
+        "wires": [
+            [
+                "0a5a607cbbb94947"
+            ]
+        ]
+    },
+    {
+        "id": "0a5a607cbbb94947",
+        "type": "function",
+        "z": "d0fe0f728b647f80",
+        "name": "function 2",
+        "func": "var data = [{\n    \"AUSSEN\": 3.6,\n    \"PRIMAER_VL\": 7.1,\n    \"PRIMAER_RL\": 7.8,\n    \"SEK_VL\": 32.7,\n    \"SEK_RL1\": 31.6,\n    \"ANLAGE_VL\": 36.6,\n    \"HEIZWASSER\": 38.1,\n    \"WW_OBEN\": 56.6,\n    \"KOLLEKTOR\": 4.5,\n    \"RAUM_M3\": 22.7,\n    \"SOLL_RAUM_M3\": 18.0,\n},\n{\n    \"AUSSEN\": 3.8,\n    \"PRIMAER_VL\": 7.3,\n    \"PRIMAER_RL\": 7.9,\n    \"SEK_VL\": 32.9,\n    \"SEK_RL1\": 31.8,\n    \"ANLAGE_VL\": 36.9,\n    \"HEIZWASSER\": 38,\n    \"WW_OBEN\": 56.4,\n    \"KOLLEKTOR\": 4.5,\n    \"RAUM_M3\": 22.8,\n    \"SOLL_RAUM_M3\": 18.0,\n},\n{\n    \"AUSSEN\": 3.7,\n    \"PRIMAER_VL\": 7.2,\n    \"PRIMAER_RL\": 7.9,\n    \"SEK_VL\": 32.8,\n    \"SEK_RL1\": 31.6,\n    \"ANLAGE_VL\": 36.3,\n    \"HEIZWASSER\": 37.9,\n    \"WW_OBEN\": 56.4,\n    \"KOLLEKTOR\": 4.5,\n    \"RAUM_M3\": 22.7,\n    \"SOLL_RAUM_M3\": 18.0,\n},\n{\n    \"AUSSEN\": 3.5,\n    \"PRIMAER_VL\": 7.2,\n    \"PRIMAER_RL\": 7.7,\n    \"SEK_VL\": 32.4,\n    \"SEK_RL1\": 31.5,\n    \"ANLAGE_VL\": 36.4,\n    \"HEIZWASSER\": 37.8,\n    \"WW_OBEN\": 56.5,\n    \"KOLLEKTOR\": 4.5,\n    \"RAUM_M3\": 22.7,\n    \"SOLL_RAUM_M3\": 18.0,\n},\n{\n    \"AUSSEN\": 3.7,\n    \"PRIMAER_VL\": 7.4,\n    \"PRIMAER_RL\": 7.6,\n    \"SEK_VL\": 32.6,\n    \"SEK_RL1\": 31.8,\n    \"ANLAGE_VL\": 36.5,\n    \"HEIZWASSER\": 37.8,\n    \"WW_OBEN\": 56.7,\n    \"KOLLEKTOR\": 4.5,\n    \"RAUM_M3\": 22.6,\n    \"SOLL_RAUM_M3\": 18.0,\n},\n{\n    \"AUSSEN\": 3.7,\n    \"PRIMAER_VL\": 7.5,\n    \"PRIMAER_RL\": 7.5,\n    \"SEK_VL\": 32.5,\n    \"SEK_RL1\": 31.9,\n    \"ANLAGE_VL\": 36.7,\n    \"HEIZWASSER\": 37.7,\n    \"WW_OBEN\": 56.6,\n    \"KOLLEKTOR\": 4.5,\n    \"RAUM_M3\": 22.8,\n    \"SOLL_RAUM_M3\": 18.0,\n},\n{\n    \"AUSSEN\": 3.7,\n    \"PRIMAER_VL\": 7.3,\n    \"PRIMAER_RL\": 7.5,\n    \"SEK_VL\": 32.7,\n    \"SEK_RL1\": 31.5,\n    \"ANLAGE_VL\": 36.6,\n    \"HEIZWASSER\": 37.5,\n    \"WW_OBEN\": 56.5,\n    \"KOLLEKTOR\": 4.5,\n    \"RAUM_M3\": 22.7,\n    \"SOLL_RAUM_M3\": 18.0,\n},\n{\n    \"AUSSEN\": 3.9,\n    \"PRIMAER_VL\": 7.2,\n    \"PRIMAER_RL\": 7.6,\n    \"SEK_VL\": 32.8,\n    \"SEK_RL1\": 31.4,\n    \"ANLAGE_VL\": 36.6,\n    \"HEIZWASSER\": 37.3,\n    \"WW_OBEN\": 56.4,\n    \"KOLLEKTOR\": 4.5,\n    \"RAUM_M3\": 22.7,\n    \"SOLL_RAUM_M3\": 18.0,\n},\n{\n    \"AUSSEN\": 3.8,\n    \"PRIMAER_VL\": 7.1,\n    \"PRIMAER_RL\": 7.5,\n    \"SEK_VL\": 32.5,\n    \"SEK_RL1\": 31.3,\n    \"ANLAGE_VL\": 36.6,\n    \"HEIZWASSER\": 37.1,\n    \"WW_OBEN\": 56.4,\n    \"KOLLEKTOR\": 4.5,\n    \"RAUM_M3\": 22.8,\n    \"SOLL_RAUM_M3\": 18.0,\n},\n{\n    \"AUSSEN\": 3.7,\n    \"PRIMAER_VL\": 7.1,\n    \"PRIMAER_RL\": 7.6,\n    \"SEK_VL\": 32.3,\n    \"SEK_RL1\": 31.3,\n    \"ANLAGE_VL\": 36.4,\n    \"HEIZWASSER\": 36.9,\n    \"WW_OBEN\": 56.5,\n    \"KOLLEKTOR\": 4.5,\n    \"RAUM_M3\": 22.7,\n    \"SOLL_RAUM_M3\": 18.0,\n}];\n\nvar counter = flow.get(\"counter\");\nvar sensors = data[counter];\nglobal.get(\"cloud.devices\")[0].sensors = sensors;\n\n\nif (counter < data.length - 1) {\n    counter++\n} else {\n    counter = 0;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 180,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cd485b3863a57f3f",
+        "type": "inject",
+        "z": "d0fe0f728b647f80",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "ad2963f40418d4cc"
+            ]
+        ]
+    },
+    {
+        "id": "ad2963f40418d4cc",
+        "type": "change",
+        "z": "d0fe0f728b647f80",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "counter",
+                "pt": "flow",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 320,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    }
+]
