@@ -4,7 +4,13 @@
             "name" : "MUV Lab Heizung Simulator",
             "id" : "6BF9EA6BA90E3C50",
             "topic" : "/up/nwnkdld9nw2e5h9jxfmu7fj1oin793pm/id/6BF9EA6BA90E3C50",
-            "configURL" : ""
+            "configURL" : "https://raw.githubusercontent.com/MUV-Digital/device-config/main/nodered/devices/simulator/muv-lab-1/heating-system.json"
+        },
+        {
+            "name" : "MUV Lab Smart Metering",
+            "id" : "03C85FF556998D87",
+            "topic" : "/up/lbgfx1932uf3sqneoq325rqnom2sc71w/id/03C85FF556998D87",
+            "configURL" : "https://raw.githubusercontent.com/MUV-Digital/device-config/main/nodered/devices/smart-metering/eastron/SDM630Modbus.json"
         }
     ]
 }
