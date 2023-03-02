@@ -1,1096 +1,568 @@
 [
     {
-        "id": "8c45f8d06741be73",
+        "id": "059e96357b492b96",
         "type": "tab",
-        "label": "Config Update",
+        "label": "SDM630Modbus",
         "disabled": false,
         "info": "",
         "env": []
     },
     {
-        "id": "36d23b104ae95f19",
-        "type": "tab",
-        "label": "MUV Cloud",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "be312c8b96f1dcb0",
-        "type": "mqtt-broker",
-        "name": "MUV Cloud MQTT Broker",
-        "broker": "mqtt.akenza.io",
-        "port": "1883",
-        "clientid": "",
-        "autoConnect": true,
-        "usetls": false,
-        "protocolVersion": "4",
-        "keepalive": "60",
-        "cleansession": true,
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthPayload": "",
-        "birthMsg": {},
-        "closeTopic": "",
-        "closeQos": "0",
-        "closePayload": "",
-        "closeMsg": {},
-        "willTopic": "",
-        "willQos": "0",
-        "willPayload": "",
-        "willMsg": {},
-        "userProps": "",
-        "sessionExpiry": ""
-    },
-    {
-        "id": "9cb41c778a242c32",
-        "type": "http request",
-        "z": "8c45f8d06741be73",
-        "name": "Deploy Configuration",
-        "method": "POST",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "127.0.0.1/flows",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [
-            {
-                "keyType": "other",
-                "keyValue": "Node-RED-Deployment-Type",
-                "valueType": "other",
-                "valueValue": "full"
-            }
-        ],
-        "x": 1100,
-        "y": 340,
+        "id": "69e4473cf5e5ec89",
+        "type": "modbus-flex-getter",
+        "z": "059e96357b492b96",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "server": "7547c27f49e25e9c",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": true,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 650,
+        "y": 100,
         "wires": [
+            [
+                "951909998ca6669a"
+            ],
             []
         ]
     },
     {
-        "id": "09c004e5e748d2f1",
-        "type": "debug",
-        "z": "8c45f8d06741be73",
-        "name": "Deploying new Device Config...",
-        "active": true,
-        "tosidebar": true,
-        "console": true,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1380,
-        "y": 260,
-        "wires": []
-    },
-    {
-        "id": "4a3f544eb892783e",
-        "type": "inject",
-        "z": "8c45f8d06741be73",
-        "name": "Startup",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "5",
-        "topic": "",
-        "payload": "{}",
-        "payloadType": "json",
-        "x": 100,
-        "y": 140,
-        "wires": [
-            [
-                "5212e7eb218d9561",
-                "94e875b81ba27c7c"
-            ]
-        ]
-    },
-    {
-        "id": "8805e992f7f00598",
-        "type": "switch",
-        "z": "8c45f8d06741be73",
-        "name": "Env Variable Exists",
-        "property": "DEVICE_CONFIGURATION",
-        "propertyType": "env",
-        "rules": [
-            {
-                "t": "nempty"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
+        "id": "dd72a78ddbcdbff5",
+        "type": "function",
+        "z": "059e96357b492b96",
+        "name": "Input Registers",
+        "func": "msg.payload = { 'fc': 4, 'unitid': 1, 'address': 0, 'quantity': 24 };\n\n\nreturn msg;",
         "outputs": 1,
-        "x": 750,
-        "y": 140,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 100,
         "wires": [
             [
-                "38a38d75d43f92ec"
+                "69e4473cf5e5ec89"
             ]
         ]
     },
     {
-        "id": "38a38d75d43f92ec",
-        "type": "http request",
-        "z": "8c45f8d06741be73",
-        "name": "Read Remote Configuration",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "${DEVICE_CONFIGURATION}",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 780,
-        "y": 180,
-        "wires": [
-            [
-                "f167fd46d0e6685e"
-            ]
-        ]
-    },
-    {
-        "id": "8362a82ef067f837",
-        "type": "file",
-        "z": "8c45f8d06741be73",
-        "name": "Write Config",
-        "filename": "/data/config/latest.json",
-        "filenameType": "str",
-        "appendNewline": false,
-        "createDir": true,
-        "overwriteFile": "true",
-        "encoding": "utf8",
-        "x": 1070,
-        "y": 220,
-        "wires": [
-            [
-                "bcc7acb5c7e32a74"
-            ]
-        ]
-    },
-    {
-        "id": "eecab5644c409048",
-        "type": "file in",
-        "z": "8c45f8d06741be73",
-        "name": "Read Config",
-        "filename": "/data/config/latest.json",
-        "filenameType": "str",
-        "format": "utf8",
-        "chunk": false,
-        "sendError": false,
-        "encoding": "utf8",
-        "allProps": false,
-        "x": 430,
-        "y": 180,
-        "wires": [
-            [
-                "89e01d33fee4fecc"
-            ]
-        ]
-    },
-    {
-        "id": "377977105c56c06a",
-        "type": "change",
-        "z": "8c45f8d06741be73",
-        "name": "Store Remote Config",
-        "rules": [
-            {
-                "t": "set",
-                "p": "config.remote",
-                "pt": "global",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 760,
-        "y": 260,
-        "wires": [
-            [
-                "3199b7b26537303c"
-            ]
-        ]
-    },
-    {
-        "id": "670b3f735eeae284",
-        "type": "catch",
-        "z": "8c45f8d06741be73",
+        "id": "951909998ca6669a",
+        "type": "buffer-parser",
+        "z": "059e96357b492b96",
         "name": "",
-        "scope": [
-            "eecab5644c409048"
-        ],
-        "uncaught": false,
-        "x": 410,
-        "y": 140,
-        "wires": [
-            [
-                "8805e992f7f00598",
-                "4f3b9deb99ebe9f4"
-            ]
-        ]
-    },
-    {
-        "id": "c60ac3fc83d15a30",
-        "type": "change",
-        "z": "8c45f8d06741be73",
-        "name": "Store Local Config",
-        "rules": [
+        "data": "payload",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
             {
-                "t": "set",
-                "p": "config.local",
-                "pt": "global",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 450,
-        "y": 260,
-        "wires": [
-            [
-                "8805e992f7f00598"
-            ]
-        ]
-    },
-    {
-        "id": "5212e7eb218d9561",
-        "type": "change",
-        "z": "8c45f8d06741be73",
-        "name": "Init Variables",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "{}",
-                "tot": "json"
+                "type": "floatbe",
+                "name": "Phase 1 volts",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
             },
             {
-                "t": "set",
-                "p": "config.local",
-                "pt": "global",
-                "to": "{}",
-                "tot": "json"
+                "type": "floatbe",
+                "name": "Phase 2 volts",
+                "offset": 4,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
             },
             {
-                "t": "set",
-                "p": "config.remote",
-                "pt": "global",
-                "to": " {}",
-                "tot": "json"
+                "type": "floatbe",
+                "name": "Phase 3 volts",
+                "offset": 8,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "floatbe",
+                "name": "Phase 1 current",
+                "offset": 12,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "floatbe",
+                "name": "Phase 2 current",
+                "offset": 16,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "floatbe",
+                "name": "Phase 3 current",
+                "offset": 20,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "floatbe",
+                "name": "Phase 1 power",
+                "offset": 24,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "floatbe",
+                "name": "Phase 2 power",
+                "offset": 28,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "floatbe",
+                "name": "Phase 3 power",
+                "offset": 32,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "floatbe",
+                "name": "Phase 1 volt amps",
+                "offset": 36,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "floatbe",
+                "name": "Phase 2 volt amps",
+                "offset": 40,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "floatbe",
+                "name": "Phase 3 volt amps",
+                "offset": 44,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
             }
         ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 250,
-        "y": 140,
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "keyvalue",
+        "resultTypeType": "return",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 850,
+        "y": 100,
         "wires": [
             [
-                "eecab5644c409048"
+                "d6f847e7e9fbaad3"
             ]
         ]
     },
     {
-        "id": "4f3b9deb99ebe9f4",
-        "type": "debug",
-        "z": "8c45f8d06741be73",
-        "name": "Device Config doesn't exist.",
-        "active": true,
-        "tosidebar": true,
-        "console": true,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 610,
-        "y": 60,
-        "wires": []
-    },
-    {
-        "id": "7b7ac37718865a31",
-        "type": "change",
-        "z": "8c45f8d06741be73",
-        "name": "Apply Remote Config",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "config.remote",
-                "tot": "global"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1100,
+        "id": "45e6ce74ebe4d289",
+        "type": "modbus-flex-getter",
+        "z": "059e96357b492b96",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "server": "7547c27f49e25e9c",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": true,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 650,
         "y": 180,
         "wires": [
             [
-                "8362a82ef067f837"
+                "629d28c122ae0dd2"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "11846148d9d51168",
+        "type": "function",
+        "z": "059e96357b492b96",
+        "name": "Input Registers",
+        "func": "msg.payload = { 'fc': 4, 'unitid': 1, 'address': 342, 'quantity': 4 };\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 180,
+        "wires": [
+            [
+                "45e6ce74ebe4d289"
             ]
         ]
     },
     {
-        "id": "fca1e38b2bfe1d61",
-        "type": "switch",
-        "z": "8c45f8d06741be73",
-        "name": "True/False",
+        "id": "629d28c122ae0dd2",
+        "type": "buffer-parser",
+        "z": "059e96357b492b96",
+        "name": "",
+        "data": "payload",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "floatbe",
+                "name": "Total kwh",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "floatbe",
+                "name": "Total kvarh",
+                "offset": 4,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "keyvalue",
+        "resultTypeType": "return",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 850,
+        "y": 180,
+        "wires": [
+            [
+                "ab4e69ebd81f4b8a"
+            ]
+        ]
+    },
+    {
+        "id": "e150fa15183f1adc",
+        "type": "modbus-flex-getter",
+        "z": "059e96357b492b96",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "server": "7547c27f49e25e9c",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": true,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 650,
+        "y": 240,
+        "wires": [
+            [
+                "2dde224ad0f04371"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "e480739325f20822",
+        "type": "function",
+        "z": "059e96357b492b96",
+        "name": "Input Registers",
+        "func": "msg.payload = { 'fc': 4, 'unitid': 1, 'address': 358, 'quantity': 6 };\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 240,
+        "wires": [
+            [
+                "e150fa15183f1adc"
+            ]
+        ]
+    },
+    {
+        "id": "2dde224ad0f04371",
+        "type": "buffer-parser",
+        "z": "059e96357b492b96",
+        "name": "",
+        "data": "payload",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "floatbe",
+                "name": "L1 total kwh",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "floatbe",
+                "name": "L2 total kwh",
+                "offset": 4,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "floatbe",
+                "name": "L3 total kwh",
+                "offset": 8,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "keyvalue",
+        "resultTypeType": "return",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 850,
+        "y": 240,
+        "wires": [
+            [
+                "d776e7f885f92383"
+            ]
+        ]
+    },
+    {
+        "id": "a154207225567b90",
+        "type": "join",
+        "z": "059e96357b492b96",
+        "name": "",
+        "mode": "custom",
+        "build": "merged",
         "property": "payload",
         "propertyType": "msg",
-        "rules": [
-            {
-                "t": "true"
-            },
-            {
-                "t": "false"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1070,
-        "y": 140,
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "1",
+        "count": "",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "num",
+        "reduceFixup": "",
+        "x": 1190,
+        "y": 180,
         "wires": [
             [
-                "430ca381530b90ca"
-            ],
-            [
-                "7b7ac37718865a31"
+                "aa85a5c6bbd0511d"
             ]
         ]
     },
     {
-        "id": "bcc7acb5c7e32a74",
-        "type": "change",
-        "z": "8c45f8d06741be73",
-        "name": "Apply Remote Config",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "config.remote",
-                "tot": "global"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1100,
-        "y": 260,
-        "wires": [
-            [
-                "09c004e5e748d2f1",
-                "48a85503faf9fed7"
-            ]
-        ]
-    },
-    {
-        "id": "430ca381530b90ca",
-        "type": "debug",
-        "z": "8c45f8d06741be73",
-        "name": "Remote Device Config already deployed.",
-        "active": true,
-        "tosidebar": true,
-        "console": true,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1370,
-        "y": 60,
-        "wires": []
-    },
-    {
-        "id": "89e01d33fee4fecc",
-        "type": "json",
-        "z": "8c45f8d06741be73",
-        "name": "",
-        "property": "payload",
-        "action": "",
-        "pretty": true,
-        "x": 410,
-        "y": 220,
-        "wires": [
-            [
-                "c60ac3fc83d15a30"
-            ]
-        ]
-    },
-    {
-        "id": "f167fd46d0e6685e",
-        "type": "json",
-        "z": "8c45f8d06741be73",
-        "name": "",
-        "property": "payload",
-        "action": "",
-        "pretty": true,
-        "x": 710,
-        "y": 220,
-        "wires": [
-            [
-                "377977105c56c06a"
-            ]
-        ]
-    },
-    {
-        "id": "3199b7b26537303c",
-        "type": "function",
-        "z": "8c45f8d06741be73",
-        "name": "Compare Remote/Local Config",
-        "func": "const deepCompare = (arg1, arg2) => {\n    if (Object.prototype.toString.call(arg1) === Object.prototype.toString.call(arg2)) {\n        if (Object.prototype.toString.call(arg1) === '[object Object]' || Object.prototype.toString.call(arg1) === '[object Array]') {\n            if (Object.keys(arg1).length !== Object.keys(arg2).length) {\n                return false;\n            }\n            return (Object.keys(arg1).every(function (key) {\n                return deepCompare(arg1[key], arg2[key]);\n            }));\n        }\n        return (arg1 === arg2);\n    }\n    return false;\n}\n\nif (deepCompare(global.get(\"config.remote\"), global.get(\"config.local\"))) {\n    msg.payload = true;\n} else {\n    msg.payload = false;\n}\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 790,
-        "y": 300,
-        "wires": [
-            [
-                "fca1e38b2bfe1d61"
-            ]
-        ]
-    },
-    {
-        "id": "8be58ed0f40fbde5",
-        "type": "comment",
-        "z": "8c45f8d06741be73",
-        "name": "Automatic Configuration Update",
-        "info": "",
-        "x": 150,
-        "y": 20,
-        "wires": []
-    },
-    {
-        "id": "48a85503faf9fed7",
-        "type": "delay",
-        "z": "8c45f8d06741be73",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "2",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 1060,
-        "y": 300,
-        "wires": [
-            [
-                "9cb41c778a242c32"
-            ]
-        ]
-    },
-    {
-        "id": "c93deaf7f1d5dec2",
-        "type": "debug",
-        "z": "8c45f8d06741be73",
-        "name": "Deploying new Customer Config...",
-        "active": true,
-        "tosidebar": true,
-        "console": true,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1370,
-        "y": 620,
-        "wires": []
-    },
-    {
-        "id": "452a03c02524c388",
-        "type": "switch",
-        "z": "8c45f8d06741be73",
-        "name": "Env Variable Exists",
-        "property": "DEVICE_CUSTOMER_CONFIGURATION",
-        "propertyType": "env",
-        "rules": [
-            {
-                "t": "nempty"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 730,
-        "y": 500,
-        "wires": [
-            [
-                "5f351ea623760afc"
-            ]
-        ]
-    },
-    {
-        "id": "5f351ea623760afc",
-        "type": "http request",
-        "z": "8c45f8d06741be73",
-        "name": "Read Remote Configuration",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "${DEVICE_CUSTOMER_CONFIGURATION}",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 760,
-        "y": 540,
-        "wires": [
-            [
-                "eb4728a6f0826f22"
-            ]
-        ]
-    },
-    {
-        "id": "a24f0d4ac57a39be",
-        "type": "file",
-        "z": "8c45f8d06741be73",
-        "name": "Write Config",
-        "filename": "/data/cloud/latest.json",
-        "filenameType": "str",
-        "appendNewline": false,
-        "createDir": true,
-        "overwriteFile": "true",
-        "encoding": "utf8",
-        "x": 1050,
-        "y": 580,
-        "wires": [
-            [
-                "c7484b48bc7597d8"
-            ]
-        ]
-    },
-    {
-        "id": "d8b4ed7dd6a194db",
-        "type": "file in",
-        "z": "8c45f8d06741be73",
-        "name": "Read Config",
-        "filename": "/data/cloud/latest.json",
-        "filenameType": "str",
-        "format": "utf8",
-        "chunk": false,
-        "sendError": false,
-        "encoding": "utf8",
-        "allProps": false,
-        "x": 410,
-        "y": 540,
-        "wires": [
-            [
-                "9ce42f3560c49945"
-            ]
-        ]
-    },
-    {
-        "id": "198aa74b751f7407",
-        "type": "change",
-        "z": "8c45f8d06741be73",
-        "name": "Store Remote Config",
-        "rules": [
-            {
-                "t": "set",
-                "p": "cloud.config.remote",
-                "pt": "global",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 740,
-        "y": 620,
-        "wires": [
-            [
-                "a935e7abe2a75d34"
-            ]
-        ]
-    },
-    {
-        "id": "0c38607f917fb2c9",
-        "type": "catch",
-        "z": "8c45f8d06741be73",
-        "name": "",
-        "scope": [
-            "d8b4ed7dd6a194db"
-        ],
-        "uncaught": false,
-        "x": 390,
-        "y": 500,
-        "wires": [
-            [
-                "452a03c02524c388",
-                "807efadb7c4cc5cb"
-            ]
-        ]
-    },
-    {
-        "id": "1d5fcd7ed11d239e",
-        "type": "change",
-        "z": "8c45f8d06741be73",
-        "name": "Store Local Config",
-        "rules": [
-            {
-                "t": "set",
-                "p": "cloud.config.local",
-                "pt": "global",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 430,
-        "y": 620,
-        "wires": [
-            [
-                "452a03c02524c388"
-            ]
-        ]
-    },
-    {
-        "id": "94e875b81ba27c7c",
-        "type": "change",
-        "z": "8c45f8d06741be73",
-        "name": "Init Variables",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "{}",
-                "tot": "json"
-            },
-            {
-                "t": "set",
-                "p": "cloud.config.local",
-                "pt": "global",
-                "to": "{}",
-                "tot": "json"
-            },
-            {
-                "t": "set",
-                "p": "cloud.config.remote",
-                "pt": "global",
-                "to": " {}",
-                "tot": "json"
-            },
-            {
-                "t": "set",
-                "p": "cloud.devices",
-                "pt": "global",
-                "to": "[]",
-                "tot": "json"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 250,
-        "y": 500,
-        "wires": [
-            [
-                "d8b4ed7dd6a194db"
-            ]
-        ]
-    },
-    {
-        "id": "807efadb7c4cc5cb",
-        "type": "debug",
-        "z": "8c45f8d06741be73",
-        "name": "Customer Config doesn't exist.",
-        "active": true,
-        "tosidebar": true,
-        "console": true,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 600,
-        "y": 420,
-        "wires": []
-    },
-    {
-        "id": "01aa9dc7544f2b55",
-        "type": "change",
-        "z": "8c45f8d06741be73",
-        "name": "Apply Remote Config",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "cloud.config.remote",
-                "tot": "global"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1080,
-        "y": 540,
-        "wires": [
-            [
-                "a24f0d4ac57a39be"
-            ]
-        ]
-    },
-    {
-        "id": "17cdbfbb1eedcc15",
-        "type": "switch",
-        "z": "8c45f8d06741be73",
-        "name": "True/False",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "true"
-            },
-            {
-                "t": "false"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1050,
-        "y": 500,
-        "wires": [
-            [
-                "8570e4975b604533",
-                "d8f9f7a996818d8d"
-            ],
-            [
-                "01aa9dc7544f2b55"
-            ]
-        ]
-    },
-    {
-        "id": "c7484b48bc7597d8",
-        "type": "change",
-        "z": "8c45f8d06741be73",
-        "name": "Apply Remote Config",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "cloud.config.remote",
-                "tot": "global"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1080,
-        "y": 620,
-        "wires": [
-            [
-                "c93deaf7f1d5dec2",
-                "a34f12b31113e0bf"
-            ]
-        ]
-    },
-    {
-        "id": "8570e4975b604533",
-        "type": "debug",
-        "z": "8c45f8d06741be73",
-        "name": "Remote Customer Config already deployed.",
-        "active": true,
-        "tosidebar": true,
-        "console": true,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1360,
-        "y": 420,
-        "wires": []
-    },
-    {
-        "id": "9ce42f3560c49945",
-        "type": "json",
-        "z": "8c45f8d06741be73",
-        "name": "",
-        "property": "payload",
-        "action": "",
-        "pretty": true,
-        "x": 390,
-        "y": 580,
-        "wires": [
-            [
-                "1d5fcd7ed11d239e"
-            ]
-        ]
-    },
-    {
-        "id": "eb4728a6f0826f22",
-        "type": "json",
-        "z": "8c45f8d06741be73",
-        "name": "",
-        "property": "payload",
-        "action": "",
-        "pretty": true,
-        "x": 690,
-        "y": 580,
-        "wires": [
-            [
-                "198aa74b751f7407"
-            ]
-        ]
-    },
-    {
-        "id": "a935e7abe2a75d34",
-        "type": "function",
-        "z": "8c45f8d06741be73",
-        "name": "Compare Remote/Local Config",
-        "func": "const deepCompare = (arg1, arg2) => {\n    if (Object.prototype.toString.call(arg1) === Object.prototype.toString.call(arg2)) {\n        if (Object.prototype.toString.call(arg1) === '[object Object]' || Object.prototype.toString.call(arg1) === '[object Array]') {\n            if (Object.keys(arg1).length !== Object.keys(arg2).length) {\n                return false;\n            }\n            return (Object.keys(arg1).every(function (key) {\n                return deepCompare(arg1[key], arg2[key]);\n            }));\n        }\n        return (arg1 === arg2);\n    }\n    return false;\n}\n\nif (deepCompare(global.get(\"cloud.config.remote\"), global.get(\"cloud.config.local\"))) {\n    msg.payload = true;\n} else {\n    msg.payload = false;\n}\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 770,
-        "y": 660,
-        "wires": [
-            [
-                "17cdbfbb1eedcc15"
-            ]
-        ]
-    },
-    {
-        "id": "a34f12b31113e0bf",
-        "type": "change",
-        "z": "8c45f8d06741be73",
-        "name": "Set Cloud Devices",
-        "rules": [
-            {
-                "t": "set",
-                "p": "cloud.devices",
-                "pt": "global",
-                "to": "cloud.config.remote.devices",
-                "tot": "global"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1070,
-        "y": 660,
-        "wires": [
-            [
-                "470ee3b3dd48d7e9"
-            ]
-        ]
-    },
-    {
-        "id": "470ee3b3dd48d7e9",
-        "type": "debug",
-        "z": "8c45f8d06741be73",
-        "name": "Customer Config Applied",
-        "active": true,
-        "tosidebar": true,
-        "console": true,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1340,
-        "y": 660,
-        "wires": []
-    },
-    {
-        "id": "d8f9f7a996818d8d",
-        "type": "change",
-        "z": "8c45f8d06741be73",
-        "name": "Apply Local Config",
-        "rules": [
-            {
-                "t": "set",
-                "p": "cloud.devices",
-                "pt": "global",
-                "to": "cloud.config.local.devices",
-                "tot": "global"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1290,
-        "y": 500,
-        "wires": [
-            [
-                "e99891fadf209f72"
-            ]
-        ]
-    },
-    {
-        "id": "161ad2f836a9b6a3",
-        "type": "debug",
-        "z": "8c45f8d06741be73",
-        "name": "Customer Config Applied",
-        "active": true,
-        "tosidebar": true,
-        "console": true,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1660,
-        "y": 500,
-        "wires": []
-    },
-    {
-        "id": "e99891fadf209f72",
-        "type": "function",
-        "z": "8c45f8d06741be73",
-        "name": "function 1",
-        "func": "global.get(\"cloud.devices\").forEach(device => {\n    device.sensors = {};\n})\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1460,
-        "y": 500,
-        "wires": [
-            [
-                "161ad2f836a9b6a3"
-            ]
-        ]
-    },
-    {
-        "id": "4880e07a7863e3c9",
-        "type": "mqtt out",
-        "z": "36d23b104ae95f19",
-        "name": "MUV Cloud",
-        "topic": "",
-        "qos": "0",
-        "retain": "false",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "be312c8b96f1dcb0",
-        "x": 1210,
-        "y": 80,
-        "wires": []
-    },
-    {
-        "id": "54630f3e2ab7393b",
-        "type": "function",
-        "z": "36d23b104ae95f19",
-        "name": "Send Sensors to Cloud",
-        "func": "global.get(\"cloud.devices\").forEach(device => {\n    msg.topic = device.topic\n    msg.payload = device.sensors;\n    \n    if (Object.keys(msg.payload).length > 0){\n        node.send(msg);\n    } else {\n        node.warn(\"Device: \" + device.id + \" has no sensor values.\");\n    }\n});\n\nnode.done();",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1010,
-        "y": 80,
-        "wires": [
-            [
-                "4880e07a7863e3c9"
-            ]
-        ]
-    },
-    {
-        "id": "5399216ed31f9d82",
-        "type": "inject",
-        "z": "36d23b104ae95f19",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "5",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "10",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 130,
-        "y": 80,
-        "wires": [
-            [
-                "54630f3e2ab7393b",
-                "de3e23cc3af03da9"
-            ]
-        ]
-    },
-    {
-        "id": "de3e23cc3af03da9",
-        "type": "link out",
-        "z": "36d23b104ae95f19",
-        "name": "Cloud uplink cycle",
-        "mode": "link",
+        "id": "5b23648546b1c667",
+        "type": "link in",
+        "z": "059e96357b492b96",
+        "name": "link in 1",
         "links": [
-            "acf296b73e514c81"
+            "de3e23cc3af03da9"
         ],
-        "x": 265,
-        "y": 40,
+        "x": 225,
+        "y": 100,
+        "wires": [
+            [
+                "dd72a78ddbcdbff5",
+                "11846148d9d51168",
+                "e480739325f20822"
+            ]
+        ]
+    },
+    {
+        "id": "d776e7f885f92383",
+        "type": "change",
+        "z": "059e96357b492b96",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "sensors",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1010,
+        "y": 240,
+        "wires": [
+            [
+                "a154207225567b90"
+            ]
+        ]
+    },
+    {
+        "id": "ab4e69ebd81f4b8a",
+        "type": "change",
+        "z": "059e96357b492b96",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "sensors",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1010,
+        "y": 180,
+        "wires": [
+            [
+                "a154207225567b90"
+            ]
+        ]
+    },
+    {
+        "id": "d6f847e7e9fbaad3",
+        "type": "change",
+        "z": "059e96357b492b96",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "sensors",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1010,
+        "y": 100,
+        "wires": [
+            [
+                "a154207225567b90"
+            ]
+        ]
+    },
+    {
+        "id": "aa85a5c6bbd0511d",
+        "type": "function",
+        "z": "059e96357b492b96",
+        "name": "Set device sensors",
+        "func": "var result = global.get(\"cloud.devices\").filter(obj => {\n    return obj.id === \"SDM630Modbus\";\n})\n\nresult.forEach(device => {\n    device.sensors = msg.payload;\n});\n\nreturn msg;",
+        "outputs": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1370,
+        "y": 180,
         "wires": []
+    },
+    {
+        "id": "7547c27f49e25e9c",
+        "type": "modbus-client",
+        "name": "RS485",
+        "clienttype": "serial",
+        "bufferCommands": true,
+        "stateLogEnabled": true,
+        "queueLogEnabled": true,
+        "failureLogEnabled": true,
+        "tcpHost": "127.0.0.1",
+        "tcpPort": "502",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB0",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": "9600",
+        "serialDatabits": "8",
+        "serialStopbits": "1",
+        "serialParity": "none",
+        "serialConnectionDelay": "100",
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": "1",
+        "commandDelay": "1",
+        "clientTimeout": "1000",
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": "5000",
+        "parallelUnitIdsAllowed": true,
+        "showWarnings": true,
+        "showLogs": true
     }
 ]
