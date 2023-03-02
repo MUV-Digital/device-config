@@ -1218,7 +1218,7 @@
         "type": "function",
         "z": "36d23b104ae95f19",
         "name": "Send Sensors to Cloud",
-        "func": "global.get(\"cloud.devices\").forEach(device => {\n    msg.topic = device.topic + \"/error\";\n    msg.payload = device.sensors;\n    node.send(msg);\n});\n\nnode.done();",
+        "func": "global.get(\"cloud.devices\").forEach(device => {\n    msg.topic = device.topic + \"/telemetry\";\n    msg.payload = device.sensors;\n    node.send(msg);\n});\n\nnode.done();",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
