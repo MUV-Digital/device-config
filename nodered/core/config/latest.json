@@ -1005,7 +1005,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 430,
+        "x": 810,
         "y": 820,
         "wires": [
             [
@@ -1029,8 +1029,8 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 660,
-        "y": 820,
+        "x": 840,
+        "y": 860,
         "wires": [
             [
                 "6cc338bb8f3e85b9"
@@ -1043,7 +1043,7 @@
         "z": "8c45f8d06741be73",
         "name": "",
         "pauseType": "delay",
-        "timeout": "2",
+        "timeout": "5",
         "timeoutUnits": "seconds",
         "rate": "1",
         "nbRateUnits": "1",
@@ -1058,7 +1058,7 @@
         "y": 820,
         "wires": [
             [
-                "ce58468417dcb813"
+                "134bc0e1f13b8bbe"
             ]
         ]
     },
@@ -1070,8 +1070,8 @@
         "property": "payload",
         "action": "",
         "pretty": true,
-        "x": 590,
-        "y": 860,
+        "x": 770,
+        "y": 900,
         "wires": [
             [
                 "8beb1874c301552f",
@@ -1092,8 +1092,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 820,
-        "y": 860,
+        "x": 1000,
+        "y": 900,
         "wires": []
     },
     {
@@ -1113,34 +1113,12 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 600,
-        "y": 900,
+        "x": 780,
+        "y": 940,
         "wires": [
             [
                 "24fc4c4655c3184e"
             ]
-        ]
-    },
-    {
-        "id": "42e544d829e692a9",
-        "type": "http request",
-        "z": "8c45f8d06741be73",
-        "name": "Deploy Configuration",
-        "method": "POST",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "127.0.0.1/flow",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 640,
-        "y": 980,
-        "wires": [
-            []
         ]
     },
     {
@@ -1160,8 +1138,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 620,
-        "y": 940,
+        "x": 800,
+        "y": 980,
         "wires": [
             [
                 "42e544d829e692a9"
@@ -1192,6 +1170,135 @@
         "wires": [
             [
                 "eb4728a6f0826f22"
+            ]
+        ]
+    },
+    {
+        "id": "134bc0e1f13b8bbe",
+        "type": "http request",
+        "z": "8c45f8d06741be73",
+        "name": "Read Local Flows",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "127.0.0.1/flows",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 410,
+        "y": 820,
+        "wires": [
+            [
+                "02a2e4ebea44c687",
+                "20feae3cc09e5299"
+            ]
+        ]
+    },
+    {
+        "id": "02a2e4ebea44c687",
+        "type": "json",
+        "z": "8c45f8d06741be73",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 370,
+        "y": 860,
+        "wires": [
+            [
+                "e7400a1dc57d5603"
+            ]
+        ]
+    },
+    {
+        "id": "42e544d829e692a9",
+        "type": "http request",
+        "z": "8c45f8d06741be73",
+        "name": "Deploy Configuration",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "127.0.0.1/flow",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 820,
+        "y": 1020,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e7400a1dc57d5603",
+        "type": "function",
+        "z": "8c45f8d06741be73",
+        "name": "Filter for logic flows",
+        "func": "const logicFlows = msg.payload.filter(flow => flow.type === \"tab\" && flow.label !== \"Config Update\" && flow.label !== \"MUV Cloud\");\n\nlogicFlows.forEach(flow => {\n    msg.url = \"127.0.0.1/flow/\" + flow.id;\n    node.send(msg);\n});\n\nnode.done();",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 900,
+        "wires": [
+            [
+                "79e9af7d78f8a56f"
+            ]
+        ]
+    },
+    {
+        "id": "79e9af7d78f8a56f",
+        "type": "http request",
+        "z": "8c45f8d06741be73",
+        "name": "Delete logic flows",
+        "method": "DELETE",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 410,
+        "y": 940,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "20feae3cc09e5299",
+        "type": "delay",
+        "z": "8c45f8d06741be73",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 640,
+        "y": 820,
+        "wires": [
+            [
+                "ce58468417dcb813"
             ]
         ]
     },
@@ -1242,10 +1349,10 @@
                 "p": "payload"
             }
         ],
-        "repeat": "5",
+        "repeat": "10",
         "crontab": "",
         "once": true,
-        "onceDelay": "10",
+        "onceDelay": "30",
         "topic": "",
         "payload": "",
         "payloadType": "date",
