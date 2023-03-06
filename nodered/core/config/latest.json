@@ -153,7 +153,14 @@
         "insecureHTTPParser": false,
         "authType": "",
         "senderr": false,
-        "headers": [],
+        "headers": [
+            {
+                "keyType": "other",
+                "keyValue": "Cache-Control",
+                "valueType": "other",
+                "valueValue": "no-cache"
+            }
+        ],
         "x": 780,
         "y": 180,
         "wires": [
@@ -1028,7 +1035,14 @@
         "insecureHTTPParser": false,
         "authType": "",
         "senderr": false,
-        "headers": [],
+        "headers": [
+            {
+                "keyType": "other",
+                "keyValue": "Cache-Control",
+                "valueType": "other",
+                "valueValue": "no-cache"
+            }
+        ],
         "x": 840,
         "y": 860,
         "wires": [
