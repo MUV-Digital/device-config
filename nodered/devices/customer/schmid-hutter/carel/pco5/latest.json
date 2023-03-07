@@ -630,7 +630,7 @@
             "type": "function",
             "z": "c0093ba4737c82fe",
             "name": "Create Telemetry Data",
-            "func": "var analog = global.get(\"data.analog\");\nvar integer = global.get(\"data.integer\");\nvar digital = global.get(\"data.digital\");\nmsg.payload = {...analog, ...integer, ...digital};\n\nvar devices = global.get(\"cloud.devices\")\nvar pco5 = devices.filter(device => device.id === \"pco5\");\nif(pco5.length > 0){\n    pco5[0].sensors = msg.payload; \n}\n\nreturn msg;",
+            "func": "var analog = global.get(\"local.devices.pco5.analog\");\nvar integer = global.get(\"local.devices.pco5.integer\");\nvar digital = global.get(\"local.devices.pco5.digital\");\nmsg.payload = {...analog, ...integer, ...digital};\n\nvar devices = global.get(\"cloud.devices\")\nvar pco5 = devices.filter(device => device.id === \"pco5\");\nif(pco5.length > 0){\n    pco5[0].sensors = msg.payload; \n}\n\nreturn msg;",
             "outputs": 1,
             "noerr": 0,
             "initialize": "",
