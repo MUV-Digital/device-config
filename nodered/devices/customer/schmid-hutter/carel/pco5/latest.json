@@ -1,0 +1,847 @@
+[
+    {
+        "id": "c0093ba4737c82fe",
+        "type": "tab",
+        "label": "PCO5",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "7547c27f49e25e9c",
+        "type": "modbus-client",
+        "name": "RS485",
+        "clienttype": "serial",
+        "bufferCommands": true,
+        "stateLogEnabled": true,
+        "queueLogEnabled": true,
+        "failureLogEnabled": true,
+        "tcpHost": "127.0.0.1",
+        "tcpPort": "502",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB0",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": "19200",
+        "serialDatabits": "8",
+        "serialStopbits": "1",
+        "serialParity": "none",
+        "serialConnectionDelay": "500",
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": 1,
+        "commandDelay": 1,
+        "clientTimeout": 10000,
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": 5000,
+        "parallelUnitIdsAllowed": true,
+        "showWarnings": true,
+        "showLogs": true
+    },
+    {
+        "id": "f90b6e1dd5f01edd",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mqtt.akenza.io",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "54f0887b72233d8e",
+        "type": "modbus-flex-getter",
+        "z": "c0093ba4737c82fe",
+        "name": "",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "server": "7547c27f49e25e9c",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": true,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 610,
+        "y": 200,
+        "wires": [
+            [
+                "6bad1b218a7768c4"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "cfcdc39c842b590a",
+        "type": "function",
+        "z": "c0093ba4737c82fe",
+        "name": "Read Boolean Values",
+        "func": "msg.payload = { \n    'fc': 1, \n    'unitid': 1,\n    'address': 1,\n    'quantity': 4\n};\n\nmsg.type = \"BOOLEAN\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 280,
+        "wires": [
+            [
+                "54f0887b72233d8e"
+            ]
+        ]
+    },
+    {
+        "id": "cfb8de49990e8642",
+        "type": "function",
+        "z": "c0093ba4737c82fe",
+        "name": "Read Analog Values",
+        "func": "msg.payload = {\n    'fc': 3,\n    'unitid': 1,\n    'address': 1,\n    'quantity': 20\n};\n\nmsg.type = \"ANALOG\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 200,
+        "wires": [
+            [
+                "54f0887b72233d8e"
+            ]
+        ]
+    },
+    {
+        "id": "2dc080231414da55",
+        "type": "inject",
+        "z": "c0093ba4737c82fe",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "10",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 200,
+        "wires": [
+            [
+                "cfb8de49990e8642",
+                "2c069f7e13e05920"
+            ]
+        ]
+    },
+    {
+        "id": "926b2e75e2a94c89",
+        "type": "function",
+        "z": "c0093ba4737c82fe",
+        "name": "Read Integer Values",
+        "func": "msg.payload = { \n    'fc': 3, \n    'unitid': 1,\n    'address': 5002,\n    'quantity': 20\n};\n\nmsg.type = \"INTEGER\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 240,
+        "wires": [
+            [
+                "54f0887b72233d8e"
+            ]
+        ]
+    },
+    {
+        "id": "821b0994c637efaf",
+        "type": "mqtt out",
+        "z": "c0093ba4737c82fe",
+        "name": "",
+        "topic": "/up/nwnkdld9nw2e5h9jxfmu7fj1oin793pm/id/63848955EF630F4B/telemetry",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f90b6e1dd5f01edd",
+        "x": 750,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "305aafba2aae158a",
+        "type": "mqtt out",
+        "z": "c0093ba4737c82fe",
+        "name": "",
+        "topic": "/up/nwnkdld9nw2e5h9jxfmu7fj1oin793pm/id/63848955EF630F4B/error",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f90b6e1dd5f01edd",
+        "x": 730,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "2eb6089afe0c593b",
+        "type": "buffer-parser",
+        "z": "c0093ba4737c82fe",
+        "name": "",
+        "data": "payload",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "int16be",
+                "name": "Analog-1",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "0.1",
+                "mask": ""
+            },
+            {
+                "type": "int16be",
+                "name": "Analog-2",
+                "offset": 2,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "0.1",
+                "mask": ""
+            },
+            {
+                "type": "int16be",
+                "name": "Analog-3",
+                "offset": 4,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "0.1",
+                "mask": ""
+            },
+            {
+                "type": "int16be",
+                "name": "Analog-4",
+                "offset": 6,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "0.1",
+                "mask": ""
+            },
+            {
+                "type": "int16be",
+                "name": "Analog-5",
+                "offset": 8,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "0.1",
+                "mask": ""
+            },
+            {
+                "type": "int16be",
+                "name": "Analog-6",
+                "offset": 10,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "0.1",
+                "mask": ""
+            },
+            {
+                "type": "int16be",
+                "name": "Analog-7",
+                "offset": 12,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "0.1",
+                "mask": ""
+            },
+            {
+                "type": "int16be",
+                "name": "Analog-8",
+                "offset": 14,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "0.1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "keyvalue",
+        "resultTypeType": "return",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 870,
+        "y": 200,
+        "wires": [
+            [
+                "138d40ce3426fa86"
+            ]
+        ]
+    },
+    {
+        "id": "2c069f7e13e05920",
+        "type": "delay",
+        "z": "c0093ba4737c82fe",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "10",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 120,
+        "y": 240,
+        "wires": [
+            [
+                "926b2e75e2a94c89",
+                "817b46e4da8db9ee"
+            ]
+        ]
+    },
+    {
+        "id": "817b46e4da8db9ee",
+        "type": "delay",
+        "z": "c0093ba4737c82fe",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "10",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 120,
+        "y": 280,
+        "wires": [
+            [
+                "cfcdc39c842b590a"
+            ]
+        ]
+    },
+    {
+        "id": "366c3e2714e9d6ce",
+        "type": "buffer-parser",
+        "z": "c0093ba4737c82fe",
+        "name": "",
+        "data": "payload",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "bool",
+                "name": "Digital-1",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "bool",
+                "name": "Digital-2",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 1,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "bool",
+                "name": "Digital-3",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 2,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "bool",
+                "name": "Digital-4",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 3,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "bool",
+                "name": "Digital-5",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 4,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "bool",
+                "name": "Digital-6",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 5,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "bool",
+                "name": "Digital-7",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 6,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "bool",
+                "name": "Digital-8",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 7,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "keyvalue",
+        "resultTypeType": "return",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 870,
+        "y": 280,
+        "wires": [
+            [
+                "66a4cf95cd95eddd"
+            ]
+        ]
+    },
+    {
+        "id": "e411839fb84d1b4f",
+        "type": "buffer-parser",
+        "z": "c0093ba4737c82fe",
+        "name": "",
+        "data": "payload",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "int16be",
+                "name": "Integer-1",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "int16be",
+                "name": "Integer-2",
+                "offset": 2,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "int16be",
+                "name": "Integer-3",
+                "offset": 4,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "int16be",
+                "name": "Integer-4",
+                "offset": 6,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "int16be",
+                "name": "Integer-5",
+                "offset": 8,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "int16be",
+                "name": "Integer-6",
+                "offset": 10,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "int16be",
+                "name": "Integer-7",
+                "offset": 12,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "int16be",
+                "name": "Integer-8",
+                "offset": 14,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "keyvalue",
+        "resultTypeType": "return",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 870,
+        "y": 240,
+        "wires": [
+            [
+                "11d52616eba3cccc"
+            ]
+        ]
+    },
+    {
+        "id": "6bad1b218a7768c4",
+        "type": "switch",
+        "z": "c0093ba4737c82fe",
+        "name": "",
+        "property": "type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "ANALOG",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "INTEGER",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "BOOLEAN",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 650,
+        "y": 260,
+        "wires": [
+            [
+                "2eb6089afe0c593b"
+            ],
+            [
+                "e411839fb84d1b4f"
+            ],
+            [
+                "366c3e2714e9d6ce"
+            ]
+        ]
+    },
+    {
+        "id": "20a76390feae9a51",
+        "type": "inject",
+        "z": "c0093ba4737c82fe",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "30",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "180",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 380,
+        "wires": [
+            [
+                "a05af721ac5ff17f"
+            ]
+        ]
+    },
+    {
+        "id": "138d40ce3426fa86",
+        "type": "change",
+        "z": "c0093ba4737c82fe",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "data.analog",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1060,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "11d52616eba3cccc",
+        "type": "change",
+        "z": "c0093ba4737c82fe",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "data.integer",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1060,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "66a4cf95cd95eddd",
+        "type": "change",
+        "z": "c0093ba4737c82fe",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "data.digital",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1060,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a05af721ac5ff17f",
+        "type": "function",
+        "z": "c0093ba4737c82fe",
+        "name": "Create Telemetry Data",
+        "func": "var analog = global.get(\"data.analog\");\nvar integer = global.get(\"data.integer\");\nvar digital = global.get(\"data.digital\");\n\nmsg.payload = {...analog, ...integer, ...digital};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 380,
+        "wires": [
+            [
+                "821b0994c637efaf"
+            ]
+        ]
+    },
+    {
+        "id": "d5e19640061a1d7d",
+        "type": "inject",
+        "z": "c0093ba4737c82fe",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 40,
+        "wires": [
+            [
+                "69b8b9826880ca6c",
+                "d81a8e7480a6fe96",
+                "cb9c52f3e711b027"
+            ]
+        ]
+    },
+    {
+        "id": "69b8b9826880ca6c",
+        "type": "change",
+        "z": "c0093ba4737c82fe",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "data.analog",
+                "pt": "global",
+                "to": "{}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 320,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d81a8e7480a6fe96",
+        "type": "change",
+        "z": "c0093ba4737c82fe",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "data.integer",
+                "pt": "global",
+                "to": "{}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 320,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cb9c52f3e711b027",
+        "type": "change",
+        "z": "c0093ba4737c82fe",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "data.digital",
+                "pt": "global",
+                "to": "{}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 320,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    }
+]
