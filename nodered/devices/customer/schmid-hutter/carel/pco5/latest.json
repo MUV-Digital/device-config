@@ -1,5 +1,5 @@
 {
-    "id": "c0093ba4737c82fe",
+    "id": "d2387857ce85b8b3",
     "label": "PCO5",
     "disabled": false,
     "info": "",
@@ -8,7 +8,7 @@
         {
             "id": "54f0887b72233d8e",
             "type": "modbus-flex-getter",
-            "z": "c0093ba4737c82fe",
+            "z": "d2387857ce85b8b3",
             "name": "",
             "showStatusActivities": true,
             "showErrors": true,
@@ -34,7 +34,7 @@
         {
             "id": "cfcdc39c842b590a",
             "type": "function",
-            "z": "c0093ba4737c82fe",
+            "z": "d2387857ce85b8b3",
             "name": "Read Boolean Values",
             "func": "msg.payload = { \n    'fc': 1, \n    'unitid': 1,\n    'address': 1,\n    'quantity': 4\n};\n\nmsg.type = \"BOOLEAN\"\n\nreturn msg;",
             "outputs": 1,
@@ -53,7 +53,7 @@
         {
             "id": "cfb8de49990e8642",
             "type": "function",
-            "z": "c0093ba4737c82fe",
+            "z": "d2387857ce85b8b3",
             "name": "Read Analog Values",
             "func": "msg.payload = {\n    'fc': 3,\n    'unitid': 1,\n    'address': 1,\n    'quantity': 20\n};\n\nmsg.type = \"ANALOG\"\n\nreturn msg;",
             "outputs": 1,
@@ -72,7 +72,7 @@
         {
             "id": "2dc080231414da55",
             "type": "inject",
-            "z": "c0093ba4737c82fe",
+            "z": "d2387857ce85b8b3",
             "name": "",
             "props": [
                 {
@@ -98,7 +98,7 @@
         {
             "id": "926b2e75e2a94c89",
             "type": "function",
-            "z": "c0093ba4737c82fe",
+            "z": "d2387857ce85b8b3",
             "name": "Read Integer Values",
             "func": "msg.payload = { \n    'fc': 3, \n    'unitid': 1,\n    'address': 5002,\n    'quantity': 20\n};\n\nmsg.type = \"INTEGER\"\n\nreturn msg;",
             "outputs": 1,
@@ -117,7 +117,7 @@
         {
             "id": "2eb6089afe0c593b",
             "type": "buffer-parser",
-            "z": "c0093ba4737c82fe",
+            "z": "d2387857ce85b8b3",
             "name": "",
             "data": "payload",
             "dataType": "msg",
@@ -222,7 +222,7 @@
         {
             "id": "2c069f7e13e05920",
             "type": "delay",
-            "z": "c0093ba4737c82fe",
+            "z": "d2387857ce85b8b3",
             "name": "",
             "pauseType": "delay",
             "timeout": "10",
@@ -248,7 +248,7 @@
         {
             "id": "817b46e4da8db9ee",
             "type": "delay",
-            "z": "c0093ba4737c82fe",
+            "z": "d2387857ce85b8b3",
             "name": "",
             "pauseType": "delay",
             "timeout": "10",
@@ -273,7 +273,7 @@
         {
             "id": "366c3e2714e9d6ce",
             "type": "buffer-parser",
-            "z": "c0093ba4737c82fe",
+            "z": "d2387857ce85b8b3",
             "name": "",
             "data": "payload",
             "dataType": "msg",
@@ -378,7 +378,7 @@
         {
             "id": "e411839fb84d1b4f",
             "type": "buffer-parser",
-            "z": "c0093ba4737c82fe",
+            "z": "d2387857ce85b8b3",
             "name": "",
             "data": "payload",
             "dataType": "msg",
@@ -483,7 +483,7 @@
         {
             "id": "6bad1b218a7768c4",
             "type": "switch",
-            "z": "c0093ba4737c82fe",
+            "z": "d2387857ce85b8b3",
             "name": "",
             "property": "type",
             "propertyType": "msg",
@@ -524,7 +524,7 @@
         {
             "id": "20a76390feae9a51",
             "type": "inject",
-            "z": "c0093ba4737c82fe",
+            "z": "d2387857ce85b8b3",
             "name": "",
             "props": [
                 {
@@ -553,7 +553,7 @@
         {
             "id": "138d40ce3426fa86",
             "type": "change",
-            "z": "c0093ba4737c82fe",
+            "z": "d2387857ce85b8b3",
             "name": "",
             "rules": [
                 {
@@ -578,7 +578,7 @@
         {
             "id": "11d52616eba3cccc",
             "type": "change",
-            "z": "c0093ba4737c82fe",
+            "z": "d2387857ce85b8b3",
             "name": "",
             "rules": [
                 {
@@ -603,7 +603,7 @@
         {
             "id": "66a4cf95cd95eddd",
             "type": "change",
-            "z": "c0093ba4737c82fe",
+            "z": "d2387857ce85b8b3",
             "name": "",
             "rules": [
                 {
@@ -628,7 +628,7 @@
         {
             "id": "a05af721ac5ff17f",
             "type": "function",
-            "z": "c0093ba4737c82fe",
+            "z": "d2387857ce85b8b3",
             "name": "Create Telemetry Data",
             "func": "var analog = global.get(\"local.devices.pco5.analog\");\nvar integer = global.get(\"local.devices.pco5.integer\");\nvar digital = global.get(\"local.devices.pco5.digital\");\nmsg.payload = {...analog, ...integer, ...digital};\n\nvar devices = global.get(\"cloud.devices\")\nvar pco5 = devices.filter(device => device.id === \"pco5\");\nif(pco5.length > 0){\n    pco5[0].sensors = msg.payload; \n}\n\nreturn msg;",
             "outputs": 1,
@@ -645,7 +645,7 @@
         {
             "id": "d5e19640061a1d7d",
             "type": "inject",
-            "z": "c0093ba4737c82fe",
+            "z": "d2387857ce85b8b3",
             "name": "",
             "props": [
                 {
@@ -676,7 +676,7 @@
         {
             "id": "69b8b9826880ca6c",
             "type": "change",
-            "z": "c0093ba4737c82fe",
+            "z": "d2387857ce85b8b3",
             "name": "",
             "rules": [
                 {
@@ -701,7 +701,7 @@
         {
             "id": "d81a8e7480a6fe96",
             "type": "change",
-            "z": "c0093ba4737c82fe",
+            "z": "d2387857ce85b8b3",
             "name": "",
             "rules": [
                 {
@@ -726,7 +726,7 @@
         {
             "id": "cb9c52f3e711b027",
             "type": "change",
-            "z": "c0093ba4737c82fe",
+            "z": "d2387857ce85b8b3",
             "name": "",
             "rules": [
                 {
@@ -747,12 +747,103 @@
             "wires": [
                 []
             ]
+        },
+        {
+            "id": "5885c1602c898a4d",
+            "type": "inject",
+            "z": "d2387857ce85b8b3",
+            "name": "",
+            "props": [
+                {
+                    "p": "payload"
+                },
+                {
+                    "p": "topic",
+                    "vt": "str"
+                }
+            ],
+            "repeat": "",
+            "crontab": "",
+            "once": false,
+            "onceDelay": 0.1,
+            "topic": "",
+            "payload": "",
+            "payloadType": "date",
+            "x": 120,
+            "y": 520,
+            "wires": [
+                [
+                    "985669d2c68953cb"
+                ]
+            ]
+        },
+        {
+            "id": "985669d2c68953cb",
+            "type": "function",
+            "z": "d2387857ce85b8b3",
+            "name": "Read Controller Config",
+            "func": "msg.payload = { \n    'fc': 17, \n    'unitid': 1,\n    'address': 1,\n    'quantity': 1\n};\n\nmsg.type = \"BOOLEAN\"\n\nreturn msg;",
+            "outputs": 1,
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 300,
+            "y": 520,
+            "wires": [
+                [
+                    "256cf4c18a32c194"
+                ]
+            ]
+        },
+        {
+            "id": "609f610c25a21b4a",
+            "type": "debug",
+            "z": "d2387857ce85b8b3",
+            "name": "debug 1",
+            "active": true,
+            "tosidebar": true,
+            "console": false,
+            "tostatus": false,
+            "complete": "false",
+            "statusVal": "",
+            "statusType": "auto",
+            "x": 720,
+            "y": 500,
+            "wires": []
+        },
+        {
+            "id": "256cf4c18a32c194",
+            "type": "modbus-flex-getter",
+            "z": "d2387857ce85b8b3",
+            "name": "",
+            "showStatusActivities": true,
+            "showErrors": true,
+            "showWarnings": true,
+            "logIOActivities": false,
+            "server": "7547c27f49e25e9c",
+            "useIOFile": false,
+            "ioFile": "",
+            "useIOForPayload": false,
+            "emptyMsgOnFail": false,
+            "keepMsgProperties": true,
+            "delayOnStart": false,
+            "startDelayTime": "",
+            "x": 510,
+            "y": 520,
+            "wires": [
+                [
+                    "609f610c25a21b4a"
+                ],
+                []
+            ]
         }
     ],
     "configs": [
         {
             "id": "7547c27f49e25e9c",
             "type": "modbus-client",
+            "z": "d2387857ce85b8b3",
             "name": "RS485",
             "clienttype": "serial",
             "bufferCommands": true,
@@ -768,7 +859,7 @@
             "serialDatabits": "8",
             "serialStopbits": "1",
             "serialParity": "none",
-            "serialConnectionDelay": "500",
+            "serialConnectionDelay": "150",
             "serialAsciiResponseStartDelimiter": "0x3A",
             "unit_id": 1,
             "commandDelay": 1,
