@@ -859,7 +859,7 @@
             "serialDatabits": "8",
             "serialStopbits": "1",
             "serialParity": "none",
-            "serialConnectionDelay": "150",
+            "serialConnectionDelay": "50",
             "serialAsciiResponseStartDelimiter": "0x3A",
             "unit_id": 1,
             "commandDelay": 1,
