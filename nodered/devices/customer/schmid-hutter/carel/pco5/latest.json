@@ -695,7 +695,7 @@
             "type": "function",
             "z": "d2387857ce85b8b3",
             "name": "Create State Data",
-            "func": "var digital = global.get(\"local.devices.pco5.digital\");\nvar devices = global.get(\"cloud.devices\")\nvar pco5 = devices.filter(device => device.id === \"pco5\");\n\nconst activeStates = Object.keys(digital).filter(key => key.includes(\"STATE-\") && digital[key]);\n\nif (pco5.length > 0) {\n    if (activeStates.length > 0){\n        activeStates.forEach(state => {\n            pco5[0].states[state] = digital[state];\n        });\n    } else {\n        pco5[0].states = {};\n    }\n}\n\nreturn msg;",
+            "func": "var digital = global.get(\"local.devices.pco5.digital\");\nvar devices = global.get(\"cloud.devices\")\nvar pco5 = devices.filter(device => device.id === \"pco5\");\n\nconst activeStates = Object.keys(digital).filter(key => key.includes(\"STATE-\") && digital[key]);\n\nif (pco5.length > 0) {\n    if (activeStates.length > 0){\n        pco5[0].states = {};\n        activeStates.forEach(state => {\n            pco5[0].states[state] = digital[state];\n        });\n    } else {\n        pco5[0].states = {};\n    }\n}\n\nreturn msg;",
             "outputs": 1,
             "noerr": 0,
             "initialize": "",
