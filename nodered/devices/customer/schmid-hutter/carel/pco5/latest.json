@@ -197,7 +197,7 @@
             "type": "function",
             "z": "d2387857ce85b8b3",
             "name": "Create Telemetry Data",
-            "func": "var analog = global.get(\"local.devices.pco5.analog\");\nvar integer = global.get(\"local.devices.pco5.integer\");\nvar digital = global.get(\"local.devices.pco5.digital\");\nmsg.payload = { ...analog, ...integer};\n\nmsg.payload = Object.keys(msg.payload)\n    .filter(key => msg.payload[key] !== 0)\n    .reduce((obj, key) => {\n        obj[key] = msg.payload [key];\n        return obj;\n    }, {});\n\nvar devices = global.get(\"cloud.devices\")\nvar pco5 = devices.filter(device => device.id === \"pco5\");\nif(pco5.length > 0){\n    pco5[0].sensors = msg.payload; \n}\n\n\nreturn msg;",
+            "func": "var analog = global.get(\"local.devices.pco5.analog\");\nvar integer = global.get(\"local.devices.pco5.integer\");\nvar digital = global.get(\"local.devices.pco5.digital\");\nmsg.payload = { ...analog, ...integer};\n\nmsg.payload = Object.keys(msg.payload)\n    .filter(key => msg.payload[key] !== 0 && msg.payload[key] !== -99.9 && msg.payload[key] !== 99.9 && msg.payload[key] !== -99 && msg.payload[key] !== 99)\n    .reduce((obj, key) => {\n        obj[key] = msg.payload [key];\n        return obj;\n    }, {});\n\nvar devices = global.get(\"cloud.devices\")\nvar pco5 = devices.filter(device => device.id === \"pco5\");\nif(pco5.length > 0){\n    pco5[0].sensors = msg.payload; \n}\n\n\nreturn msg;",
             "outputs": 1,
             "noerr": 0,
             "initialize": "",
