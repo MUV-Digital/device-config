@@ -187,7 +187,8 @@
             "wires": [
                 [
                     "a05af721ac5ff17f",
-                    "d837a012db8325d7"
+                    "d837a012db8325d7",
+                    "ac0e07fe017265d5"
                 ]
             ]
         },
@@ -678,6 +679,23 @@
             "z": "d2387857ce85b8b3",
             "name": "Create Error Data",
             "func": "var digital = global.get(\"local.devices.pco5.digital\");\nvar devices = global.get(\"cloud.devices\")\nvar pco5 = devices.filter(device => device.id === \"pco5\");\n\nconst activeAlarms = Object.keys(digital).filter(key => key.includes(\"ALARM-\") && digital[key]);\n\nif (pco5.length > 0) {\n    if(activeAlarms.length > 0){\n        activeAlarms.forEach(alarm => {\n            pco5[0].errors[alarm] = digital[alarm];\n        });\n    } else {\n        pco5[0].errors = {};\n    }\n}\n\nreturn msg;",
+            "outputs": 1,
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 890,
+            "y": 120,
+            "wires": [
+                []
+            ]
+        },
+        {
+            "id": "ac0e07fe017265d5",
+            "type": "function",
+            "z": "d2387857ce85b8b3",
+            "name": "Create State Data",
+            "func": "var digital = global.get(\"local.devices.pco5.digital\");\nvar devices = global.get(\"cloud.devices\")\nvar pco5 = devices.filter(device => device.id === \"pco5\");\n\nconst activeStates = Object.keys(digital).filter(key => key.includes(\"STATE-\") && digital[key]);\n\nif (pco5.length > 0) {\n    if (activeStates.length > 0){\n        activeStates.forEach(state => {\n            pco5[0].states[state] = digital[state];\n        });\n    } else {\n        pco5[0].states = {};\n    }\n}\n\nreturn msg;",
             "outputs": 1,
             "noerr": 0,
             "initialize": "",
