@@ -43,52 +43,6 @@
         "sessionExpiry": ""
     },
     {
-        "id": "9cb41c778a242c32",
-        "type": "http request",
-        "z": "8c45f8d06741be73",
-        "name": "Deploy Configuration",
-        "method": "POST",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "127.0.0.1/flows",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [
-            {
-                "keyType": "other",
-                "keyValue": "Node-RED-Deployment-Type",
-                "valueType": "other",
-                "valueValue": "full"
-            }
-        ],
-        "x": 1100,
-        "y": 340,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "09c004e5e748d2f1",
-        "type": "debug",
-        "z": "8c45f8d06741be73",
-        "name": "Deploying new System Config...",
-        "active": true,
-        "tosidebar": true,
-        "console": true,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1380,
-        "y": 260,
-        "wires": []
-    },
-    {
         "id": "4a3f544eb892783e",
         "type": "inject",
         "z": "8c45f8d06741be73",
@@ -106,387 +60,10 @@
         "payload": "{}",
         "payloadType": "json",
         "x": 100,
-        "y": 140,
+        "y": 80,
         "wires": [
             [
-                "5212e7eb218d9561",
-                "94e875b81ba27c7c",
-                "221faf33ddac3bab"
-            ]
-        ]
-    },
-    {
-        "id": "8805e992f7f00598",
-        "type": "switch",
-        "z": "8c45f8d06741be73",
-        "name": "Env Variable Exists",
-        "property": "DEVICE_CONFIGURATION",
-        "propertyType": "env",
-        "rules": [
-            {
-                "t": "nempty"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 750,
-        "y": 140,
-        "wires": [
-            [
-                "38a38d75d43f92ec"
-            ]
-        ]
-    },
-    {
-        "id": "38a38d75d43f92ec",
-        "type": "http request",
-        "z": "8c45f8d06741be73",
-        "name": "Read Remote Configuration",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "${DEVICE_CONFIGURATION}",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [
-            {
-                "keyType": "other",
-                "keyValue": "Cache-Control",
-                "valueType": "other",
-                "valueValue": "no-cache"
-            }
-        ],
-        "x": 780,
-        "y": 180,
-        "wires": [
-            [
-                "f167fd46d0e6685e"
-            ]
-        ]
-    },
-    {
-        "id": "8362a82ef067f837",
-        "type": "file",
-        "z": "8c45f8d06741be73",
-        "name": "Write Config",
-        "filename": "/data/config/latest.json",
-        "filenameType": "str",
-        "appendNewline": false,
-        "createDir": true,
-        "overwriteFile": "true",
-        "encoding": "utf8",
-        "x": 1070,
-        "y": 220,
-        "wires": [
-            [
-                "bcc7acb5c7e32a74"
-            ]
-        ]
-    },
-    {
-        "id": "eecab5644c409048",
-        "type": "file in",
-        "z": "8c45f8d06741be73",
-        "name": "Read Config",
-        "filename": "/data/config/latest.json",
-        "filenameType": "str",
-        "format": "utf8",
-        "chunk": false,
-        "sendError": false,
-        "encoding": "utf8",
-        "allProps": false,
-        "x": 430,
-        "y": 180,
-        "wires": [
-            [
-                "89e01d33fee4fecc"
-            ]
-        ]
-    },
-    {
-        "id": "377977105c56c06a",
-        "type": "change",
-        "z": "8c45f8d06741be73",
-        "name": "Store Remote Config",
-        "rules": [
-            {
-                "t": "set",
-                "p": "config.remote",
-                "pt": "global",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 760,
-        "y": 260,
-        "wires": [
-            [
-                "3199b7b26537303c"
-            ]
-        ]
-    },
-    {
-        "id": "670b3f735eeae284",
-        "type": "catch",
-        "z": "8c45f8d06741be73",
-        "name": "",
-        "scope": [
-            "eecab5644c409048"
-        ],
-        "uncaught": false,
-        "x": 410,
-        "y": 140,
-        "wires": [
-            [
-                "8805e992f7f00598",
-                "4f3b9deb99ebe9f4"
-            ]
-        ]
-    },
-    {
-        "id": "c60ac3fc83d15a30",
-        "type": "change",
-        "z": "8c45f8d06741be73",
-        "name": "Store Local Config",
-        "rules": [
-            {
-                "t": "set",
-                "p": "config.local",
-                "pt": "global",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 450,
-        "y": 260,
-        "wires": [
-            [
-                "8805e992f7f00598"
-            ]
-        ]
-    },
-    {
-        "id": "5212e7eb218d9561",
-        "type": "change",
-        "z": "8c45f8d06741be73",
-        "name": "Init Variables",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "{}",
-                "tot": "json"
-            },
-            {
-                "t": "set",
-                "p": "config.local",
-                "pt": "global",
-                "to": "{}",
-                "tot": "json"
-            },
-            {
-                "t": "set",
-                "p": "config.remote",
-                "pt": "global",
-                "to": " {}",
-                "tot": "json"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 250,
-        "y": 140,
-        "wires": [
-            [
-                "eecab5644c409048"
-            ]
-        ]
-    },
-    {
-        "id": "4f3b9deb99ebe9f4",
-        "type": "debug",
-        "z": "8c45f8d06741be73",
-        "name": "System Config doesn't exist.",
-        "active": true,
-        "tosidebar": true,
-        "console": true,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 610,
-        "y": 60,
-        "wires": []
-    },
-    {
-        "id": "7b7ac37718865a31",
-        "type": "change",
-        "z": "8c45f8d06741be73",
-        "name": "Apply Remote Config",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "config.remote",
-                "tot": "global"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1100,
-        "y": 180,
-        "wires": [
-            [
-                "8362a82ef067f837"
-            ]
-        ]
-    },
-    {
-        "id": "fca1e38b2bfe1d61",
-        "type": "switch",
-        "z": "8c45f8d06741be73",
-        "name": "True/False",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "true"
-            },
-            {
-                "t": "false"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1070,
-        "y": 140,
-        "wires": [
-            [
-                "430ca381530b90ca"
-            ],
-            [
-                "7b7ac37718865a31"
-            ]
-        ]
-    },
-    {
-        "id": "bcc7acb5c7e32a74",
-        "type": "change",
-        "z": "8c45f8d06741be73",
-        "name": "Apply Remote Config",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "config.remote",
-                "tot": "global"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1100,
-        "y": 260,
-        "wires": [
-            [
-                "09c004e5e748d2f1",
-                "48a85503faf9fed7"
-            ]
-        ]
-    },
-    {
-        "id": "430ca381530b90ca",
-        "type": "debug",
-        "z": "8c45f8d06741be73",
-        "name": "Remote System Config already deployed.",
-        "active": true,
-        "tosidebar": true,
-        "console": true,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1370,
-        "y": 60,
-        "wires": []
-    },
-    {
-        "id": "89e01d33fee4fecc",
-        "type": "json",
-        "z": "8c45f8d06741be73",
-        "name": "",
-        "property": "payload",
-        "action": "",
-        "pretty": true,
-        "x": 410,
-        "y": 220,
-        "wires": [
-            [
-                "c60ac3fc83d15a30"
-            ]
-        ]
-    },
-    {
-        "id": "f167fd46d0e6685e",
-        "type": "json",
-        "z": "8c45f8d06741be73",
-        "name": "",
-        "property": "payload",
-        "action": "",
-        "pretty": true,
-        "x": 710,
-        "y": 220,
-        "wires": [
-            [
-                "377977105c56c06a"
-            ]
-        ]
-    },
-    {
-        "id": "3199b7b26537303c",
-        "type": "function",
-        "z": "8c45f8d06741be73",
-        "name": "Compare Remote/Local Config",
-        "func": "const deepCompare = (arg1, arg2) => {\n    if (Object.prototype.toString.call(arg1) === Object.prototype.toString.call(arg2)) {\n        if (Object.prototype.toString.call(arg1) === '[object Object]' || Object.prototype.toString.call(arg1) === '[object Array]') {\n            if (Object.keys(arg1).length !== Object.keys(arg2).length) {\n                return false;\n            }\n            return (Object.keys(arg1).every(function (key) {\n                return deepCompare(arg1[key], arg2[key]);\n            }));\n        }\n        return (arg1 === arg2);\n    }\n    return false;\n}\n\nif (deepCompare(global.get(\"config.remote\"), global.get(\"config.local\"))) {\n    msg.payload = true;\n} else {\n    msg.payload = false;\n}\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 790,
-        "y": 300,
-        "wires": [
-            [
-                "fca1e38b2bfe1d61"
+                "1cad8157545dc325"
             ]
         ]
     },
@@ -501,35 +78,10 @@
         "wires": []
     },
     {
-        "id": "48a85503faf9fed7",
-        "type": "delay",
-        "z": "8c45f8d06741be73",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "2",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 1060,
-        "y": 300,
-        "wires": [
-            [
-                "9cb41c778a242c32"
-            ]
-        ]
-    },
-    {
         "id": "c93deaf7f1d5dec2",
         "type": "debug",
         "z": "8c45f8d06741be73",
-        "name": "Deploying new Customer Config...",
+        "name": "Deploying new IoT Link Config...",
         "active": true,
         "tosidebar": true,
         "console": true,
@@ -538,8 +90,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1370,
-        "y": 620,
+        "x": 1380,
+        "y": 700,
         "wires": []
     },
     {
@@ -547,7 +99,7 @@
         "type": "switch",
         "z": "8c45f8d06741be73",
         "name": "Env Variable Exists",
-        "property": "DEVICE_CUSTOMER_CONFIGURATION",
+        "property": "CLOUD_CONFIGURATION",
         "propertyType": "env",
         "rules": [
             {
@@ -557,8 +109,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 730,
-        "y": 500,
+        "x": 750,
+        "y": 580,
         "wires": [
             [
                 "ef927bf343698888"
@@ -570,14 +122,14 @@
         "type": "file",
         "z": "8c45f8d06741be73",
         "name": "Write Config",
-        "filename": "/data/cloud/latest.json",
+        "filename": "/config/iotLink/latest.json",
         "filenameType": "str",
         "appendNewline": false,
         "createDir": true,
         "overwriteFile": "true",
         "encoding": "utf8",
-        "x": 1050,
-        "y": 580,
+        "x": 1070,
+        "y": 660,
         "wires": [
             [
                 "c7484b48bc7597d8"
@@ -589,15 +141,15 @@
         "type": "file in",
         "z": "8c45f8d06741be73",
         "name": "Read Config",
-        "filename": "/data/cloud/latest.json",
+        "filename": "/config/iotLink/latest.json",
         "filenameType": "str",
         "format": "utf8",
         "chunk": false,
         "sendError": false,
         "encoding": "utf8",
         "allProps": false,
-        "x": 410,
-        "y": 540,
+        "x": 430,
+        "y": 620,
         "wires": [
             [
                 "9ce42f3560c49945"
@@ -612,7 +164,7 @@
         "rules": [
             {
                 "t": "set",
-                "p": "cloud.config.remote",
+                "p": "cloud.config.iotlink.remote",
                 "pt": "global",
                 "to": "payload",
                 "tot": "msg"
@@ -623,8 +175,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 740,
-        "y": 620,
+        "x": 760,
+        "y": 700,
         "wires": [
             [
                 "a935e7abe2a75d34"
@@ -640,8 +192,8 @@
             "d8b4ed7dd6a194db"
         ],
         "uncaught": false,
-        "x": 390,
-        "y": 500,
+        "x": 410,
+        "y": 580,
         "wires": [
             [
                 "452a03c02524c388",
@@ -657,7 +209,7 @@
         "rules": [
             {
                 "t": "set",
-                "p": "cloud.config.local",
+                "p": "cloud.config.iotlink.local",
                 "pt": "global",
                 "to": "payload",
                 "tot": "msg"
@@ -668,8 +220,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 430,
-        "y": 620,
+        "x": 450,
+        "y": 700,
         "wires": [
             [
                 "452a03c02524c388"
@@ -691,16 +243,37 @@
             },
             {
                 "t": "set",
-                "p": "cloud.config.local",
+                "p": "cloud.config.iotlink.local",
                 "pt": "global",
                 "to": "{}",
                 "tot": "json"
             },
             {
                 "t": "set",
-                "p": "cloud.config.remote",
+                "p": "cloud.config.iotlink.remote",
                 "pt": "global",
                 "to": " {}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "cloud.config.devices.local",
+                "pt": "global",
+                "to": "{}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "cloud.config.devices.remote",
+                "pt": "global",
+                "to": "{}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "cloud.iotLinks",
+                "pt": "global",
+                "to": "[]",
                 "tot": "json"
             },
             {
@@ -716,8 +289,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 250,
-        "y": 500,
+        "x": 270,
+        "y": 580,
         "wires": [
             [
                 "d8b4ed7dd6a194db"
@@ -728,7 +301,7 @@
         "id": "807efadb7c4cc5cb",
         "type": "debug",
         "z": "8c45f8d06741be73",
-        "name": "Customer Config doesn't exist.",
+        "name": "IoT Link Config doesn't exist.",
         "active": true,
         "tosidebar": true,
         "console": true,
@@ -737,8 +310,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 600,
-        "y": 420,
+        "x": 610,
+        "y": 500,
         "wires": []
     },
     {
@@ -751,7 +324,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "cloud.config.remote",
+                "to": "cloud.config.iotlink.remote",
                 "tot": "global"
             }
         ],
@@ -760,8 +333,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1080,
-        "y": 540,
+        "x": 1100,
+        "y": 620,
         "wires": [
             [
                 "a24f0d4ac57a39be"
@@ -786,11 +359,10 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1050,
-        "y": 500,
+        "x": 1070,
+        "y": 580,
         "wires": [
             [
-                "8570e4975b604533",
                 "d8f9f7a996818d8d"
             ],
             [
@@ -808,7 +380,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "cloud.config.remote",
+                "to": "cloud.config.iotlink.remote.iotLinks",
                 "tot": "global"
             }
         ],
@@ -817,8 +389,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1080,
-        "y": 620,
+        "x": 1100,
+        "y": 700,
         "wires": [
             [
                 "c93deaf7f1d5dec2",
@@ -830,7 +402,7 @@
         "id": "8570e4975b604533",
         "type": "debug",
         "z": "8c45f8d06741be73",
-        "name": "Remote Customer Config already deployed.",
+        "name": "Remote IoT Link Config already deployed.",
         "active": true,
         "tosidebar": true,
         "console": true,
@@ -839,8 +411,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1360,
-        "y": 420,
+        "x": 1390,
+        "y": 500,
         "wires": []
     },
     {
@@ -851,8 +423,8 @@
         "property": "payload",
         "action": "",
         "pretty": true,
-        "x": 390,
-        "y": 580,
+        "x": 410,
+        "y": 660,
         "wires": [
             [
                 "1d5fcd7ed11d239e"
@@ -867,8 +439,8 @@
         "property": "payload",
         "action": "",
         "pretty": true,
-        "x": 690,
-        "y": 580,
+        "x": 710,
+        "y": 660,
         "wires": [
             [
                 "198aa74b751f7407"
@@ -880,14 +452,14 @@
         "type": "function",
         "z": "8c45f8d06741be73",
         "name": "Compare Remote/Local Config",
-        "func": "const deepCompare = (arg1, arg2) => {\n    if (Object.prototype.toString.call(arg1) === Object.prototype.toString.call(arg2)) {\n        if (Object.prototype.toString.call(arg1) === '[object Object]' || Object.prototype.toString.call(arg1) === '[object Array]') {\n            if (Object.keys(arg1).length !== Object.keys(arg2).length) {\n                return false;\n            }\n            return (Object.keys(arg1).every(function (key) {\n                return deepCompare(arg1[key], arg2[key]);\n            }));\n        }\n        return (arg1 === arg2);\n    }\n    return false;\n}\n\nif (deepCompare(global.get(\"cloud.config.remote\"), global.get(\"cloud.config.local\"))) {\n    msg.payload = true;\n} else {\n    msg.payload = false;\n}\n\nreturn msg;",
+        "func": "const deepCompare = (arg1, arg2) => {\n    if (Object.prototype.toString.call(arg1) === Object.prototype.toString.call(arg2)) {\n        if (Object.prototype.toString.call(arg1) === '[object Object]' || Object.prototype.toString.call(arg1) === '[object Array]') {\n            if (Object.keys(arg1).length !== Object.keys(arg2).length) {\n                return false;\n            }\n            return (Object.keys(arg1).every(function (key) {\n                return deepCompare(arg1[key], arg2[key]);\n            }));\n        }\n        return (arg1 === arg2);\n    }\n    return false;\n}\n\nif (deepCompare(global.get(\"cloud.config.iotlink.remote\"), global.get(\"cloud.config.iotlink.local\"))) {\n    msg.payload = true;\n} else {\n    msg.payload = false;\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 770,
-        "y": 660,
+        "x": 790,
+        "y": 740,
         "wires": [
             [
                 "17cdbfbb1eedcc15"
@@ -898,13 +470,13 @@
         "id": "a34f12b31113e0bf",
         "type": "change",
         "z": "8c45f8d06741be73",
-        "name": "Set Cloud Devices",
+        "name": "Set Cloud IoT Link",
         "rules": [
             {
                 "t": "set",
-                "p": "cloud.devices",
+                "p": "cloud.iotLinks",
                 "pt": "global",
-                "to": "cloud.config.remote.devices",
+                "to": "cloud.config.iotlink.remote.iotLinks",
                 "tot": "global"
             }
         ],
@@ -913,11 +485,12 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1070,
-        "y": 660,
+        "x": 1090,
+        "y": 740,
         "wires": [
             [
-                "470ee3b3dd48d7e9"
+                "470ee3b3dd48d7e9",
+                "80df0e134d8e09fb"
             ]
         ]
     },
@@ -934,8 +507,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1340,
-        "y": 660,
+        "x": 1360,
+        "y": 740,
         "wires": []
     },
     {
@@ -946,9 +519,9 @@
         "rules": [
             {
                 "t": "set",
-                "p": "cloud.devices",
+                "p": "cloud.iotLinks",
                 "pt": "global",
-                "to": "cloud.config.local.devices",
+                "to": "cloud.config.iotlink.local.iotLinks",
                 "tot": "global"
             }
         ],
@@ -957,47 +530,12 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1290,
-        "y": 500,
+        "x": 1270,
+        "y": 560,
         "wires": [
             [
-                "e99891fadf209f72"
-            ]
-        ]
-    },
-    {
-        "id": "161ad2f836a9b6a3",
-        "type": "debug",
-        "z": "8c45f8d06741be73",
-        "name": "Customer Config Applied",
-        "active": true,
-        "tosidebar": true,
-        "console": true,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1660,
-        "y": 500,
-        "wires": []
-    },
-    {
-        "id": "e99891fadf209f72",
-        "type": "function",
-        "z": "8c45f8d06741be73",
-        "name": "function 1",
-        "func": "global.get(\"cloud.devices\").forEach(device => {\n    device.sensors = {};\n    device.errors = {};\n})\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1460,
-        "y": 500,
-        "wires": [
-            [
-                "161ad2f836a9b6a3"
+                "8570e4975b604533",
+                "01f72f9141f9f090"
             ]
         ]
     },
@@ -1006,14 +544,14 @@
         "type": "function",
         "z": "8c45f8d06741be73",
         "name": "Read Config URLs",
-        "func": "global.get(\"cloud.devices\").forEach(device => {\n    if (device.configURL !== null && device.configURL !== undefined) {\n        msg.url = device.configURL;\n        node.send(msg);\n    }\n});\n\nnode.done();",
+        "func": "global.get(\"cloud.iotLinks\").forEach(iotLink => {\n    if (iotLink.configurations) {\n        iotLink.configurations.forEach(config => {\n            if (config.logic){\n                msg.url = config.logic;\n                node.send(msg);\n            } else {\n                node.warn(\"Invalid IoT-Link Logic\");\n            }\n        });\n    } else {\n        node.warn(\"Invalid IoT-Link Configuration\");\n    }\n});\n\nnode.done();",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1230,
-        "y": 820,
+        "x": 1270,
+        "y": 920,
         "wires": [
             [
                 "c17d4993caeb087f"
@@ -1043,36 +581,11 @@
                 "valueValue": "no-cache"
             }
         ],
-        "x": 1260,
-        "y": 860,
+        "x": 1300,
+        "y": 960,
         "wires": [
             [
                 "6cc338bb8f3e85b9"
-            ]
-        ]
-    },
-    {
-        "id": "221faf33ddac3bab",
-        "type": "delay",
-        "z": "8c45f8d06741be73",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "5",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 240,
-        "y": 820,
-        "wires": [
-            [
-                "e15bec4bbe4d18ef"
             ]
         ]
     },
@@ -1084,8 +597,8 @@
         "property": "payload",
         "action": "",
         "pretty": true,
-        "x": 1190,
-        "y": 900,
+        "x": 1230,
+        "y": 1000,
         "wires": [
             [
                 "8beb1874c301552f",
@@ -1097,7 +610,7 @@
         "id": "8beb1874c301552f",
         "type": "debug",
         "z": "8c45f8d06741be73",
-        "name": "Deploying new Device Config...",
+        "name": "Deploying new Device Type...",
         "active": true,
         "tosidebar": true,
         "console": true,
@@ -1106,8 +619,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1420,
-        "y": 900,
+        "x": 1450,
+        "y": 1000,
         "wires": []
     },
     {
@@ -1127,8 +640,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 1200,
-        "y": 940,
+        "x": 1240,
+        "y": 1040,
         "wires": [
             [
                 "24fc4c4655c3184e"
@@ -1152,8 +665,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1220,
-        "y": 980,
+        "x": 1260,
+        "y": 1080,
         "wires": [
             [
                 "42e544d829e692a9"
@@ -1170,7 +683,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "DEVICE_CUSTOMER_CONFIGURATION",
+                "to": "CLOUD_CONFIGURATION",
                 "tot": "env"
             }
         ],
@@ -1179,8 +692,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 710,
-        "y": 540,
+        "x": 730,
+        "y": 620,
         "wires": [
             [
                 "eb4728a6f0826f22"
@@ -1203,8 +716,8 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 830,
-        "y": 820,
+        "x": 910,
+        "y": 920,
         "wires": [
             [
                 "02a2e4ebea44c687",
@@ -1220,8 +733,8 @@
         "property": "payload",
         "action": "",
         "pretty": true,
-        "x": 790,
-        "y": 860,
+        "x": 870,
+        "y": 960,
         "wires": [
             [
                 "e7400a1dc57d5603"
@@ -1244,8 +757,8 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 1240,
-        "y": 1020,
+        "x": 1280,
+        "y": 1120,
         "wires": [
             []
         ]
@@ -1261,8 +774,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 830,
-        "y": 900,
+        "x": 910,
+        "y": 1000,
         "wires": [
             [
                 "79e9af7d78f8a56f"
@@ -1285,8 +798,8 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 830,
-        "y": 940,
+        "x": 910,
+        "y": 1040,
         "wires": [
             []
         ]
@@ -1308,34 +821,11 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 1060,
-        "y": 820,
+        "x": 1100,
+        "y": 920,
         "wires": [
             [
                 "ce58468417dcb813"
-            ]
-        ]
-    },
-    {
-        "id": "e15bec4bbe4d18ef",
-        "type": "switch",
-        "z": "8c45f8d06741be73",
-        "name": "Env Variable Exists",
-        "property": "DEVICE_CONFIGURATION",
-        "propertyType": "env",
-        "rules": [
-            {
-                "t": "nempty"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 410,
-        "y": 820,
-        "wires": [
-            [
-                "74d769b21535dc6f"
             ]
         ]
     },
@@ -1344,7 +834,7 @@
         "type": "switch",
         "z": "8c45f8d06741be73",
         "name": "Env Variable Exists",
-        "property": "DEVICE_CUSTOMER_CONFIGURATION",
+        "property": "CLOUD_CONFIGURATION",
         "propertyType": "env",
         "rules": [
             {
@@ -1354,8 +844,61 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 610,
+        "x": 390,
+        "y": 920,
+        "wires": [
+            [
+                "d03f5a539bca5953"
+            ]
+        ]
+    },
+    {
+        "id": "f969ec4563688c46",
+        "type": "link in",
+        "z": "8c45f8d06741be73",
+        "name": "Trigger Logic Deploy",
+        "links": [
+            "01f72f9141f9f090",
+            "80df0e134d8e09fb"
+        ],
+        "x": 35,
+        "y": 920,
+        "wires": [
+            [
+                "74d769b21535dc6f"
+            ]
+        ]
+    },
+    {
+        "id": "a8ec70548d498121",
+        "type": "debug",
+        "z": "8c45f8d06741be73",
+        "name": "Devices Config doesn't exist.",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
         "y": 820,
+        "wires": []
+    },
+    {
+        "id": "e99891fadf209f72",
+        "type": "function",
+        "z": "8c45f8d06741be73",
+        "name": "Init IoT Links + Devices",
+        "func": "global.get(\"cloud.iotLinks\").forEach(remoteIotLink => {\n    msg.payload.forEach(localIotLink => {\n        if (remoteIotLink.id === localIotLink.id) {\n            remoteIotLink = localIotLink;\n            localIotLink.configurations.forEach(configuration => {\n                global.get(\"cloud.devices\").push({\n                    \"id\": configuration.id,\n                    \"sensors\": {},\n                    \"errors\": {},\n                    \"states\": {}\n                });\n            });\n        }\n    });\n});\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 1000,
         "wires": [
             [
                 "134bc0e1f13b8bbe"
@@ -1363,10 +906,720 @@
         ]
     },
     {
+        "id": "ed9fafc49c68a6d3",
+        "type": "link in",
+        "z": "8c45f8d06741be73",
+        "name": "Trigger Logic Update",
+        "links": [
+            "15838240fb48caa2"
+        ],
+        "x": 35,
+        "y": 980,
+        "wires": [
+            [
+                "976056f9a7eedddf"
+            ]
+        ]
+    },
+    {
+        "id": "9bc5f1b7022a05cd",
+        "type": "file",
+        "z": "8c45f8d06741be73",
+        "name": "Write Config",
+        "filename": "/config/devices/latest.json",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "utf8",
+        "x": 150,
+        "y": 1020,
+        "wires": [
+            [
+                "74d769b21535dc6f"
+            ]
+        ]
+    },
+    {
+        "id": "976056f9a7eedddf",
+        "type": "change",
+        "z": "8c45f8d06741be73",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "cloud.iotLinks",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 160,
+        "y": 980,
+        "wires": [
+            [
+                "9bc5f1b7022a05cd"
+            ]
+        ]
+    },
+    {
+        "id": "d03f5a539bca5953",
+        "type": "file in",
+        "z": "8c45f8d06741be73",
+        "name": "Read Config",
+        "filename": "/config/devices/latest.json",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "utf8",
+        "allProps": false,
+        "x": 590,
+        "y": 920,
+        "wires": [
+            [
+                "4fe62af70a9b14a9"
+            ]
+        ]
+    },
+    {
+        "id": "ac5775cb5a19f1d1",
+        "type": "catch",
+        "z": "8c45f8d06741be73",
+        "name": "",
+        "scope": [
+            "d03f5a539bca5953"
+        ],
+        "uncaught": false,
+        "x": 610,
+        "y": 860,
+        "wires": [
+            [
+                "a8ec70548d498121"
+            ]
+        ]
+    },
+    {
+        "id": "4fe62af70a9b14a9",
+        "type": "json",
+        "z": "8c45f8d06741be73",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 570,
+        "y": 960,
+        "wires": [
+            [
+                "e99891fadf209f72"
+            ]
+        ]
+    },
+    {
+        "id": "01f72f9141f9f090",
+        "type": "link out",
+        "z": "8c45f8d06741be73",
+        "name": "link out 2",
+        "mode": "link",
+        "links": [
+            "f969ec4563688c46"
+        ],
+        "x": 1425,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "80df0e134d8e09fb",
+        "type": "link out",
+        "z": "8c45f8d06741be73",
+        "name": "link out 3",
+        "mode": "link",
+        "links": [
+            "f969ec4563688c46"
+        ],
+        "x": 1165,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "2bbaa5d6d475d9db",
+        "type": "http request",
+        "z": "8c45f8d06741be73",
+        "name": "Deploy Configuration",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "127.0.0.1/flows",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "other",
+                "keyValue": "Node-RED-Deployment-Type",
+                "valueType": "other",
+                "valueValue": "full"
+            }
+        ],
+        "x": 1140,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "750856405656a418",
+        "type": "debug",
+        "z": "8c45f8d06741be73",
+        "name": "Deploying new System Config...",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1420,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "bb028188234003dc",
+        "type": "switch",
+        "z": "8c45f8d06741be73",
+        "name": "Env Variable Exists",
+        "property": "CLOUD_CONFIGURATION",
+        "propertyType": "env",
+        "rules": [
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 790,
+        "y": 140,
+        "wires": [
+            [
+                "779c03738a34cf3b"
+            ]
+        ]
+    },
+    {
+        "id": "cc7336fd48d831bc",
+        "type": "http request",
+        "z": "8c45f8d06741be73",
+        "name": "Read Remote Configuration",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "other",
+                "keyValue": "Cache-Control",
+                "valueType": "other",
+                "valueValue": "no-cache"
+            }
+        ],
+        "x": 820,
+        "y": 300,
+        "wires": [
+            [
+                "dc11ea643146fa1e"
+            ]
+        ]
+    },
+    {
+        "id": "127710d7f2d713ed",
+        "type": "file",
+        "z": "8c45f8d06741be73",
+        "name": "Write Config",
+        "filename": "/data/system/latest.json",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "utf8",
+        "x": 1110,
+        "y": 220,
+        "wires": [
+            [
+                "df3d89d4d17ed0aa"
+            ]
+        ]
+    },
+    {
+        "id": "69870229b427f0c6",
+        "type": "file in",
+        "z": "8c45f8d06741be73",
+        "name": "Read Config",
+        "filename": "/data/system/latest.json",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "utf8",
+        "allProps": false,
+        "x": 470,
+        "y": 180,
+        "wires": [
+            [
+                "30e363f44883c139"
+            ]
+        ]
+    },
+    {
+        "id": "240af3ae8429a1c1",
+        "type": "change",
+        "z": "8c45f8d06741be73",
+        "name": "Store Remote Config",
+        "rules": [
+            {
+                "t": "set",
+                "p": "config.system.remote",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 380,
+        "wires": [
+            [
+                "2aa63ca795a118d9"
+            ]
+        ]
+    },
+    {
+        "id": "b9b44853514c8fd4",
+        "type": "catch",
+        "z": "8c45f8d06741be73",
+        "name": "",
+        "scope": [
+            "69870229b427f0c6"
+        ],
+        "uncaught": false,
+        "x": 450,
+        "y": 140,
+        "wires": [
+            [
+                "bb028188234003dc",
+                "aa6c3b295b229392"
+            ]
+        ]
+    },
+    {
+        "id": "4944c8476586562a",
+        "type": "change",
+        "z": "8c45f8d06741be73",
+        "name": "Store Local Config",
+        "rules": [
+            {
+                "t": "set",
+                "p": "config.system.local",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 490,
+        "y": 260,
+        "wires": [
+            [
+                "bb028188234003dc"
+            ]
+        ]
+    },
+    {
+        "id": "1cad8157545dc325",
+        "type": "change",
+        "z": "8c45f8d06741be73",
+        "name": "Init Variables",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "config.system.local",
+                "pt": "global",
+                "to": "{}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "config.system.remote",
+                "pt": "global",
+                "to": " {}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 140,
+        "wires": [
+            [
+                "69870229b427f0c6"
+            ]
+        ]
+    },
+    {
+        "id": "aa6c3b295b229392",
+        "type": "debug",
+        "z": "8c45f8d06741be73",
+        "name": "System Config doesn't exist.",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "f7f5999bb3f63947",
+        "type": "change",
+        "z": "8c45f8d06741be73",
+        "name": "Apply Remote Config",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "config.system.remote",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1140,
+        "y": 180,
+        "wires": [
+            [
+                "127710d7f2d713ed"
+            ]
+        ]
+    },
+    {
+        "id": "f7cf15576d238157",
+        "type": "switch",
+        "z": "8c45f8d06741be73",
+        "name": "True/False",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1110,
+        "y": 140,
+        "wires": [
+            [
+                "264c2b1634ca7673",
+                "2f6000344a02be3c"
+            ],
+            [
+                "f7f5999bb3f63947"
+            ]
+        ]
+    },
+    {
+        "id": "df3d89d4d17ed0aa",
+        "type": "change",
+        "z": "8c45f8d06741be73",
+        "name": "Apply Remote Config",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "config.system.remote.systemConfiguration",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1140,
+        "y": 260,
+        "wires": [
+            [
+                "750856405656a418",
+                "0e0cc2feb79166d1"
+            ]
+        ]
+    },
+    {
+        "id": "264c2b1634ca7673",
+        "type": "debug",
+        "z": "8c45f8d06741be73",
+        "name": "Remote System Config already deployed.",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1410,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "30e363f44883c139",
+        "type": "json",
+        "z": "8c45f8d06741be73",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 450,
+        "y": 220,
+        "wires": [
+            [
+                "4944c8476586562a"
+            ]
+        ]
+    },
+    {
+        "id": "dc11ea643146fa1e",
+        "type": "json",
+        "z": "8c45f8d06741be73",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 750,
+        "y": 340,
+        "wires": [
+            [
+                "240af3ae8429a1c1"
+            ]
+        ]
+    },
+    {
+        "id": "2aa63ca795a118d9",
+        "type": "function",
+        "z": "8c45f8d06741be73",
+        "name": "Compare Remote/Local Config",
+        "func": "const deepCompare = (arg1, arg2) => {\n    if (Object.prototype.toString.call(arg1) === Object.prototype.toString.call(arg2)) {\n        if (Object.prototype.toString.call(arg1) === '[object Object]' || Object.prototype.toString.call(arg1) === '[object Array]') {\n            if (Object.keys(arg1).length !== Object.keys(arg2).length) {\n                return false;\n            }\n            return (Object.keys(arg1).every(function (key) {\n                return deepCompare(arg1[key], arg2[key]);\n            }));\n        }\n        return (arg1 === arg2);\n    }\n    return false;\n}\n\nif (deepCompare(global.get(\"config.system.remote\"), global.get(\"config.system.local\"))) {\n    msg.payload = true;\n} else {\n    msg.payload = false;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 420,
+        "wires": [
+            [
+                "f7cf15576d238157"
+            ]
+        ]
+    },
+    {
+        "id": "0e0cc2feb79166d1",
+        "type": "delay",
+        "z": "8c45f8d06741be73",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1100,
+        "y": 300,
+        "wires": [
+            [
+                "2bbaa5d6d475d9db"
+            ]
+        ]
+    },
+    {
+        "id": "cb921d8530f11f84",
+        "type": "link in",
+        "z": "8c45f8d06741be73",
+        "name": "Trigger IoT Link Deploy",
+        "links": [
+            "2f6000344a02be3c"
+        ],
+        "x": 45,
+        "y": 580,
+        "wires": [
+            [
+                "94e875b81ba27c7c"
+            ]
+        ]
+    },
+    {
+        "id": "2f6000344a02be3c",
+        "type": "link out",
+        "z": "8c45f8d06741be73",
+        "name": "link out 4",
+        "mode": "link",
+        "links": [
+            "cb921d8530f11f84"
+        ],
+        "x": 1315,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "9408245c89a2c87a",
+        "type": "change",
+        "z": "8c45f8d06741be73",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "payload.systemConfiguration",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 260,
+        "wires": [
+            [
+                "cc7336fd48d831bc"
+            ]
+        ]
+    },
+    {
+        "id": "57fd30b906f161fd",
+        "type": "inject",
+        "z": "8c45f8d06741be73",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"systemConfiguration\":\"asda\",\"iotLinks\":[{\"id\":\"muv-lab\",\"uplink\":\"/up/69iuw7lu0vo6wb9r05j47irwffrj40nx/id/7DA11EB2AC22D8DA\",\"downlink\":\"/down/69iuw7lu0vo6wb9r05j47irwffrj40nx/id/7DA11EB2AC22D8DA\",\"configurations\":[]}]}",
+        "payloadType": "json",
+        "x": 110,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a97a1bbe6e74802c",
+        "type": "json",
+        "z": "8c45f8d06741be73",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 750,
+        "y": 220,
+        "wires": [
+            [
+                "9408245c89a2c87a"
+            ]
+        ]
+    },
+    {
+        "id": "779c03738a34cf3b",
+        "type": "change",
+        "z": "8c45f8d06741be73",
+        "name": "Set Config",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "CLOUD_CONFIGURATION",
+                "tot": "env"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 180,
+        "wires": [
+            [
+                "a97a1bbe6e74802c"
+            ]
+        ]
+    },
+    {
         "id": "4880e07a7863e3c9",
         "type": "mqtt out",
         "z": "36d23b104ae95f19",
-        "name": "MUV Cloud Telemtry",
+        "name": "MUV Cloud Uplink Telemtry",
         "topic": "",
         "qos": "0",
         "retain": "false",
@@ -1376,7 +1629,7 @@
         "correl": "",
         "expiry": "",
         "broker": "be312c8b96f1dcb0",
-        "x": 1240,
+        "x": 720,
         "y": 80,
         "wires": []
     },
@@ -1385,13 +1638,13 @@
         "type": "function",
         "z": "36d23b104ae95f19",
         "name": "Send Sensors to Cloud",
-        "func": "global.get(\"cloud.devices\").forEach(device => {\n    msg.topic = device.topic + \"/telemetry\";\n    msg.payload = device.sensors;\n    node.send(msg);\n});\n\nnode.done();",
+        "func": "global.get(\"cloud.devices\").forEach(devices => {\n    msg.topic = devices.uplink + \"/telemetry\";\n    msg.payload = devices.sensors;\n    node.send(msg);\n});\n\nnode.done();",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 930,
+        "x": 390,
         "y": 80,
         "wires": [
             [
@@ -1409,7 +1662,7 @@
                 "p": "payload"
             }
         ],
-        "repeat": "10",
+        "repeat": "60",
         "crontab": "",
         "once": true,
         "onceDelay": "30",
@@ -1422,7 +1675,8 @@
             [
                 "54630f3e2ab7393b",
                 "de3e23cc3af03da9",
-                "ddb12aeb38995a4a"
+                "ddb12aeb38995a4a",
+                "dc34e4fcb3eeca2e"
             ]
         ]
     },
@@ -1436,7 +1690,7 @@
             "acf296b73e514c81",
             "5b23648546b1c667"
         ],
-        "x": 265,
+        "x": 295,
         "y": 40,
         "wires": []
     },
@@ -1444,7 +1698,7 @@
         "id": "238392b309c51de9",
         "type": "mqtt out",
         "z": "36d23b104ae95f19",
-        "name": "MUV Cloud Error",
+        "name": "MUV Cloud Uplink Error",
         "topic": "",
         "qos": "0",
         "retain": "false",
@@ -1454,23 +1708,23 @@
         "correl": "",
         "expiry": "",
         "broker": "be312c8b96f1dcb0",
-        "x": 1230,
-        "y": 140,
+        "x": 710,
+        "y": 120,
         "wires": []
     },
     {
         "id": "ddb12aeb38995a4a",
         "type": "function",
         "z": "36d23b104ae95f19",
-        "name": "Send errors to cloud",
-        "func": "global.get(\"cloud.devices\").forEach(device => {\n    msg.topic = device.topic + \"/error\";\n    msg.payload = device.errors;\n    node.send(msg);\n});\n\nnode.done();",
+        "name": "Send Errors to cloud",
+        "func": "global.get(\"cloud.devices\").forEach(devices => {\n    msg.topic = devices.uplink + \"/error\";\n    msg.payload = devices.errors;\n    node.send(msg);\n});\n\nnode.done();",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 920,
-        "y": 140,
+        "x": 380,
+        "y": 120,
         "wires": [
             [
                 "238392b309c51de9"
@@ -1494,11 +1748,12 @@
         "topic": "",
         "payload": "{}",
         "payloadType": "json",
-        "x": 870,
-        "y": 20,
+        "x": 110,
+        "y": 260,
         "wires": [
             [
-                "371668732aec16e9"
+                "371668732aec16e9",
+                "1f20614cface4a28"
             ]
         ]
     },
@@ -1528,13 +1783,236 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1020,
-        "y": 20,
+        "x": 400,
+        "y": 260,
         "wires": [
             [
                 "4880e07a7863e3c9",
-                "238392b309c51de9"
+                "238392b309c51de9",
+                "dfbb46c27eb14268"
             ]
         ]
+    },
+    {
+        "id": "cd0ab1141965ef81",
+        "type": "mqtt in",
+        "z": "36d23b104ae95f19",
+        "name": "MUV Cloud Downlink",
+        "topic": "",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "be312c8b96f1dcb0",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 1,
+        "x": 700,
+        "y": 300,
+        "wires": [
+            [
+                "1fa7f8f203d1b315"
+            ]
+        ]
+    },
+    {
+        "id": "1f20614cface4a28",
+        "type": "change",
+        "z": "36d23b104ae95f19",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "action",
+                "pt": "msg",
+                "to": "connect",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "broker",
+                "pt": "msg",
+                "to": "{\t   \"broker\": \"mqtt.akenza.io\",\t   \"port\": 1883,\t   \"force\": true,\t   \"username\": $env(\"CLOUD_USERNAME\"),\t   \"password\": $env(\"CLOUD_PASSWORD\")\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 300,
+        "wires": [
+            [
+                "cd0ab1141965ef81",
+                "949d473b8fdcc3c4"
+            ]
+        ]
+    },
+    {
+        "id": "d3e75f89c54b9266",
+        "type": "function",
+        "z": "36d23b104ae95f19",
+        "name": "Subscribe to IoT Link Downlink Configurations",
+        "func": "global.get(\"cloud.iotLinks\").forEach(iotLink => {\n    msg.action = \"subscribe\";\n    msg.topic = iotLink.downlink + \"/config\";\n    node.send(msg);\n});\n\nnode.done();",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 380,
+        "wires": [
+            [
+                "cd0ab1141965ef81"
+            ]
+        ]
+    },
+    {
+        "id": "949d473b8fdcc3c4",
+        "type": "delay",
+        "z": "36d23b104ae95f19",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 380,
+        "y": 340,
+        "wires": [
+            [
+                "d3e75f89c54b9266"
+            ]
+        ]
+    },
+    {
+        "id": "1fa7f8f203d1b315",
+        "type": "switch",
+        "z": "36d23b104ae95f19",
+        "name": "Config Upate",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "/config",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 890,
+        "y": 300,
+        "wires": [
+            [
+                "719ddac15f7e144f"
+            ]
+        ]
+    },
+    {
+        "id": "719ddac15f7e144f",
+        "type": "function",
+        "z": "36d23b104ae95f19",
+        "name": "update configURL",
+        "func": "const matchingLocalIotLink = global.get(\"cloud.iotLinks\").filter(localIotLink => localIotLink.id === msg.payload.id);\n\nif (!Array.isArray(msg.payload.configurations)){\n    node.warn(\"Invalid configuration sent by cloud\");\n    node.done();\n}\n\nif (matchingLocalIotLink.length > 0) {\n    matchingLocalIotLink[0].configurations = msg.payload.configurations;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1070,
+        "y": 300,
+        "wires": [
+            [
+                "919289d23359e8a8"
+            ]
+        ]
+    },
+    {
+        "id": "919289d23359e8a8",
+        "type": "join",
+        "z": "36d23b104ae95f19",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": true,
+        "timeout": "2",
+        "count": "",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 1230,
+        "y": 300,
+        "wires": [
+            [
+                "15838240fb48caa2"
+            ]
+        ]
+    },
+    {
+        "id": "15838240fb48caa2",
+        "type": "link out",
+        "z": "36d23b104ae95f19",
+        "name": "link out 1",
+        "mode": "link",
+        "links": [
+            "ed9fafc49c68a6d3"
+        ],
+        "x": 1315,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "dc34e4fcb3eeca2e",
+        "type": "function",
+        "z": "36d23b104ae95f19",
+        "name": "Send States to cloud",
+        "func": "global.get(\"cloud.devices\").forEach(device => {\n    msg.topic = device.topic + \"/state\";\n    msg.payload = device.states;\n    node.send(msg);\n});\n\nnode.done();",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 160,
+        "wires": [
+            [
+                "dfbb46c27eb14268"
+            ]
+        ]
+    },
+    {
+        "id": "dfbb46c27eb14268",
+        "type": "mqtt out",
+        "z": "36d23b104ae95f19",
+        "name": "MUV Cloud Uplink Sates",
+        "topic": "",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "be312c8b96f1dcb0",
+        "x": 710,
+        "y": 160,
+        "wires": []
     }
 ]
