@@ -891,7 +891,7 @@
         "type": "function",
         "z": "8c45f8d06741be73",
         "name": "Init IoT Links + Devices",
-        "func": "global.get(\"cloud.iotLinks\").forEach(remoteIotLink => {\n    msg.payload.forEach(localIotLink => {\n        if (remoteIotLink.id === localIotLink.id) {\n            remoteIotLink = localIotLink;\n            localIotLink.configurations.forEach(configuration => {\n                global.get(\"cloud.devices\").push({\n                    \"id\": configuration.id,\n                    \"sensors\": {},\n                    \"errors\": {},\n                    \"states\": {}\n                });\n            });\n        }\n    });\n});\n\nreturn msg;",
+        "func": "global.get(\"cloud.iotLinks\").forEach(remoteIotLink => {\n    msg.payload.forEach(localIotLink => {\n        if (remoteIotLink.id === localIotLink.id) {\n            remoteIotLink = localIotLink;\n            localIotLink.configurations.forEach(configuration => {\n                global.get(\"cloud.devices\").push({\n                    \"id\": configuration.id,\n                    \"uplink\": localIotLink.uplink,\n                    \"downlink\": localIotLink.downlink,\n                    \"sensors\": {},\n                    \"errors\": {},\n                    \"states\": {}\n                });\n            });\n        }\n    });\n});\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1550,29 +1550,6 @@
         ]
     },
     {
-        "id": "57fd30b906f161fd",
-        "type": "inject",
-        "z": "8c45f8d06741be73",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "{\"systemConfiguration\":\"asda\",\"iotLinks\":[{\"id\":\"muv-lab\",\"uplink\":\"/up/69iuw7lu0vo6wb9r05j47irwffrj40nx/id/7DA11EB2AC22D8DA\",\"downlink\":\"/down/69iuw7lu0vo6wb9r05j47irwffrj40nx/id/7DA11EB2AC22D8DA\",\"configurations\":[]}]}",
-        "payloadType": "json",
-        "x": 110,
-        "y": 260,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "a97a1bbe6e74802c",
         "type": "json",
         "z": "8c45f8d06741be73",
@@ -1810,7 +1787,8 @@
         "y": 300,
         "wires": [
             [
-                "1fa7f8f203d1b315"
+                "1fa7f8f203d1b315",
+                "9f6eea7f8a2c2aa5"
             ]
         ]
     },
@@ -1854,7 +1832,7 @@
         "type": "function",
         "z": "36d23b104ae95f19",
         "name": "Subscribe to IoT Link Downlink Configurations",
-        "func": "global.get(\"cloud.iotLinks\").forEach(iotLink => {\n    msg.action = \"subscribe\";\n    msg.topic = iotLink.downlink + \"/config\";\n    node.send(msg);\n});\n\nnode.done();",
+        "func": "global.get(\"cloud.iotLinks\").forEach(iotLink => {\n    msg.action = \"subscribe\";\n    msg.topic = iotLink.downlink + \"/config\";\n    node.send(msg);\n    msg.topic = iotLink.downlink + \"/command\";\n    node.send(msg);\n});\n\nnode.done();",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2014,5 +1992,28 @@
         "x": 710,
         "y": 160,
         "wires": []
+    },
+    {
+        "id": "9f6eea7f8a2c2aa5",
+        "type": "switch",
+        "z": "36d23b104ae95f19",
+        "name": "Command",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "/command",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 890,
+        "y": 340,
+        "wires": [
+            []
+        ]
     }
 ]
