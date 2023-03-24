@@ -1,5 +1,5 @@
 {
-    "id": "8de273b848a9c07d",
+    "id": "26d78b1ac02d6fe2",
     "label": "SDM630Modbus",
     "disabled": false,
     "info": "",
@@ -8,7 +8,7 @@
         {
             "id": "69e4473cf5e5ec89",
             "type": "modbus-flex-getter",
-            "z": "8de273b848a9c07d",
+            "z": "26d78b1ac02d6fe2",
             "name": "",
             "showStatusActivities": false,
             "showErrors": false,
@@ -34,7 +34,7 @@
         {
             "id": "dd72a78ddbcdbff5",
             "type": "function",
-            "z": "8de273b848a9c07d",
+            "z": "26d78b1ac02d6fe2",
             "name": "Input Registers",
             "func": "msg.payload = { 'fc': 4, 'unitid': 1, 'address': 0, 'quantity': 24 };\n\n\nreturn msg;",
             "outputs": 1,
@@ -53,7 +53,7 @@
         {
             "id": "951909998ca6669a",
             "type": "buffer-parser",
-            "z": "8de273b848a9c07d",
+            "z": "26d78b1ac02d6fe2",
             "name": "",
             "data": "payload",
             "dataType": "msg",
@@ -62,7 +62,7 @@
             "items": [
                 {
                     "type": "floatbe",
-                    "name": "Phase 1 volts",
+                    "name": "ANALOG-1",
                     "offset": 0,
                     "length": 1,
                     "offsetbit": 0,
@@ -71,7 +71,7 @@
                 },
                 {
                     "type": "floatbe",
-                    "name": "Phase 2 volts",
+                    "name": "ANALOG-2",
                     "offset": 4,
                     "length": 1,
                     "offsetbit": 0,
@@ -80,7 +80,7 @@
                 },
                 {
                     "type": "floatbe",
-                    "name": "Phase 3 volts",
+                    "name": "ANALOG-3",
                     "offset": 8,
                     "length": 1,
                     "offsetbit": 0,
@@ -89,7 +89,7 @@
                 },
                 {
                     "type": "floatbe",
-                    "name": "Phase 1 current",
+                    "name": "ANALOG-4",
                     "offset": 12,
                     "length": 1,
                     "offsetbit": 0,
@@ -98,7 +98,7 @@
                 },
                 {
                     "type": "floatbe",
-                    "name": "Phase 2 current",
+                    "name": "ANALOG-5",
                     "offset": 16,
                     "length": 1,
                     "offsetbit": 0,
@@ -107,7 +107,7 @@
                 },
                 {
                     "type": "floatbe",
-                    "name": "Phase 3 current",
+                    "name": "ANALOG-6",
                     "offset": 20,
                     "length": 1,
                     "offsetbit": 0,
@@ -116,7 +116,7 @@
                 },
                 {
                     "type": "floatbe",
-                    "name": "Phase 1 power",
+                    "name": "ANALOG-7",
                     "offset": 24,
                     "length": 1,
                     "offsetbit": 0,
@@ -125,7 +125,7 @@
                 },
                 {
                     "type": "floatbe",
-                    "name": "Phase 2 power",
+                    "name": "ANALOG-8",
                     "offset": 28,
                     "length": 1,
                     "offsetbit": 0,
@@ -134,7 +134,7 @@
                 },
                 {
                     "type": "floatbe",
-                    "name": "Phase 3 power",
+                    "name": "ANALOG-9",
                     "offset": 32,
                     "length": 1,
                     "offsetbit": 0,
@@ -143,7 +143,7 @@
                 },
                 {
                     "type": "floatbe",
-                    "name": "Phase 1 volt amps",
+                    "name": "ANALOG-10",
                     "offset": 36,
                     "length": 1,
                     "offsetbit": 0,
@@ -152,7 +152,7 @@
                 },
                 {
                     "type": "floatbe",
-                    "name": "Phase 2 volt amps",
+                    "name": "ANALOG-11",
                     "offset": 40,
                     "length": 1,
                     "offsetbit": 0,
@@ -161,7 +161,7 @@
                 },
                 {
                     "type": "floatbe",
-                    "name": "Phase 3 volt amps",
+                    "name": "ANALOG-12",
                     "offset": 44,
                     "length": 1,
                     "offsetbit": 0,
@@ -194,7 +194,7 @@
         {
             "id": "45e6ce74ebe4d289",
             "type": "modbus-flex-getter",
-            "z": "8de273b848a9c07d",
+            "z": "26d78b1ac02d6fe2",
             "name": "",
             "showStatusActivities": false,
             "showErrors": false,
@@ -220,7 +220,7 @@
         {
             "id": "11846148d9d51168",
             "type": "function",
-            "z": "8de273b848a9c07d",
+            "z": "26d78b1ac02d6fe2",
             "name": "Input Registers",
             "func": "msg.payload = { 'fc': 4, 'unitid': 1, 'address': 342, 'quantity': 4 };\n\n\nreturn msg;",
             "outputs": 1,
@@ -239,7 +239,7 @@
         {
             "id": "629d28c122ae0dd2",
             "type": "buffer-parser",
-            "z": "8de273b848a9c07d",
+            "z": "26d78b1ac02d6fe2",
             "name": "",
             "data": "payload",
             "dataType": "msg",
@@ -248,7 +248,7 @@
             "items": [
                 {
                     "type": "floatbe",
-                    "name": "Total kwh",
+                    "name": "ANALOG-13",
                     "offset": 0,
                     "length": 1,
                     "offsetbit": 0,
@@ -257,7 +257,7 @@
                 },
                 {
                     "type": "floatbe",
-                    "name": "Total kvarh",
+                    "name": "ANALOG-14",
                     "offset": 4,
                     "length": 1,
                     "offsetbit": 0,
@@ -290,7 +290,7 @@
         {
             "id": "e150fa15183f1adc",
             "type": "modbus-flex-getter",
-            "z": "8de273b848a9c07d",
+            "z": "26d78b1ac02d6fe2",
             "name": "",
             "showStatusActivities": false,
             "showErrors": false,
@@ -316,7 +316,7 @@
         {
             "id": "e480739325f20822",
             "type": "function",
-            "z": "8de273b848a9c07d",
+            "z": "26d78b1ac02d6fe2",
             "name": "Input Registers",
             "func": "msg.payload = { 'fc': 4, 'unitid': 1, 'address': 358, 'quantity': 6 };\n\n\nreturn msg;",
             "outputs": 1,
@@ -335,7 +335,7 @@
         {
             "id": "2dde224ad0f04371",
             "type": "buffer-parser",
-            "z": "8de273b848a9c07d",
+            "z": "26d78b1ac02d6fe2",
             "name": "",
             "data": "payload",
             "dataType": "msg",
@@ -344,7 +344,7 @@
             "items": [
                 {
                     "type": "floatbe",
-                    "name": "L1 total kwh",
+                    "name": "ANALOG-15",
                     "offset": 0,
                     "length": 1,
                     "offsetbit": 0,
@@ -353,7 +353,7 @@
                 },
                 {
                     "type": "floatbe",
-                    "name": "L2 total kwh",
+                    "name": "ANALOG-16",
                     "offset": 4,
                     "length": 1,
                     "offsetbit": 0,
@@ -362,7 +362,7 @@
                 },
                 {
                     "type": "floatbe",
-                    "name": "L3 total kwh",
+                    "name": "ANALOG-17",
                     "offset": 8,
                     "length": 1,
                     "offsetbit": 0,
@@ -395,7 +395,7 @@
         {
             "id": "a154207225567b90",
             "type": "join",
-            "z": "8de273b848a9c07d",
+            "z": "26d78b1ac02d6fe2",
             "name": "",
             "mode": "custom",
             "build": "merged",
@@ -421,27 +421,9 @@
             ]
         },
         {
-            "id": "5b23648546b1c667",
-            "type": "link in",
-            "z": "8de273b848a9c07d",
-            "name": "link in 1",
-            "links": [
-                "de3e23cc3af03da9"
-            ],
-            "x": 225,
-            "y": 100,
-            "wires": [
-                [
-                    "dd72a78ddbcdbff5",
-                    "11846148d9d51168",
-                    "e480739325f20822"
-                ]
-            ]
-        },
-        {
             "id": "d776e7f885f92383",
             "type": "change",
-            "z": "8de273b848a9c07d",
+            "z": "26d78b1ac02d6fe2",
             "name": "",
             "rules": [
                 {
@@ -468,7 +450,7 @@
         {
             "id": "ab4e69ebd81f4b8a",
             "type": "change",
-            "z": "8de273b848a9c07d",
+            "z": "26d78b1ac02d6fe2",
             "name": "",
             "rules": [
                 {
@@ -495,7 +477,7 @@
         {
             "id": "d6f847e7e9fbaad3",
             "type": "change",
-            "z": "8de273b848a9c07d",
+            "z": "26d78b1ac02d6fe2",
             "name": "",
             "rules": [
                 {
@@ -522,7 +504,7 @@
         {
             "id": "aa85a5c6bbd0511d",
             "type": "function",
-            "z": "8de273b848a9c07d",
+            "z": "26d78b1ac02d6fe2",
             "name": "Set device sensors",
             "func": "var result = global.get(\"cloud.devices\").filter(obj => {\n    return obj.id === \"SDM630Modbus\";\n})\n\nresult.forEach(device => {\n    device.sensors = msg.payload;\n});\n\nreturn msg;",
             "outputs": 0,
@@ -533,13 +515,40 @@
             "x": 1370,
             "y": 180,
             "wires": []
+        },
+        {
+            "id": "de26f919943fa51a",
+            "type": "inject",
+            "z": "26d78b1ac02d6fe2",
+            "name": "Cycle",
+            "props": [
+                {
+                    "p": "payload"
+                }
+            ],
+            "repeat": "30",
+            "crontab": "",
+            "once": true,
+            "onceDelay": "30",
+            "topic": "",
+            "payload": "",
+            "payloadType": "date",
+            "x": 130,
+            "y": 160,
+            "wires": [
+                [
+                    "dd72a78ddbcdbff5",
+                    "11846148d9d51168",
+                    "e480739325f20822"
+                ]
+            ]
         }
     ],
     "configs": [
         {
             "id": "7547c27f49e25e9c",
             "type": "modbus-client",
-            "z": "8de273b848a9c07d",
+            "z": "26d78b1ac02d6fe2",
             "name": "RS485",
             "clienttype": "serial",
             "bufferCommands": true,
