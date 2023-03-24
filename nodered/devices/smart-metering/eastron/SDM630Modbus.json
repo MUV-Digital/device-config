@@ -1,5 +1,5 @@
 {
-    "id": "26d78b1ac02d6fe2",
+    "id": "6ffdf0ab33e88dd5",
     "label": "SDM630Modbus",
     "disabled": false,
     "info": "",
@@ -8,7 +8,7 @@
         {
             "id": "69e4473cf5e5ec89",
             "type": "modbus-flex-getter",
-            "z": "26d78b1ac02d6fe2",
+            "z": "6ffdf0ab33e88dd5",
             "name": "",
             "showStatusActivities": false,
             "showErrors": false,
@@ -34,7 +34,7 @@
         {
             "id": "dd72a78ddbcdbff5",
             "type": "function",
-            "z": "26d78b1ac02d6fe2",
+            "z": "6ffdf0ab33e88dd5",
             "name": "Input Registers",
             "func": "msg.payload = { 'fc': 4, 'unitid': 1, 'address': 0, 'quantity': 24 };\n\n\nreturn msg;",
             "outputs": 1,
@@ -53,7 +53,7 @@
         {
             "id": "951909998ca6669a",
             "type": "buffer-parser",
-            "z": "26d78b1ac02d6fe2",
+            "z": "6ffdf0ab33e88dd5",
             "name": "",
             "data": "payload",
             "dataType": "msg",
@@ -194,7 +194,7 @@
         {
             "id": "45e6ce74ebe4d289",
             "type": "modbus-flex-getter",
-            "z": "26d78b1ac02d6fe2",
+            "z": "6ffdf0ab33e88dd5",
             "name": "",
             "showStatusActivities": false,
             "showErrors": false,
@@ -220,7 +220,7 @@
         {
             "id": "11846148d9d51168",
             "type": "function",
-            "z": "26d78b1ac02d6fe2",
+            "z": "6ffdf0ab33e88dd5",
             "name": "Input Registers",
             "func": "msg.payload = { 'fc': 4, 'unitid': 1, 'address': 342, 'quantity': 4 };\n\n\nreturn msg;",
             "outputs": 1,
@@ -239,7 +239,7 @@
         {
             "id": "629d28c122ae0dd2",
             "type": "buffer-parser",
-            "z": "26d78b1ac02d6fe2",
+            "z": "6ffdf0ab33e88dd5",
             "name": "",
             "data": "payload",
             "dataType": "msg",
@@ -290,7 +290,7 @@
         {
             "id": "e150fa15183f1adc",
             "type": "modbus-flex-getter",
-            "z": "26d78b1ac02d6fe2",
+            "z": "6ffdf0ab33e88dd5",
             "name": "",
             "showStatusActivities": false,
             "showErrors": false,
@@ -316,7 +316,7 @@
         {
             "id": "e480739325f20822",
             "type": "function",
-            "z": "26d78b1ac02d6fe2",
+            "z": "6ffdf0ab33e88dd5",
             "name": "Input Registers",
             "func": "msg.payload = { 'fc': 4, 'unitid': 1, 'address': 358, 'quantity': 6 };\n\n\nreturn msg;",
             "outputs": 1,
@@ -335,7 +335,7 @@
         {
             "id": "2dde224ad0f04371",
             "type": "buffer-parser",
-            "z": "26d78b1ac02d6fe2",
+            "z": "6ffdf0ab33e88dd5",
             "name": "",
             "data": "payload",
             "dataType": "msg",
@@ -395,7 +395,7 @@
         {
             "id": "a154207225567b90",
             "type": "join",
-            "z": "26d78b1ac02d6fe2",
+            "z": "6ffdf0ab33e88dd5",
             "name": "",
             "mode": "custom",
             "build": "merged",
@@ -423,7 +423,7 @@
         {
             "id": "d776e7f885f92383",
             "type": "change",
-            "z": "26d78b1ac02d6fe2",
+            "z": "6ffdf0ab33e88dd5",
             "name": "",
             "rules": [
                 {
@@ -450,7 +450,7 @@
         {
             "id": "ab4e69ebd81f4b8a",
             "type": "change",
-            "z": "26d78b1ac02d6fe2",
+            "z": "6ffdf0ab33e88dd5",
             "name": "",
             "rules": [
                 {
@@ -477,7 +477,7 @@
         {
             "id": "d6f847e7e9fbaad3",
             "type": "change",
-            "z": "26d78b1ac02d6fe2",
+            "z": "6ffdf0ab33e88dd5",
             "name": "",
             "rules": [
                 {
@@ -504,9 +504,9 @@
         {
             "id": "aa85a5c6bbd0511d",
             "type": "function",
-            "z": "26d78b1ac02d6fe2",
+            "z": "6ffdf0ab33e88dd5",
             "name": "Set device sensors",
-            "func": "var result = global.get(\"cloud.devices\").filter(obj => {\n    return obj.id === \"SDM630Modbus\";\n})\n\nresult.forEach(device => {\n    device.sensors = msg.payload;\n});\n\nreturn msg;",
+            "func": "var result = global.get(\"cloud.devices\").filter(obj => {\n    return obj.id === \"SDM630Modbus\";\n})\n\nfor (var propertyName in msg.payload) {\n    if (typeof msg.payload[propertyName] === 'number') {\n        msg.payload[propertyName] = Math.round((msg.payload[propertyName] + Number.EPSILON) * 100) / 100\n    }\n}\n\nresult.forEach(device => {\n   device.sensors = msg.payload;\n});\n\nreturn msg;",
             "outputs": 0,
             "noerr": 0,
             "initialize": "",
@@ -519,7 +519,7 @@
         {
             "id": "de26f919943fa51a",
             "type": "inject",
-            "z": "26d78b1ac02d6fe2",
+            "z": "6ffdf0ab33e88dd5",
             "name": "Cycle",
             "props": [
                 {
@@ -548,7 +548,7 @@
         {
             "id": "7547c27f49e25e9c",
             "type": "modbus-client",
-            "z": "26d78b1ac02d6fe2",
+            "z": "6ffdf0ab33e88dd5",
             "name": "RS485",
             "clienttype": "serial",
             "bufferCommands": true,
