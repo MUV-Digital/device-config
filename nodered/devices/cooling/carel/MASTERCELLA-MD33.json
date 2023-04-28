@@ -1,0 +1,501 @@
+{
+    "id": "b30c1c48b455faa6",
+    "label": "MASTERCELLA-MD33",
+    "disabled": false,
+    "info": "",
+    "env": [],
+    "nodes": [
+        {
+            "id": "1b332d12da08f118",
+            "type": "inject",
+            "z": "b30c1c48b455faa6",
+            "name": "",
+            "props": [
+                {
+                    "p": "payload"
+                },
+                {
+                    "p": "topic",
+                    "vt": "str"
+                }
+            ],
+            "repeat": "10",
+            "crontab": "",
+            "once": true,
+            "onceDelay": "10",
+            "topic": "",
+            "payload": "",
+            "payloadType": "date",
+            "x": 110,
+            "y": 100,
+            "wires": [
+                [
+                    "39c5368bb1f5d7ef",
+                    "55f9c55a3edb97d8"
+                ]
+            ]
+        },
+        {
+            "id": "39c5368bb1f5d7ef",
+            "type": "function",
+            "z": "b30c1c48b455faa6",
+            "name": "Read Analog Values",
+            "func": "msg.type = \"ANALOG\";\nmsg.unit = \"1\";\n\nmsg.payload = { value: msg.payload, 'fc': 3, 'unitid': 1, 'address': 0, 'quantity': 5 };\n\nreturn msg\n",
+            "outputs": 1,
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 400,
+            "y": 100,
+            "wires": [
+                [
+                    "be09787ffe2192d0"
+                ]
+            ]
+        },
+        {
+            "id": "be09787ffe2192d0",
+            "type": "modbus-flex-getter",
+            "z": "b30c1c48b455faa6",
+            "name": "",
+            "showStatusActivities": true,
+            "showErrors": true,
+            "showWarnings": true,
+            "logIOActivities": false,
+            "server": "5daafcdc29cd8d0c",
+            "useIOFile": false,
+            "ioFile": "",
+            "useIOForPayload": false,
+            "emptyMsgOnFail": false,
+            "keepMsgProperties": true,
+            "delayOnStart": false,
+            "startDelayTime": "",
+            "x": 670,
+            "y": 120,
+            "wires": [
+                [
+                    "277020956d3e9224"
+                ],
+                []
+            ]
+        },
+        {
+            "id": "db51d02d52ee20ca",
+            "type": "function",
+            "z": "b30c1c48b455faa6",
+            "name": "Read Boolean Values",
+            "func": "msg.type = \"BOOLEAN\";\nmsg.unit = \"1\";\n\nmsg.payload = { value: msg.payload, 'fc': 1, 'unitid': 1, 'address': 1, 'quantity': 24 }; \n\nreturn msg\n",
+            "outputs": 1,
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 400,
+            "y": 140,
+            "wires": [
+                [
+                    "be09787ffe2192d0"
+                ]
+            ]
+        },
+        {
+            "id": "920b9a7154f6ce2f",
+            "type": "buffer-parser",
+            "z": "b30c1c48b455faa6",
+            "name": "",
+            "data": "payload",
+            "dataType": "msg",
+            "specification": "spec",
+            "specificationType": "msg",
+            "items": [
+                {
+                    "type": "int16be",
+                    "name": "item1",
+                    "offset": 0,
+                    "length": 1,
+                    "offsetbit": 0,
+                    "scale": "0.1",
+                    "mask": ""
+                }
+            ],
+            "swap1": "",
+            "swap2": "",
+            "swap3": "",
+            "swap1Type": "swap",
+            "swap2Type": "swap",
+            "swap3Type": "swap",
+            "msgProperty": "payload",
+            "msgPropertyType": "str",
+            "resultType": "keyvalue",
+            "resultTypeType": "return",
+            "multipleResult": false,
+            "fanOutMultipleResult": false,
+            "setTopic": true,
+            "outputs": 1,
+            "x": 1150,
+            "y": 100,
+            "wires": [
+                [
+                    "080cd8721130c6b7"
+                ]
+            ]
+        },
+        {
+            "id": "8d78b1e5f3c8e781",
+            "type": "function",
+            "z": "b30c1c48b455faa6",
+            "name": "Read Analog Values",
+            "func": "msg.type = \"ANALOG\";\nmsg.unit = \"2\";\n\nmsg.payload = { value: msg.payload, 'fc': 3, 'unitid': 2, 'address': 0, 'quantity': 5 };\n\nreturn msg\n",
+            "outputs": 1,
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 400,
+            "y": 260,
+            "wires": [
+                [
+                    "be09787ffe2192d0"
+                ]
+            ]
+        },
+        {
+            "id": "025566a6e4fc3aa4",
+            "type": "function",
+            "z": "b30c1c48b455faa6",
+            "name": "Read Boolean Values",
+            "func": "msg.type = \"BOOLEAN\";\nmsg.unit = \"2\";\n\nmsg.payload = { value: msg.payload, 'fc': 1, 'unitid': 2, 'address': 0, 'quantity': 24 }; \n\nreturn msg\n",
+            "outputs": 1,
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 400,
+            "y": 300,
+            "wires": [
+                [
+                    "be09787ffe2192d0"
+                ]
+            ]
+        },
+        {
+            "id": "277020956d3e9224",
+            "type": "switch",
+            "z": "b30c1c48b455faa6",
+            "name": "",
+            "property": "type",
+            "propertyType": "msg",
+            "rules": [
+                {
+                    "t": "eq",
+                    "v": "ANALOG",
+                    "vt": "str"
+                },
+                {
+                    "t": "eq",
+                    "v": "INTEGER",
+                    "vt": "str"
+                },
+                {
+                    "t": "eq",
+                    "v": "BOOLEAN",
+                    "vt": "str"
+                }
+            ],
+            "checkall": "true",
+            "repair": false,
+            "outputs": 3,
+            "x": 850,
+            "y": 100,
+            "wires": [
+                [
+                    "8c41eb54c2e8c234"
+                ],
+                [
+                    "d90b6f7ede0e7a75"
+                ],
+                [
+                    "f5968c45af69f0f0"
+                ]
+            ]
+        },
+        {
+            "id": "8c41eb54c2e8c234",
+            "type": "function",
+            "z": "b30c1c48b455faa6",
+            "name": "function 1",
+            "func": "msg.spec = {\n    \"options\":\n    {\n        \"byteSwap\": false,\n        \"resultType\": \"keyvalue\",\n        \"singleResult\": true,\n        \"setTopic\": true,\n        \"msgProperty\": \"payload\",\n    },\n    \"items\": []\n}\n\nvar adressIcrement = msg.modbusRequest.address;\nvar offset = 0;\nconst items = msg.payload.map(value => {\n    const item = {\n        \"name\": \"ANALOG-\" + adressIcrement.toString() + \"#\" + msg.unit,\n        \"type\": \"int16be\",\n        \"length \": 1,\n        \"offset\": offset,\n        \"offsetbit\": 0,\n        \"scale\": \"0.1\",\n        \"mask\": \"\"\n    };\n    adressIcrement++;\n    offset = offset + 2;\n\n    return item;\n});\n\nmsg.spec.items = items;\n\nreturn msg;",
+            "outputs": 1,
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 1000,
+            "y": 100,
+            "wires": [
+                [
+                    "920b9a7154f6ce2f"
+                ]
+            ]
+        },
+        {
+            "id": "d90b6f7ede0e7a75",
+            "type": "function",
+            "z": "b30c1c48b455faa6",
+            "name": "function 2",
+            "func": "msg.spec = {\n    \"options\":\n    {\n        \"byteSwap\": false,\n        \"resultType\": \"keyvalue\",\n        \"singleResult\": true,\n        \"setTopic\": true,\n        \"msgProperty\": \"payload\",\n    },\n    \"items\": []\n}\n\nvar adressIcrement = msg.modbusRequest.address;\nvar offset = 0;\nconst items = msg.payload.map(value => {\n    const item = {\n        \"name\": \"INTEGER-\" + adressIcrement.toString() + \"#\" + msg.unit,\n        \"type\": \"int16be\",\n        \"length \": 1,\n        \"offset\": offset,\n        \"offsetbit\": 0,\n        \"scale\": \"1\",\n        \"mask\": \"\"\n    };\n    adressIcrement++;\n    offset = offset + 2;\n\n    return item;\n});\n\nmsg.spec.items = items;\n\nreturn msg;",
+            "outputs": 1,
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 1000,
+            "y": 140,
+            "wires": [
+                [
+                    "a118bf7e13e37fed"
+                ]
+            ]
+        },
+        {
+            "id": "f5968c45af69f0f0",
+            "type": "function",
+            "z": "b30c1c48b455faa6",
+            "name": "function 3",
+            "func": "var adressIcrement = msg.modbusRequest.address;\nconst booleanValues = msg.payload.reduce(function (obj, value) {\n    let prefix = adressIcrement > 14 && adressIcrement < 24 ? \"ALARM-\" : \"STATE-\";\n    let name = prefix + adressIcrement.toString() + \"#\" + msg.unit;\n    obj[name] = value;\n    adressIcrement++;\n\n    return obj;\n}, {});\n\nmsg.payload = booleanValues;\n\nreturn msg;",
+            "outputs": 1,
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 1000,
+            "y": 180,
+            "wires": [
+                [
+                    "4a5c1fa252d87a5f"
+                ]
+            ]
+        },
+        {
+            "id": "a118bf7e13e37fed",
+            "type": "buffer-parser",
+            "z": "b30c1c48b455faa6",
+            "name": "",
+            "data": "payload",
+            "dataType": "msg",
+            "specification": "spec",
+            "specificationType": "msg",
+            "items": [
+                {
+                    "type": "int16be",
+                    "name": "item1",
+                    "offset": 0,
+                    "length": 1,
+                    "offsetbit": 0,
+                    "scale": "0.1",
+                    "mask": ""
+                }
+            ],
+            "swap1": "",
+            "swap2": "",
+            "swap3": "",
+            "swap1Type": "swap",
+            "swap2Type": "swap",
+            "swap3Type": "swap",
+            "msgProperty": "payload",
+            "msgPropertyType": "str",
+            "resultType": "keyvalue",
+            "resultTypeType": "return",
+            "multipleResult": false,
+            "fanOutMultipleResult": false,
+            "setTopic": true,
+            "outputs": 1,
+            "x": 1150,
+            "y": 140,
+            "wires": [
+                [
+                    "851a9bf2010d433b"
+                ]
+            ]
+        },
+        {
+            "id": "2b77f40eedee6b2a",
+            "type": "mqtt in",
+            "z": "b30c1c48b455faa6",
+            "name": "",
+            "topic": "device/command/MASTERCELLA-MD33",
+            "qos": "2",
+            "datatype": "auto-detect",
+            "broker": "de96f526d294fb46",
+            "nl": false,
+            "rap": true,
+            "rh": 0,
+            "inputs": 0,
+            "x": 260,
+            "y": 420,
+            "wires": [
+                []
+            ]
+        },
+        {
+            "id": "4e611b7ba1c407ee",
+            "type": "mqtt out",
+            "z": "b30c1c48b455faa6",
+            "name": "",
+            "topic": "cloud/upstream",
+            "qos": "2",
+            "retain": "true",
+            "respTopic": "",
+            "contentType": "",
+            "userProps": "",
+            "correl": "",
+            "expiry": "",
+            "broker": "de96f526d294fb46",
+            "x": 1240,
+            "y": 420,
+            "wires": []
+        },
+        {
+            "id": "bf21b8727c8ae95b",
+            "type": "function",
+            "z": "b30c1c48b455faa6",
+            "name": "function 4",
+            "func": "var result = global.get(\"cloud.devices\").filter(obj => {\n    return obj.id === \"MASTERCELLA-MD33\";\n})\n\nfor (var propertyName in msg.payload) {\n    if (typeof msg.payload[propertyName] === 'number') {\n        msg.payload[propertyName] = Math.round((msg.payload[propertyName] + Number.EPSILON) * 100) / 100\n    }\n}\n\nresult.forEach(device => {\n    device.sensors = msg.payload;\n});\n\nreturn msg;",
+            "outputs": 1,
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 1580,
+            "y": 120,
+            "wires": [
+                []
+            ]
+        },
+        {
+            "id": "080cd8721130c6b7",
+            "type": "change",
+            "z": "b30c1c48b455faa6",
+            "name": "",
+            "rules": [
+                {
+                    "t": "set",
+                    "p": "topic",
+                    "pt": "msg",
+                    "to": "sensors",
+                    "tot": "str"
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 1310,
+            "y": 100,
+            "wires": [
+                [
+                    "d0571cd95dbada68"
+                ]
+            ]
+        },
+        {
+            "id": "851a9bf2010d433b",
+            "type": "change",
+            "z": "b30c1c48b455faa6",
+            "name": "",
+            "rules": [
+                {
+                    "t": "set",
+                    "p": "topic",
+                    "pt": "msg",
+                    "to": "sensors",
+                    "tot": "str"
+                }
+            ],
+            "action": "",
+            "property": "",
+            "from": "",
+            "to": "",
+            "reg": false,
+            "x": 1310,
+            "y": 140,
+            "wires": [
+                [
+                    "d0571cd95dbada68"
+                ]
+            ]
+        },
+        {
+            "id": "d0571cd95dbada68",
+            "type": "join",
+            "z": "b30c1c48b455faa6",
+            "name": "",
+            "mode": "custom",
+            "build": "merged",
+            "property": "payload",
+            "propertyType": "msg",
+            "key": "topic",
+            "joiner": "\\n",
+            "joinerType": "str",
+            "accumulate": false,
+            "timeout": "3",
+            "count": "",
+            "reduceRight": false,
+            "reduceExp": "",
+            "reduceInit": "",
+            "reduceInitType": "",
+            "reduceFixup": "",
+            "x": 1450,
+            "y": 120,
+            "wires": [
+                [
+                    "bf21b8727c8ae95b"
+                ]
+            ]
+        },
+        {
+            "id": "55f9c55a3edb97d8",
+            "type": "delay",
+            "z": "b30c1c48b455faa6",
+            "name": "",
+            "pauseType": "delay",
+            "timeout": "1",
+            "timeoutUnits": "seconds",
+            "rate": "1",
+            "nbRateUnits": "1",
+            "rateUnits": "second",
+            "randomFirst": "1",
+            "randomLast": "5",
+            "randomUnits": "seconds",
+            "drop": false,
+            "allowrate": false,
+            "outputs": 1,
+            "x": 200,
+            "y": 140,
+            "wires": [
+                [
+                    "db51d02d52ee20ca"
+                ]
+            ]
+        },
+        {
+            "id": "4a5c1fa252d87a5f",
+            "type": "function",
+            "z": "b30c1c48b455faa6",
+            "name": "function 5",
+            "func": "var result = global.get(\"cloud.devices\").filter(obj => {\n    return obj.id === \"MASTERCELLA-MD33\";\n})\n\nfor (var propertyName in msg.payload) {\n    if (typeof msg.payload[propertyName] === 'number') {\n        msg.payload[propertyName] = Math.round((msg.payload[propertyName] + Number.EPSILON) * 100) / 100\n    }\n}\n\nresult.forEach(device => {\n    const alarms = Object.keys(msg.payload)\n        .filter(key => key.includes(\"ALARM\"))\n        .reduce((obj, key) => {\n            obj[key] = msg.payload[key];\n            return obj;\n        }, {});\n    device.errors = alarms;\n\n    const states = Object.keys(msg.payload)\n        .filter(key => key.includes(\"STATE\"))\n        .reduce((obj, key) => {\n            obj[key] = msg.payload[key];\n            return obj;\n        }, {});\n    device.states = states;\n});\n\nreturn msg;",
+            "outputs": 1,
+            "noerr": 0,
+            "initialize": "",
+            "finalize": "",
+            "libs": [],
+            "x": 1580,
+            "y": 180,
+            "wires": [
+                []
+            ]
+        }
+    ]
+}
