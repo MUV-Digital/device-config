@@ -1,14 +1,14 @@
 {
-    "id": "2c275746f11a72f5",
-    "label": "kKWNjfdyY1fXi2hoLK5JNh",
+    "id": "f8f5680259c9e32f",
+    "label": "jPM8akNSHQ29kLi7J6WUTx",
     "disabled": false,
     "info": "",
     "env": [],
     "nodes": [
         {
-            "id": "9e8c8d916d3ab9b9",
+            "id": "7g3lj1y0rrcxfb1f",
             "type": "mqtt in",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "Command",
             "topic": "",
             "qos": "2",
@@ -22,14 +22,14 @@
             "y": 680,
             "wires": [
                 [
-                    "169d56c68cd09ece"
+                    "pe0ed5k04jcmog45"
                 ]
             ]
         },
         {
-            "id": "9ad76fd273b04c09",
+            "id": "jpakon98prdl8bw1",
             "type": "mqtt out",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "",
             "topic": "cloud/upstream/data",
             "qos": "2",
@@ -45,9 +45,9 @@
             "wires": []
         },
         {
-            "id": "0ddbae0a559603cf",
+            "id": "83kn1oqqy8d1lydf",
             "type": "inject",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "",
             "props": [
                 {
@@ -65,14 +65,14 @@
             "y": 560,
             "wires": [
                 [
-                    "5538fc8d557eb90b"
+                    "oxuzcutpmtenhyhv"
                 ]
             ]
         },
         {
-            "id": "d467de8c0ca340bc",
+            "id": "5hvv5e1apojzzi11",
             "type": "function",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "Set Command for this device",
             "func": "msg.action = \"subscribe\";\nmsg.topic = {\n    \"qos\": 2,\n    \"topic\": \"device/command/\" + flow.get(\"device\").node.id\n}\n\nreturn msg;",
             "outputs": 1,
@@ -84,14 +84,14 @@
             "y": 640,
             "wires": [
                 [
-                    "9e8c8d916d3ab9b9"
+                    "7g3lj1y0rrcxfb1f"
                 ]
             ]
         },
         {
-            "id": "c411d99f85db7f6b",
+            "id": "izkk4q5vtm5blbi6",
             "type": "inject",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "Startup",
             "props": [
                 {
@@ -109,27 +109,27 @@
             "y": 80,
             "wires": [
                 [
-                    "7647930fe7612eae"
+                    "gwjk0cofhg81lmtm"
                 ]
             ]
         },
         {
-            "id": "7647930fe7612eae",
+            "id": "gwjk0cofhg81lmtm",
             "type": "getflows",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "",
             "x": 320,
             "y": 80,
             "wires": [
                 [
-                    "1cde108c090826be"
+                    "lezqyvrbzrv08dbe"
                 ]
             ]
         },
         {
-            "id": "1cde108c090826be",
+            "id": "lezqyvrbzrv08dbe",
             "type": "function",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "Init",
             "func": "var device = global.get(\"cloud.devices\").find(device => {\n    return device.node.id === msg.payload.find(flow => flow.id === msg.thisflow).label;\n})\n\nflow.set(\"device\", {\n    \"node\": device.node,\n    \"data\": device.data,\n    \"protocol\": device.protocol,\n    \"uplink\": device.uplink,\n    \"downlink\": device.downlink,\n    \"sensors\": {},\n    \"errors\": {},\n    \"states\": {}\n});\n\nreturn msg;",
             "outputs": 1,
@@ -141,14 +141,14 @@
             "y": 80,
             "wires": [
                 [
-                    "956333d57271f5df"
+                    "zx90y1987a81xx5p"
                 ]
             ]
         },
         {
-            "id": "5538fc8d557eb90b",
+            "id": "oxuzcutpmtenhyhv",
             "type": "switch",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "Config correct",
             "property": "device.node",
             "propertyType": "flow",
@@ -169,17 +169,17 @@
             "y": 600,
             "wires": [
                 [
-                    "360d823cad2ddea5"
+                    "la8pilirlzdjmxcu"
                 ],
                 [
-                    "d467de8c0ca340bc"
+                    "5hvv5e1apojzzi11"
                 ]
             ]
         },
         {
-            "id": "360d823cad2ddea5",
+            "id": "la8pilirlzdjmxcu",
             "type": "function",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "Error",
             "func": "node.warn(\"The device configuration is wrong!\")\nnode.done()",
             "outputs": 0,
@@ -192,9 +192,9 @@
             "wires": []
         },
         {
-            "id": "e804810159b83938",
+            "id": "a8xmcs5pqnk6rcgv",
             "type": "mqtt out",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "",
             "topic": "cloud/upstream/error",
             "qos": "2",
@@ -210,15 +210,15 @@
             "wires": []
         },
         {
-            "id": "8aefb4d56dc50d5e",
+            "id": "hfxihqs1yfebftz3",
             "type": "modbus-flex-connector",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "Channel 1 Connector",
             "maxReconnectsPerMinute": 4,
             "emptyQueue": false,
             "showStatusActivities": true,
             "showErrors": true,
-            "server": "4cc9c8b77fd8acf3",
+            "server": "fbvjk0r298auh66k",
             "x": 1080,
             "y": 80,
             "wires": [
@@ -226,9 +226,9 @@
             ]
         },
         {
-            "id": "3458ec8ee693bc56",
+            "id": "x3ibdzq1654r6uqv",
             "type": "modbus-flex-sequencer",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "Channel 1 Read",
             "sequences": [
                 {
@@ -239,7 +239,7 @@
                     "quantity": "1"
                 }
             ],
-            "server": "4cc9c8b77fd8acf3",
+            "server": "fbvjk0r298auh66k",
             "showStatusActivities": true,
             "showErrors": true,
             "showWarnings": true,
@@ -255,16 +255,16 @@
             "y": 320,
             "wires": [
                 [
-                    "db600b88772517a2",
-                    "be57359684771eb9"
+                    "f6pt1bdd3ux8u7qy",
+                    "1wq302noqkxff9qk"
                 ],
                 []
             ]
         },
         {
-            "id": "2f7559fb2ef62fee",
+            "id": "3upuww8ogo4oa174",
             "type": "function",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "send data based on config channel 1",
             "func": "msg.payload = \"\";\n\nmsg.sequences = flow.get(\"device.data\").filter(dataPoint => dataPoint.protocol.channel === 1).map(dataPoint => {\n    return { \n        dataPoint: dataPoint,\n        name: dataPoint.id, \n        fc: dataPoint.protocol.fc, \n        address: dataPoint.protocol.address, \n        unitid: flow.get(\"device.node.unitId\"), \n        quantity: global.get(\"function.typeToRegisterLength\")(dataPoint.protocol.type)\n    };\n});\n\nif (msg.sequences.length > 0){\n    node.send(msg);\n} else {\n    node.done();\n}\n\nnode.done();\n",
             "outputs": 1,
@@ -276,14 +276,14 @@
             "y": 320,
             "wires": [
                 [
-                    "3458ec8ee693bc56"
+                    "x3ibdzq1654r6uqv"
                 ]
             ]
         },
         {
-            "id": "28862c1aae651797",
+            "id": "ei6s91ex5c6jhmzv",
             "type": "comment",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "----- Register for commands from cloud",
             "info": "",
             "x": 150,
@@ -291,9 +291,9 @@
             "wires": []
         },
         {
-            "id": "e7613cc0431ff1c8",
+            "id": "1lfriuiuw5fp6q5p",
             "type": "comment",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "---- Connections initialization",
             "info": "",
             "x": 120,
@@ -301,9 +301,9 @@
             "wires": []
         },
         {
-            "id": "26984e68e4dd2d28",
+            "id": "ff8j8siirmpav0ht",
             "type": "function",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "Set parameters channel 1",
             "func": "const protocolParameter = flow.get(\"device.protocol\");\nconst channel = global.get(\"device.interface.serial.channels\").find(channel => channel.id === 1);\n\nif (channel) {\n    msg.payload = {\n        \"connectorType\": channel.connectorType,\n        \"serialPort\": channel.serialPort,\n        \"serialBaudrate\": protocolParameter.serialBaudrate ? protocolParameter.serialBaudrate : 19200,\n        \"serialDatabits\": protocolParameter.serialDatabits ? protocolParameter.serialDatabits : 8,\n        \"serialStopbits\": protocolParameter.serialStopbits ? protocolParameter.serialStopbits : 1,\n        \"serialParity\": protocolParameter.serialParity ? protocolParameter.serialParity : \"none\",\n        \"serialType\": protocolParameter.serialType ? protocolParameter.serialType : \"RTU-BUFFERD\",\n        \"serialConnectionDelay\": protocolParameter.serialConnectionDelay ? protocolParameter.serialConnectionDelay : 100,\n        \"unitId\": protocolParameter.unitId ? protocolParameter.unitId : 1,\n        \"commandDelay\": protocolParameter.commandDelay ? protocolParameter.commandDelay : 5,\n        \"clientTimeout\": protocolParameter.clientTimeout ? protocolParameter.clientTimeout : 1000,\n        \"reconnectTimeout\": protocolParameter.reconnectTimeout ? protocolParameter.reconnectTimeout : 2000\n    };\n\n    node.send(msg);\n} else {\n    node.done()\n}\n\nnode.done()\n",
             "outputs": 1,
@@ -315,14 +315,14 @@
             "y": 80,
             "wires": [
                 [
-                    "8aefb4d56dc50d5e"
+                    "hfxihqs1yfebftz3"
                 ]
             ]
         },
         {
-            "id": "956333d57271f5df",
+            "id": "zx90y1987a81xx5p",
             "type": "switch",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "Config correct",
             "property": "device.node",
             "propertyType": "flow",
@@ -340,14 +340,14 @@
             "y": 80,
             "wires": [
                 [
-                    "26984e68e4dd2d28"
+                    "ff8j8siirmpav0ht"
                 ]
             ]
         },
         {
-            "id": "18e1ca5c6619e132",
+            "id": "45oz7ctjavkm2zbe",
             "type": "comment",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "---- Data",
             "info": "",
             "x": 60,
@@ -355,9 +355,9 @@
             "wires": []
         },
         {
-            "id": "db600b88772517a2",
+            "id": "f6pt1bdd3ux8u7qy",
             "type": "function",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "Set telemetry data point values",
             "func": "if (msg.dataPoint.protocol.type !== \"bool\") {\n    msg.spec = {\n        \"options\":\n        {\n            \"byteSwap\": false,\n            \"resultType\": \"keyvalue\",\n            \"singleResult\": true,\n            \"setTopic\": true,\n            \"msgProperty\": \"payload\",\n        },\n        \"items\": []\n    }\n\n    msg.spec.items = [\n        {\n            \"name\": msg.name,\n            \"type\": msg.dataPoint.protocol.type,\n            \"length \": global.get(\"function.typeToRegisterLength\")(msg.dataPoint.protocol.type),\n            \"offset\": 0,\n            \"offsetbit\": msg.dataPoint.protocol.offsetbit,\n            \"scale\": msg.dataPoint.protocol.scale.toString(),\n            \"mask\": msg.dataPoint.protocol.mask\n        }\n    ];\n\n    node.send(msg);\n}\n\nnode.done();\n",
             "outputs": 1,
@@ -369,14 +369,14 @@
             "y": 340,
             "wires": [
                 [
-                    "6955c2fd99d775b2"
+                    "8e1150jj2s5mk1ox"
                 ]
             ]
         },
         {
-            "id": "6955c2fd99d775b2",
+            "id": "8e1150jj2s5mk1ox",
             "type": "buffer-parser",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "",
             "data": "payload",
             "dataType": "msg",
@@ -411,14 +411,14 @@
             "y": 340,
             "wires": [
                 [
-                    "b7355febc06cb13b"
+                    "izf2fgli07iteok5"
                 ]
             ]
         },
         {
-            "id": "ee3940e38fb31115",
+            "id": "4leqh48mswsh01z3",
             "type": "switch",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "Config correct",
             "property": "device.node",
             "propertyType": "flow",
@@ -436,14 +436,14 @@
             "y": 320,
             "wires": [
                 [
-                    "2f7559fb2ef62fee"
+                    "3upuww8ogo4oa174"
                 ]
             ]
         },
         {
-            "id": "b7355febc06cb13b",
+            "id": "izf2fgli07iteok5",
             "type": "function",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "Set sensor value on device",
             "func": "var device = global.get(\"cloud.devices\").find(device => {\n    return device.node.id === flow.get(\"device\").node.id\n})\n\nfor (var propertyName in msg.payload) {\n    if (typeof msg.payload[propertyName] === 'number') {\n        // Round to 2 decimal\n        msg.payload[propertyName] = Math.round((msg.payload[propertyName] + Number.EPSILON) * 100) / 100\n    }\n    if (msg.dataPoint.protocol.type === \"bool\" && msg.dataPoint.protocol.isError) {\n        if (msg.payload[propertyName]) {\n            device.errors[propertyName] = msg.payload[propertyName];\n            flow.get(\"device\").errors[propertyName] = msg.payload[propertyName];\n        } else {\n            delete device.errors[propertyName];\n            delete flow.get(\"device\").errors[propertyName];\n        }\n    } else if (msg.dataPoint.protocol.type === \"bool\") {\n        device.states[propertyName] = msg.payload[propertyName];\n        flow.get(\"device\").states[propertyName] = msg.payload[propertyName];\n    } else {\n        device.sensors[propertyName] = msg.payload[propertyName];\n        flow.get(\"device\").sensors[propertyName] = msg.payload[propertyName];\n    }\n}\n\nreturn msg;",
             "outputs": 1,
@@ -455,14 +455,14 @@
             "y": 380,
             "wires": [
                 [
-                    "3ecaafd12001ca50"
+                    "v54c30tj9rk7rpj2"
                 ]
             ]
         },
         {
-            "id": "e77e838755e2e8c6",
+            "id": "ruuz5rdqd97f4ffz",
             "type": "inject",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "Read intervall",
             "props": [
                 {
@@ -484,14 +484,14 @@
             "y": 260,
             "wires": [
                 [
-                    "ee3940e38fb31115"
+                    "4leqh48mswsh01z3"
                 ]
             ]
         },
         {
-            "id": "83e8869ee0b9be60",
+            "id": "0mn3r5tujs7872vp",
             "type": "switch",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "",
             "property": "device.errors",
             "propertyType": "flow",
@@ -507,14 +507,14 @@
             "y": 500,
             "wires": [
                 [
-                    "e804810159b83938"
+                    "a8xmcs5pqnk6rcgv"
                 ]
             ]
         },
         {
-            "id": "3ecaafd12001ca50",
+            "id": "v54c30tj9rk7rpj2",
             "type": "switch",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "",
             "property": "device.errors",
             "propertyType": "flow",
@@ -532,14 +532,14 @@
             "y": 500,
             "wires": [
                 [
-                    "83e8869ee0b9be60"
+                    "0mn3r5tujs7872vp"
                 ]
             ]
         },
         {
-            "id": "169d56c68cd09ece",
+            "id": "pe0ed5k04jcmog45",
             "type": "function",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "send write data channel 1",
             "func": "if (msg.payload.dataPoint.protocol.channel === 1){\n    if (msg.payload.dataPoint.protocol.type === \"bool\"){\n        if (msg.payload.dataPoint.protocol.invert){\n            msg.payload.value = !msg.payload.value;\n        }\n        msg.payload = {\n            \"value\": msg.payload.value,\n            \"fc\": 5,\n            \"unitid\": flow.get(\"device.node.unitId\"),\n            \"address\": msg.payload.dataPoint.protocol.address,\n            \"quantity\": 1\n        } \n    } else {\n        msg.payload = {\n            \"value\": parseInt(msg.payload.value) * (1 / msg.payload.dataPoint.protocol.scale),\n            \"fc\": 16,\n            \"unitid\": flow.get(\"device.node.unitId\"),\n            \"address\": msg.payload.dataPoint.protocol.address,\n            \"quantity\": global.get(\"function.typeToRegisterLength\")(msg.payload.dataPoint.protocol.type)\n        } \n    }\n\n    node.send (msg);\n}\n\nnode.done();\n\n",
             "outputs": 1,
@@ -551,19 +551,19 @@
             "y": 680,
             "wires": [
                 [
-                    "5bd02fb550eaa645"
+                    "m2w0k5yhs9v6vnpj"
                 ]
             ]
         },
         {
-            "id": "5bd02fb550eaa645",
+            "id": "m2w0k5yhs9v6vnpj",
             "type": "modbus-flex-write",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "Channel 1",
             "showStatusActivities": true,
             "showErrors": true,
             "showWarnings": true,
-            "server": "4cc9c8b77fd8acf3",
+            "server": "fbvjk0r298auh66k",
             "emptyMsgOnFail": false,
             "keepMsgProperties": true,
             "delayOnStart": false,
@@ -572,16 +572,16 @@
             "y": 680,
             "wires": [
                 [
-                    "ee3940e38fb31115",
-                    "bbf332bd1560e1c5"
+                    "4leqh48mswsh01z3",
+                    "kur8bcap9gts92gu"
                 ],
                 []
             ]
         },
         {
-            "id": "be57359684771eb9",
+            "id": "1wq302noqkxff9qk",
             "type": "function",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "Set state data point values",
             "func": "if (msg.dataPoint.protocol.type === \"bool\") {\n    var payload = {};\n    payload[msg.name] = msg.payload[msg.dataPoint.protocol.offsetbit];\n\n    if (msg.dataPoint.protocol.invert) {\n        payload[msg.name] = !payload[msg.name];\n    }\n\n    msg.payload = payload;\n\n    node.send(msg);\n}\n\nnode.done();\n",
             "outputs": 1,
@@ -593,14 +593,14 @@
             "y": 380,
             "wires": [
                 [
-                    "b7355febc06cb13b"
+                    "izf2fgli07iteok5"
                 ]
             ]
         },
         {
-            "id": "bbf332bd1560e1c5",
+            "id": "kur8bcap9gts92gu",
             "type": "delay",
-            "z": "2c275746f11a72f5",
+            "z": "f8f5680259c9e32f",
             "name": "",
             "pauseType": "delay",
             "timeout": "10",
@@ -618,41 +618,9 @@
             "y": 680,
             "wires": [
                 [
-                    "9ad76fd273b04c09"
+                    "jpakon98prdl8bw1"
                 ]
             ]
-        }
-    ],
-    "configs": [
-        {
-            "id": "4cc9c8b77fd8acf3",
-            "type": "modbus-client",
-            "z": "2c275746f11a72f5",
-            "name": "Serial - Channel 1",
-            "clienttype": "serial",
-            "bufferCommands": true,
-            "stateLogEnabled": false,
-            "queueLogEnabled": false,
-            "failureLogEnabled": true,
-            "tcpHost": "127.0.0.1",
-            "tcpPort": "502",
-            "tcpType": "DEFAULT",
-            "serialPort": "/dev/ttyAMA2",
-            "serialType": "RTU-BUFFERD",
-            "serialBaudrate": "19200",
-            "serialDatabits": "8",
-            "serialStopbits": "1",
-            "serialParity": "none",
-            "serialConnectionDelay": "100",
-            "serialAsciiResponseStartDelimiter": "0x3A",
-            "unit_id": 1,
-            "commandDelay": 5,
-            "clientTimeout": 1000,
-            "reconnectOnTimeout": true,
-            "reconnectTimeout": 2000,
-            "parallelUnitIdsAllowed": false,
-            "showWarnings": true,
-            "showLogs": true
         }
     ]
 }
