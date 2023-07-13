@@ -410,7 +410,7 @@
             "type": "function",
             "z": "7c189b0e64b1650c",
             "name": "Set sensor value on device",
-            "func": "var device = global.get(\"cloud.devices\").find(device => {\n    return device.node.id === flow.get(\"device\").node.id\n})\n\nmsg.stateUpstreamRequired = false;\n\nfor (var propertyName in msg.payload) {\n    if (typeof msg.payload[propertyName] === 'number') {\n        // Round to 2 decimal\n        msg.payload[propertyName] = Math.round((msg.payload[propertyName] + Number.EPSILON) * 100) / 100\n    }\n    if (msg.dataPoint.protocol.type === \"bool\" && msg.dataPoint.protocol.isError) {\n        device.errors[propertyName] = msg.payload[propertyName];\n        flow.get(\"device\").errors[propertyName] = msg.payload[propertyName];\n    } \n    if (msg.dataPoint.protocol.type === \"bool\") {\n        device.states[propertyName] = msg.payload[propertyName];\n        flow.get(\"device\").states[propertyName] = msg.payload[propertyName];\n        if (device.states[propertyName] !== msg.payload[propertyName]){\n            msg.stateUpstreamRequired = true;\n        }\n    } else {\n        device.sensors[propertyName] = msg.payload[propertyName];\n        flow.get(\"device\").sensors[propertyName] = msg.payload[propertyName];\n    }\n}\n\nreturn msg;",
+            "func": "var device = global.get(\"cloud.devices\").find(device => {\n    return device.node.id === flow.get(\"device\").node.id\n})\n\nmsg.stateUpstreamRequired = false;\nmsg.errorUpstreamRequired = false;\nfor (var propertyName in msg.payload) {\n    if (typeof msg.payload[propertyName] === 'number') {\n        // Round to 2 decimal\n        msg.payload[propertyName] = Math.round((msg.payload[propertyName] + Number.EPSILON) * 100) / 100\n    }\n    if (msg.dataPoint.protocol.isError) {\n        if (device.errors[propertyName] !== msg.payload[propertyName]) {\n            msg.errorUpstreamRequired = true;\n        }\n\n        device.errors[propertyName] = msg.payload[propertyName];\n        flow.get(\"device\").errors[propertyName] = msg.payload[propertyName];\n    } else if (msg.dataPoint.protocol.type === \"bool\") {\n        if (device.states[propertyName] !== msg.payload[propertyName]) {\n            msg.stateUpstreamRequired = true;\n        }\n\n        device.states[propertyName] = msg.payload[propertyName];\n        flow.get(\"device\").states[propertyName] = msg.payload[propertyName];\n    } else {\n        device.sensors[propertyName] = msg.payload[propertyName];\n        flow.get(\"device\").sensors[propertyName] = msg.payload[propertyName];\n    }\n}\n\nreturn msg;",
             "outputs": 1,
             "noerr": 0,
             "initialize": "",
@@ -420,7 +420,8 @@
             "y": 380,
             "wires": [
                 [
-                    "8e5c92c08df56cfc"
+                    "8e5c92c08df56cfc",
+                    "c7f279526c841782"
                 ]
             ]
         },
@@ -787,6 +788,47 @@
                     "263f478533a4fa19"
                 ]
             ]
+        },
+        {
+            "id": "c7f279526c841782",
+            "type": "switch",
+            "z": "7c189b0e64b1650c",
+            "name": "Error Upstream Required?",
+            "property": "errorUpstreamRequired",
+            "propertyType": "msg",
+            "rules": [
+                {
+                    "t": "true"
+                }
+            ],
+            "checkall": "true",
+            "repair": false,
+            "outputs": 1,
+            "x": 1160,
+            "y": 560,
+            "wires": [
+                [
+                    "6d882c856326db9c"
+                ]
+            ]
+        },
+        {
+            "id": "6d882c856326db9c",
+            "type": "mqtt out",
+            "z": "7c189b0e64b1650c",
+            "name": "",
+            "topic": "cloud/upstream/error",
+            "qos": "2",
+            "retain": "true",
+            "respTopic": "",
+            "contentType": "",
+            "userProps": "",
+            "correl": "",
+            "expiry": "",
+            "broker": "de96f526d294fb46",
+            "x": 1140,
+            "y": 600,
+            "wires": []
         }
     ]
 }
